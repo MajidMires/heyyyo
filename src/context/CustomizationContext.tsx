@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ProductCardSettings, ProductModalSettings, SectionStyle, SetupStep } from '../types';
+import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ProductCardSettings, ProductModalSettings, MenuSettings, SectionStyle, SetupStep, PageType } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
 interface CustomizationContextType {
@@ -11,6 +11,7 @@ interface CustomizationContextType {
   updateGlobalSettings: (settings: Partial<StoreCustomization['globalSettings']>) => void;
   updateProductCardSettings: (settings: Partial<ProductCardSettings>) => void;
   updateProductModalSettings: (settings: Partial<ProductModalSettings>) => void;
+  updateMenuSettings: (settings: Partial<MenuSettings>) => void;
   selectedElementId: string | null;
   setSelectedElementId: (id: string | null) => void;
   updateElementSectionStyle: (id: string, sectionStyle: Partial<SectionStyle>) => void;
@@ -38,6 +39,18 @@ const initialProductCardSettings: ProductCardSettings = {
   buttonColor: '#3B82F6',
 };
 
+const initialMenuSettings: MenuSettings = {
+  template: 'standard',
+  logoPosition: 'left',
+  opacity: 100,
+  backgroundColor: '#FFFFFF',
+  textColor: '#1F2937',
+  fontFamily: 'Inter, sans-serif',
+  showSearch: true,
+  showCart: true,
+  menuItems: ['Home', 'Shop', 'About', 'Contact'],
+};
+
 const initialProductModalSettings: ProductModalSettings = {
   accentColor: '#3B82F6',
   borderColor: '#E5E7EB',
@@ -50,6 +63,7 @@ const initialCustomization: StoreCustomization = {
   elements: [],
   globalSettings: initialGlobalSettings,
   productCardSettings: initialProductCardSettings,
+  menuSettings: initialMenuSettings,
   productModalSettings: initialProductModalSettings,
   setupStep: 'welcome',
   isSetupComplete: false,
@@ -173,6 +187,13 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
     }));
   };
 
+  const updateMenuSettings = (settings: Partial<MenuSettings>) => {
+    setCustomization(prev => ({
+      ...prev,
+      menuSettings: { ...prev.menuSettings, ...settings },
+    }));
+  };
+
   const updateProductModalSettings = (settings: Partial<ProductModalSettings>) => {
     setCustomization(prev => ({
       ...prev,
@@ -199,6 +220,7 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
         updateGlobalSettings,
         updateProductCardSettings,
         updateProductModalSettings,
+        updateMenuSettings,
         updateElementSectionStyle,
         selectedElementId,
         setSelectedElementId,
