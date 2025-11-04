@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
-import { Store, Palette, Layout, CheckCircle } from 'lucide-react';
+import { Store, Palette, LayoutGrid as Layout, CheckCircle } from 'lucide-react';
 
 const WelcomeStep: React.FC = () => {
   const { setCustomizationMode, setCurrentSetupStep } = useCustomization();

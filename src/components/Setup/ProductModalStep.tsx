@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
-import { ArrowLeft, ArrowRight, Layout, X, ShoppingCart, Store } from 'lucide-react';
+import { ArrowLeft, ArrowRight, LayoutGrid as Layout, X, ShoppingCart, Store } from 'lucide-react';
 
 const ProductModalStep: React.FC = () => {
   const { 
