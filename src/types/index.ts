@@ -1,27 +1,25 @@
 export type ElementType = 'imageWithText' | 'slideshow' | 'collection' | 'banner' | 'featured';
-export type CustomizationMode = 'storefront' | 'modal' | 'productCard';
+export type CustomizationMode = 'welcome' | 'productCard' | 'productModal' | 'storefront';
+export type SetupStep = 'welcome' | 'productCard' | 'productModal' | 'storefront' | 'complete';
 
-export interface ButtonStyle {
-  id: string;
-  text: string;
+export interface ProductCardSettings {
+  glowColor: string;
+  buttonColor: string;
+}
+
+export interface ProductModalSettings {
+  accentColor: string;
+  borderColor: string;
   backgroundColor: string;
   textColor: string;
-  borderColor: string;
-  borderWidth: number;
-  borderRadius: number;
-  fontSize: string;
-  fontWeight: string;
-  padding: string;
-  hoverEffect: 'none' | 'lift' | 'glow' | 'scale' | 'fade';
-  animation: 'none' | 'pulse' | 'bounce' | 'shake';
-  link: string;
-  target: '_self' | '_blank';
+  backgroundPattern: 'none' | 'signature' | 'minimal';
 }
 
 export interface SectionStyle {
   backgroundColor: string;
   backgroundGradient?: string;
   backgroundImage?: string;
+  backgroundVideo?: string;
   backgroundOpacity: number;
   padding: {
     top: number;
@@ -39,18 +37,6 @@ export interface SectionStyle {
   maxWidth: string;
 }
 
-export interface MenuSettings {
-  template: 'standard' | 'centered' | 'minimal' | 'overlay' | 'transparent';
-  logoPosition: 'left' | 'center' | 'right';
-  opacity: number;
-  fontFamily: string;
-  textColor: string;
-  backgroundColor: string;
-  showSearch: boolean;
-  showCart: boolean;
-  menuItems: string[];
-}
-
 export interface ElementTemplate {
   id: string;
   name: string;
@@ -64,32 +50,7 @@ export interface ElementInstance {
   type: ElementType;
   order: number;
   settings: Record<string, any>;
-  buttons?: ButtonStyle[];
   sectionStyle?: SectionStyle;
-}
-
-export interface ModalSettings {
-  backgroundColor: string;
-  backgroundGradient?: string;
-  imagePosition: 'left' | 'right';
-  visitStoreButton: {
-    text: string;
-    style: 'outline' | 'ghost' | 'filled';
-    color: string;
-  };
-  backgroundPattern: 'none' | 'dots' | 'stripes' | 'gradient' | 'abstract';
-  showReviews: boolean;
-}
-
-export interface ProductCardSettings {
-  hoverEffect: 'glow';
-  glowColor: string;
-  fontFamily: string;
-  accentColor: string;
-  shadowIntensity: 'light' | 'medium' | 'strong';
-  showRating: boolean;
-  showPriceChange: boolean;
-  showInStock: boolean;
 }
 
 export interface StoreCustomization {
@@ -99,10 +60,12 @@ export interface StoreCustomization {
     primaryColor: string;
     secondaryColor: string;
     fontFamily: string;
+    fontSize: 'small' | 'medium' | 'large';
     logo?: string;
     banner?: string;
   };
-  menuSettings: MenuSettings;
-  modalSettings: ModalSettings;
   productCardSettings: ProductCardSettings;
+  productModalSettings: ProductModalSettings;
+  setupStep: SetupStep;
+  isSetupComplete: boolean;
 }

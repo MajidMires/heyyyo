@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ModalSettings, ProductCardSettings, MenuSettings, ButtonStyle, SectionStyle } from '../types';
+import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ProductCardSettings, ProductModalSettings, SectionStyle, SetupStep } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
 interface CustomizationContextType {
@@ -9,12 +9,10 @@ interface CustomizationContextType {
   updateElementSettings: (id: string, settings: Record<string, any>) => void;
   reorderElements: (startIndex: number, endIndex: number) => void;
   updateGlobalSettings: (settings: Partial<StoreCustomization['globalSettings']>) => void;
-  updateMenuSettings: (settings: Partial<MenuSettings>) => void;
-  updateModalSettings: (settings: Partial<ModalSettings>) => void;
   updateProductCardSettings: (settings: Partial<ProductCardSettings>) => void;
+  updateProductModalSettings: (settings: Partial<ProductModalSettings>) => void;
   selectedElementId: string | null;
   setSelectedElementId: (id: string | null) => void;
-  updateElementButtons: (id: string, buttons: ButtonStyle[]) => void;
   updateElementSectionStyle: (id: string, sectionStyle: Partial<SectionStyle>) => void;
   customizationMode: CustomizationMode;
   setCustomizationMode: (mode: CustomizationMode) => void;
@@ -22,6 +20,9 @@ interface CustomizationContextType {
   setSidebarView: (view: 'sections' | 'sectionSettings') => void;
   isMobileView: boolean;
   setIsMobileView: (mobile: boolean) => void;
+  currentSetupStep: SetupStep;
+  setCurrentSetupStep: (step: SetupStep) => void;
+  completeSetupStep: (step: SetupStep) => void;
 }
 
 const initialGlobalSettings = {
@@ -29,50 +30,29 @@ const initialGlobalSettings = {
   primaryColor: '#3B82F6',
   secondaryColor: '#10B981',
   fontFamily: 'Inter, sans-serif',
-};
-
-const initialMenuSettings: MenuSettings = {
-  template: 'standard',
-  logoPosition: 'left',
-  opacity: 100,
-  fontFamily: 'Inter, sans-serif',
-  textColor: '#374151',
-  backgroundColor: '#FFFFFF',
-  showSearch: true,
-  showCart: true,
-  menuItems: ['Home', 'Shop', 'Collections', 'About', 'Contact'],
-};
-
-const initialModalSettings: ModalSettings = {
-  backgroundColor: '#8B5CF6',
-  backgroundGradient: 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%)',
-  imagePosition: 'left',
-  visitStoreButton: {
-    text: 'Visit Store',
-    style: 'filled',
-    color: '#4C1D95',
-  },
-  backgroundPattern: 'none',
-  showReviews: true,
+  fontSize: 'medium' as const,
 };
 
 const initialProductCardSettings: ProductCardSettings = {
-  hoverEffect: 'glow',
   glowColor: '#3B82F6',
-  fontFamily: 'Inter, sans-serif',
+  buttonColor: '#3B82F6',
+};
+
+const initialProductModalSettings: ProductModalSettings = {
   accentColor: '#3B82F6',
-  shadowIntensity: 'light',
-  showRating: true,
-  showPriceChange: true,
-  showInStock: true,
+  borderColor: '#E5E7EB',
+  backgroundColor: '#FFFFFF',
+  textColor: '#1F2937',
+  backgroundPattern: 'none',
 };
 
 const initialCustomization: StoreCustomization = {
   elements: [],
   globalSettings: initialGlobalSettings,
-  menuSettings: initialMenuSettings,
-  modalSettings: initialModalSettings,
   productCardSettings: initialProductCardSettings,
+  productModalSettings: initialProductModalSettings,
+  setupStep: 'welcome',
+  isSetupComplete: false,
 };
 
 const createDefaultSectionStyle = (): SectionStyle => ({
@@ -99,9 +79,10 @@ const CustomizationContext = createContext<CustomizationContextType | undefined>
 export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [customization, setCustomization] = useState<StoreCustomization>(initialCustomization);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
-  const [customizationMode, setCustomizationMode] = useState<CustomizationMode>('storefront');
+  const [customizationMode, setCustomizationMode] = useState<CustomizationMode>('welcome');
   const [sidebarView, setSidebarView] = useState<'sections' | 'sectionSettings'>('sections');
   const [isMobileView, setIsMobileView] = useState(false);
+  const [currentSetupStep, setCurrentSetupStep] = useState<SetupStep>('welcome');
 
   const addElement = (templateId: string, type: ElementType) => {
     if (customization.elements.length >= 5) {
@@ -115,7 +96,6 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
       type,
       order: customization.elements.length,
       settings: {},
-      buttons: [],
       sectionStyle: createDefaultSectionStyle(),
     };
 
@@ -162,17 +142,6 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
     }));
   };
 
-  const updateElementButtons = (id: string, buttons: ButtonStyle[]) => {
-    setCustomization(prev => ({
-      ...prev,
-      elements: prev.elements.map(element => 
-        element.id === id 
-          ? { ...element, buttons } 
-          : element
-      ),
-    }));
-  };
-
   const updateElementSectionStyle = (id: string, sectionStyle: Partial<SectionStyle>) => {
     setCustomization(prev => ({
       ...prev,
@@ -197,24 +166,25 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
     }));
   };
 
-  const updateMenuSettings = (settings: Partial<MenuSettings>) => {
-    setCustomization(prev => ({
-      ...prev,
-      menuSettings: { ...prev.menuSettings, ...settings },
-    }));
-  };
-
-  const updateModalSettings = (settings: Partial<ModalSettings>) => {
-    setCustomization(prev => ({
-      ...prev,
-      modalSettings: { ...prev.modalSettings, ...settings },
-    }));
-  };
-
   const updateProductCardSettings = (settings: Partial<ProductCardSettings>) => {
     setCustomization(prev => ({
       ...prev,
       productCardSettings: { ...prev.productCardSettings, ...settings },
+    }));
+  };
+
+  const updateProductModalSettings = (settings: Partial<ProductModalSettings>) => {
+    setCustomization(prev => ({
+      ...prev,
+      productModalSettings: { ...prev.productModalSettings, ...settings },
+    }));
+  };
+
+  const completeSetupStep = (step: SetupStep) => {
+    setCustomization(prev => ({
+      ...prev,
+      setupStep: step,
+      isSetupComplete: step === 'complete',
     }));
   };
 
@@ -227,10 +197,8 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
         updateElementSettings,
         reorderElements,
         updateGlobalSettings,
-        updateMenuSettings,
-        updateModalSettings,
         updateProductCardSettings,
-        updateElementButtons,
+        updateProductModalSettings,
         updateElementSectionStyle,
         selectedElementId,
         setSelectedElementId,
@@ -240,6 +208,9 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
         setSidebarView,
         isMobileView,
         setIsMobileView,
+        currentSetupStep,
+        setCurrentSetupStep,
+        completeSetupStep,
       }}
     >
       {children}
