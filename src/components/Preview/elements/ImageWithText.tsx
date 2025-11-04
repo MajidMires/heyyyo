@@ -1,89 +1,37 @@
 import React from 'react';
-import { useCustomization } from '../../context/CustomizationContext';
-import { ButtonStyle, SectionStyle } from '../../types';
+import { SectionStyle } from '../../types';
 
 interface ImageWithTextProps {
   templateId: string;
   settings: {
     heading?: string;
     subtext?: string;
-    buttonText?: string;
     imageUrl?: string;
     textColor?: string;
     fontFamily?: string;
+    fontSize?: 'small' | 'medium' | 'large';
   };
-  buttons?: ButtonStyle[];
   sectionStyle?: SectionStyle;
 }
 
-const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, buttons = [], sectionStyle }) => {
+const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sectionStyle }) => {
   const defaultImage = "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800";
   const heading = settings.heading || 'Your Heading Here';
   const subtext = settings.subtext || 'Your descriptive text goes here. Engage your customers with compelling copy.';
-  const buttonText = settings.buttonText || 'Shop Now';
   const imageUrl = settings.imageUrl || defaultImage;
   const textColor = settings.textColor || '#000000';
   const fontFamily = settings.fontFamily || 'Inter, sans-serif';
+  const fontSize = settings.fontSize || 'medium';
 
-  const renderButtons = () => {
-    if (buttons.length === 0) {
-      return (
-        <button className="px-6 py-2 rounded-md text-white font-medium" style={{ backgroundColor: textColor }}>
-          {buttonText}
-        </button>
-      );
+  const getFontSize = () => {
+    switch (fontSize) {
+      case 'small': return { heading: 'text-2xl', subtext: 'text-sm' };
+      case 'large': return { heading: 'text-4xl', subtext: 'text-lg' };
+      default: return { heading: 'text-3xl', subtext: 'text-base' };
     }
-
-    return (
-      <div className="flex flex-wrap gap-3">
-        {buttons.map((button) => (
-          <a
-            key={button.id}
-            href={button.link}
-            target={button.target}
-            className="inline-block transition-all duration-200 hover:no-underline"
-            style={{
-              backgroundColor: button.backgroundColor,
-              color: button.textColor,
-              border: `${button.borderWidth}px solid ${button.borderColor}`,
-              borderRadius: `${button.borderRadius}px`,
-              fontSize: button.fontSize === 'small' ? '0.875rem' : button.fontSize === 'large' ? '1.125rem' : '1rem',
-              fontWeight: button.fontWeight,
-              padding: button.padding === 'small' ? '0.5rem 1rem' : button.padding === 'large' ? '0.875rem 2rem' : '0.75rem 1.5rem',
-              textDecoration: 'none',
-              animation: button.animation !== 'none' ? `${button.animation} 2s infinite` : 'none',
-            }}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget as HTMLElement;
-              switch (button.hoverEffect) {
-                case 'lift':
-                  target.style.transform = 'translateY(-2px)';
-                  target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-                  break;
-                case 'glow':
-                  target.style.boxShadow = `0 0 20px ${button.backgroundColor}40`;
-                  break;
-                case 'scale':
-                  target.style.transform = 'scale(1.05)';
-                  break;
-                case 'fade':
-                  target.style.opacity = '0.8';
-                  break;
-              }
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget as HTMLElement;
-              target.style.transform = 'none';
-              target.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
-              target.style.opacity = '1';
-            }}
-          >
-            {button.text}
-          </a>
-        ))}
-      </div>
-    );
   };
+
+  const fontSizes = getFontSize();
 
   const getSectionStyle = (): React.CSSProperties => {
     if (!sectionStyle) return {};
@@ -134,9 +82,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, but
                 />
               </div>
               <div className="md:w-1/2 md:pl-10">
-                <h2 className="text-3xl font-bold mb-4" style={{ color: textColor, fontFamily }}>{heading}</h2>
-                <p className="mb-6" style={{ color: textColor, fontFamily }}>{subtext}</p>
-                {renderButtons()}
+                <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>
+                <p className={`${fontSizes.subtext} mb-6`} style={{ color: textColor, fontFamily }}>{subtext}</p>
               </div>
             </div>
           </div>
@@ -156,9 +103,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, but
                 />
               </div>
               <div className="md:w-1/2 md:pr-10">
-                <h2 className="text-3xl font-bold mb-4" style={{ color: textColor, fontFamily }}>{heading}</h2>
-                <p className="mb-6" style={{ color: textColor, fontFamily }}>{subtext}</p>
-                {renderButtons()}
+                <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>
+                <p className={`${fontSizes.subtext} mb-6`} style={{ color: textColor, fontFamily }}>{subtext}</p>
               </div>
             </div>
           </div>
@@ -176,9 +122,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, but
                 className="w-full h-96 object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-8">
-                <h2 className="text-4xl font-bold mb-4 text-white" style={{ fontFamily }}>{heading}</h2>
-                <p className="mb-6 text-white max-w-xl" style={{ fontFamily }}>{subtext}</p>
-                {renderButtons()}
+                <h2 className={`${fontSizes.heading} md:text-5xl font-bold mb-4 text-white`} style={{ fontFamily }}>{heading}</h2>
+                <p className={`${fontSizes.subtext} mb-6 text-white max-w-xl`} style={{ fontFamily }}>{subtext}</p>
               </div>
             </div>
           </div>
@@ -196,13 +141,12 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, but
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
               <div className="container mx-auto">
-                <h2 className="text-3xl font-bold mb-2 text-white" style={{ fontFamily }}>{heading}</h2>
+                <h2 className={`${fontSizes.heading} font-bold mb-2 text-white`} style={{ fontFamily }}>{heading}</h2>
               </div>
             </div>
           </div>
           <div className="container mx-auto px-4">
-            <p className="mb-6" style={{ color: textColor, fontFamily }}>{subtext}</p>
-            {renderButtons()}
+            <p className={`${fontSizes.subtext} mb-6`} style={{ color: textColor, fontFamily }}>{subtext}</p>
           </div>
         </section>
       );
@@ -214,9 +158,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, but
             <div className="md:w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             <div className="md:w-1/2 h-full flex items-center justify-center p-12" style={{ backgroundColor: textColor + '10' }}>
               <div>
-                <h2 className="text-3xl font-bold mb-4" style={{ color: textColor, fontFamily }}>{heading}</h2>
-                <p className="mb-6" style={{ color: textColor, fontFamily }}>{subtext}</p>
-                {renderButtons()}
+                <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>
+                <p className={`${fontSizes.subtext} mb-6`} style={{ color: textColor, fontFamily }}>{subtext}</p>
               </div>
             </div>
           </div>
@@ -260,9 +203,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, but
           />
           <div className="absolute inset-0 bg-black bg-opacity-40" />
           <div className={getTextPositionClasses()}>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4" style={{ fontFamily }}>{heading}</h1>
-            <p className="text-lg md:text-xl mb-6 max-w-2xl" style={{ fontFamily }}>{subtext}</p>
-            {renderButtons()}
+            <h1 className={`${fontSizes.heading} md:text-6xl font-bold mb-4`} style={{ fontFamily }}>{heading}</h1>
+            <p className={`${fontSizes.subtext} md:text-xl mb-6 max-w-2xl`} style={{ fontFamily }}>{subtext}</p>
           </div>
         </section>
       );

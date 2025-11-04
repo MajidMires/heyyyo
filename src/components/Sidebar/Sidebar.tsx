@@ -5,10 +5,7 @@ import ElementSelector from './ElementSelector';
 import ElementSettings from './ElementSettings';
 import GlobalSettings from './GlobalSettings';
 import SectionsList from './SectionsList';
-import ModalSettings from './ModalSettings';
-import ProductCardSettings from './ProductCardSettings';
-import MenuSettings from './MenuSettings';
-import { Settings, Palette, Layers, Plus, ArrowLeft } from 'lucide-react';
+import { Settings, Palette, Layers, Plus, ArrowLeft, CheckCircle } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const { 
@@ -17,11 +14,12 @@ const Sidebar: React.FC = () => {
     customizationMode, 
     sidebarView, 
     setSidebarView,
-    setSelectedElementId 
+    setSelectedElementId,
+    completeSetupStep,
+    setCustomizationMode
   } = useCustomization();
   
   const [activeTab, setActiveTab] = useState<'add' | 'sections' | 'settings'>('add');
-  const [settingsTab, setSettingsTab] = useState<'theme' | 'menu'>('theme');
   const [elementTypeFilter, setElementTypeFilter] = useState<ElementType | null>(null);
 
   const elementCount = customization.elements.length;
@@ -32,18 +30,18 @@ const Sidebar: React.FC = () => {
     setSelectedElementId(null);
   };
 
-  const getSidebarTitle = () => {
-    switch (customizationMode) {
-      case 'modal':
-        return 'Modal Customization';
-      case 'productCard':
-        return 'Product Card Customization';
-      default:
-        return 'Storefront Customization';
-    }
+  const handleCompleteSetup = () => {
+    completeSetupStep('complete');
+    // Could redirect to a success page or dashboard
+    alert('Store setup complete! Your storefront is ready.');
   };
 
-  const renderStorefrontContent = () => {
+  // Only show sidebar for storefront mode
+  if (customizationMode !== 'storefront') {
+    return null;
+  }
+
+  const renderContent = () => {
     if (sidebarView === 'sectionSettings' && selectedElementId) {
       return (
         <div className="flex-1 flex flex-col">
@@ -189,33 +187,7 @@ const Sidebar: React.FC = () => {
 
           {activeTab === 'settings' && (
             <div className="p-4">
-              <div className="space-y-4">
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => setSettingsTab('theme')}
-                    className={`px-3 py-2 text-xs rounded-md ${
-                      settingsTab === 'theme'
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    Theme
-                  </button>
-                  <button
-                    onClick={() => setSettingsTab('menu')}
-                    className={`px-3 py-2 text-xs rounded-md ${
-                      settingsTab === 'menu'
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    Menu
-                  </button>
-                </div>
-                
-                {settingsTab === 'theme' && <GlobalSettings />}
-                {settingsTab === 'menu' && <MenuSettings />}
-              </div>
+              <GlobalSettings />
             </div>
           )}
         </div>
@@ -226,27 +198,24 @@ const Sidebar: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col bg-white border-r border-gray-200">
       <div className="p-4 border-b border-gray-200">
-        <h2 className="text-xl font-semibold text-gray-800">{getSidebarTitle()}</h2>
-        {customizationMode === 'storefront' && (
+        <h2 className="text-xl font-semibold text-gray-800">Build Your Storefront</h2>
+        <div className="flex items-center justify-between">
           <p className="text-sm text-gray-500">
             {elementCount}/5 sections added
           </p>
-        )}
+          {elementCount > 0 && (
+            <button
+              onClick={handleCompleteSetup}
+              className="flex items-center px-3 py-1 bg-green-600 text-white text-xs rounded-md hover:bg-green-700 transition-colors"
+            >
+              <CheckCircle size={14} className="mr-1" />
+              Complete Setup
+            </button>
+          )}
+        </div>
       </div>
 
-      {customizationMode === 'storefront' && renderStorefrontContent()}
-      
-      {customizationMode === 'modal' && (
-        <div className="flex-1 overflow-y-auto p-4">
-          <ModalSettings />
-        </div>
-      )}
-      
-      {customizationMode === 'productCard' && (
-        <div className="flex-1 overflow-y-auto p-4">
-          <ProductCardSettings />
-        </div>
-      )}
+      {renderContent()}
     </div>
   );
 };

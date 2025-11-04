@@ -1,8 +1,7 @@
 import React from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
 import { getTemplateById } from '../../data/templates';
-import { Trash2, Plus, GripVertical, Settings, Palette } from 'lucide-react';
-import ButtonCustomizer from './ButtonCustomizer';
+import { Trash2, Settings, Palette } from 'lucide-react';
 import SectionStyler from './SectionStyler';
 
 interface ElementSettingsProps {
@@ -10,9 +9,8 @@ interface ElementSettingsProps {
 }
 
 const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
-  const { customization, updateElementSettings, removeElement, updateElementButtons, updateElementSectionStyle } = useCustomization();
-  const [activeTab, setActiveTab] = React.useState<'content' | 'buttons' | 'style'>('content');
-  const [expandedButton, setExpandedButton] = React.useState<string | null>(null);
+  const { customization, updateElementSettings, removeElement, updateElementSectionStyle } = useCustomization();
+  const [activeTab, setActiveTab] = React.useState<'content' | 'style'>('content');
 
   const element = customization.elements.find((el) => el.id === elementId);
   if (!element) return null;
@@ -37,7 +35,6 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
   };
 
   const settings = element.settings || {};
-  const buttons = element.buttons || [];
   const sectionStyle = element.sectionStyle;
 
   return (
@@ -64,15 +61,6 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
           Content
         </button>
         <button
-          onClick={() => setActiveTab('buttons')}
-          className={`flex-1 py-2 px-3 text-sm font-medium ${
-            activeTab === 'buttons' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'
-          }`}
-        >
-          <Plus size={14} className="inline mr-1" />
-          Buttons
-        </button>
-        <button
           onClick={() => setActiveTab('style')}
           className={`flex-1 py-2 px-3 text-sm font-medium ${
             activeTab === 'style' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'
@@ -86,7 +74,7 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
       <div className="space-y-4 max-h-96 overflow-y-auto">
         {activeTab === 'content' && (
           <div className="space-y-4">
-        {/* Common settings based on element type */}
+            {/* Common settings based on element type */}
         {template.type === 'imageWithText' && (
           <>
             <div className="space-y-2">
@@ -110,16 +98,6 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Button Text</label>
-              <input
-                type="text"
-                value={settings.buttonText || 'Shop Now'}
-                onChange={(e) => handleTextChange('buttonText', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-              />
-            </div>
-
-            <div className="space-y-2">
               <label className="block text-xs font-medium text-gray-700">Image URL</label>
               <input
                 type="text"
@@ -127,6 +105,19 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 onChange={(e) => handleImageChange('imageUrl', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
               />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Font Size</label>
+              <select
+                value={settings.fontSize || 'medium'}
+                onChange={(e) => handleTextChange('fontSize', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+              </select>
             </div>
 
             <div className="space-y-2">
@@ -146,6 +137,17 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 <option value="left">Left Side</option>
                 <option value="right">Right Side</option>
               </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Background Image/Video URL</label>
+              <input
+                type="text"
+                value={settings.backgroundMedia || ''}
+                onChange={(e) => handleTextChange('backgroundMedia', e.target.value)}
+                placeholder="https://example.com/image.jpg or video.mp4"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
             </div>
 
             <div className="space-y-2">
@@ -368,14 +370,6 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
           </>
         )}
       </div>
-        )}
-
-        {activeTab === 'buttons' && (
-          <ButtonCustomizer
-            elementId={elementId}
-            buttons={buttons}
-            onButtonsChange={(newButtons) => updateElementButtons(elementId, newButtons)}
-          />
         )}
 
         {activeTab === 'style' && sectionStyle && (
