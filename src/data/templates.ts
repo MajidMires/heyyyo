@@ -38,6 +38,12 @@ export const templates: ElementTemplate[] = [
     type: 'imageWithText',
     thumbnail: 'https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
+  {
+    id: 'image-text-7',
+    name: 'Full Width Image Banner',
+    type: 'imageWithText',
+    thumbnail: 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=300',
+  },
 
   // Slideshow Templates
   {

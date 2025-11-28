@@ -209,6 +209,19 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         </section>
       );
 
+    case 'image-text-7': // Full Width Image Banner
+      return (
+        <section style={getSectionStyle()}>
+          <div className="w-full">
+            <img 
+              src={imageUrl} 
+              alt={heading} 
+              className="w-full h-64 md:h-80 lg:h-96 object-cover"
+            />
+          </div>
+        </section>
+      );
+
     default:
       return null;
   }
