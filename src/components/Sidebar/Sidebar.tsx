@@ -4,6 +4,7 @@ import { ElementType } from '../../types';
 import ElementSelector from './ElementSelector';
 import ElementSettings from './ElementSettings';
 import GlobalSettings from './GlobalSettings';
+import MenuSettings from './MenuSettings';
 import SectionsList from './SectionsList';
 import { Settings, Palette, Layers, Plus, ArrowLeft, CheckCircle } from 'lucide-react';
 
@@ -187,7 +188,16 @@ const Sidebar: React.FC = () => {
 
           {activeTab === 'settings' && (
             <div className="p-4">
-              <GlobalSettings />
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-medium text-gray-800 mb-4">Global Theme</h3>
+                  <GlobalSettings />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-gray-800 mb-4">Menu Settings</h3>
+                  <MenuSettings />
+                </div>
+              </div>
             </div>
           )}
         </div>

@@ -10,6 +10,8 @@ export interface MenuSettings {
   backgroundColor: string;
   textColor: string;
   fontFamily: string;
+  fontSize: 'small' | 'medium' | 'large';
+  fontWeight: 'normal' | 'medium' | 'semibold' | 'bold';
   showSearch: boolean;
   showCart: boolean;
   menuItems: string[];

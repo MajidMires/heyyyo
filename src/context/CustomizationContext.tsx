@@ -46,6 +46,8 @@ const initialMenuSettings: MenuSettings = {
   backgroundColor: '#FFFFFF',
   textColor: '#1F2937',
   fontFamily: 'Inter, sans-serif',
+  fontSize: 'medium',
+  fontWeight: 'medium',
   showSearch: true,
   showCart: true,
   menuItems: ['Home', 'Shop', 'About', 'Contact'],

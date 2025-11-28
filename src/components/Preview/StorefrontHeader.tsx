@@ -35,10 +35,23 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const renderLogo = () => {
     if (logo) {
-      return <img src={logo} alt="Store Logo" className="h-8 md:h-10 object-contain" />;
+      return (
+        <img 
+          src={logo} 
+          alt="Store Logo" 
+          className="h-8 md:h-10 object-contain"
+          style={{ fontFamily: menuSettings.fontFamily }}
+        />
+      );
     }
     return (
-      <div className="font-bold text-xl flex items-center">
+      <div 
+        className="font-bold text-xl flex items-center"
+        style={{ 
+          fontFamily: menuSettings.fontFamily,
+          fontSize: menuSettings.fontSize === 'small' ? '1rem' : menuSettings.fontSize === 'large' ? '1.5rem' : '1.25rem'
+        }}
+      >
         <ShoppingBag className="mr-2" size={24} style={{ color: primaryColor }} />
         <span>Store Name</span>
       </div>
@@ -46,13 +59,21 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
   };
 
   const renderNavigation = () => (
-    <nav className="hidden md:flex items-center space-x-6">
+    <nav 
+      className="hidden md:flex items-center space-x-6"
+      style={{ fontFamily: menuSettings.fontFamily }}
+    >
       {menuSettings.menuItems.map((item, index) => (
         <a 
           key={index} 
           href="#" 
-          className="font-medium hover:opacity-75 transition-opacity"
-          style={{ color: menuSettings.textColor }}
+          className="hover:opacity-75 transition-opacity"
+          style={{ 
+            color: menuSettings.textColor,
+            fontFamily: menuSettings.fontFamily,
+            fontSize: menuSettings.fontSize === 'small' ? '0.875rem' : menuSettings.fontSize === 'large' ? '1.125rem' : '1rem',
+            fontWeight: menuSettings.fontWeight || 'medium'
+          }}
         >
           {item}
         </a>

@@ -124,6 +124,37 @@ const MenuSettings: React.FC = () => {
               <option value="'Playfair Display', serif">Playfair Display</option>
               <option value="'Montserrat', sans-serif">Montserrat</option>
               <option value="'Open Sans', sans-serif">Open Sans</option>
+              <option value="'Poppins', sans-serif">Poppins</option>
+              <option value="'Nunito', sans-serif">Nunito</option>
+              <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+              <option value="'Lato', sans-serif">Lato</option>
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-xs font-medium text-gray-700">Font Size</label>
+            <select
+              value={menuSettings.fontSize}
+              onChange={(e) => handleSettingChange('fontSize', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+            >
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="block text-xs font-medium text-gray-700">Font Weight</label>
+            <select
+              value={menuSettings.fontWeight}
+              onChange={(e) => handleSettingChange('fontWeight', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+            >
+              <option value="normal">Normal</option>
+              <option value="medium">Medium</option>
+              <option value="semibold">Semibold</option>
+              <option value="bold">Bold</option>
             </select>
           </div>
         </div>
