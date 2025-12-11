@@ -18,14 +18,15 @@ interface ImageWithTextProps {
 
 const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sectionStyle }) => {
   const defaultImage = "https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800";
-  const heading = settings.heading || 'Your Heading Here';
-  const subtext = settings.subtext || 'Your descriptive text goes here. Engage your customers with compelling copy.';
+  const heading = settings.heading || '';
+  const subtext = settings.subtext || '';
   const imageUrl = settings.imageUrl || defaultImage;
   const textColor = settings.textColor || '#000000';
   const fontFamily = settings.fontFamily || 'Inter, sans-serif';
   const fontSize = settings.fontSize || 'medium';
   const textPosition = settings.textPosition || 'bottom-center';
   const backgroundMedia = settings.backgroundMedia || '';
+  const showShadow = settings.showShadow !== false; // Default to true, but can be disabled
 
   const getFontSize = () => {
     switch (fontSize) {
@@ -109,13 +110,15 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 <img 
                   src={imageUrl} 
                   alt={heading} 
-                  className="w-full h-64 md:h-80 object-cover rounded-lg"
+                  className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                 />
               </div>
-              <div className="md:w-1/2">
-                <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>
-                <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>
-              </div>
+              {(heading || subtext) && (
+                <div className="md:w-1/2">
+                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -130,13 +133,15 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 <img 
                   src={imageUrl} 
                   alt={heading} 
-                  className="w-full h-64 md:h-80 object-cover rounded-lg"
+                  className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                 />
               </div>
-              <div className="md:w-1/2">
-                <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>
-                <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>
-              </div>
+              {(heading || subtext) && (
+                <div className="md:w-1/2">
+                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -146,16 +151,18 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       return (
         <section className="relative" style={getSectionStyle()}>
           <div className="container mx-auto px-4">
-            <div className="relative rounded-lg overflow-hidden">
+            <div className={`relative rounded-lg overflow-hidden ${showShadow ? 'shadow-xl' : ''}`}>
               <img 
                 src={imageUrl} 
                 alt={heading} 
                 className="w-full h-64 md:h-96 object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4 md:p-8">
-                <h2 className={`${fontSizes.heading} font-bold mb-4 text-white`} style={{ fontFamily }}>{heading}</h2>
-                <p className={`${fontSizes.subtext} text-white max-w-2xl leading-relaxed`} style={{ fontFamily }}>{subtext}</p>
-              </div>
+              {(heading || subtext) && (
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4 md:p-8">
+                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4 text-white`} style={{ fontFamily }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} text-white max-w-2xl leading-relaxed`} style={{ fontFamily }}>{subtext}</p>}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -164,21 +171,25 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
     case 'image-text-4': // Full Width Image with Bottom Text
       return (
         <section style={getSectionStyle()}>
-          <div className="relative mb-8">
+          <div className={`relative mb-8 ${showShadow ? 'shadow-lg' : ''}`}>
             <img 
               src={imageUrl} 
               alt={heading} 
               className="w-full h-64 md:h-96 object-cover"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
-              <div className="container mx-auto">
-                <h2 className={`${fontSizes.heading} font-bold text-white`} style={{ fontFamily }}>{heading}</h2>
+            {heading && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
+                <div className="container mx-auto">
+                  <h2 className={`${fontSizes.heading} font-bold text-white`} style={{ fontFamily }}>{heading}</h2>
+                </div>
               </div>
+            )}
+          </div>
+          {subtext && (
+            <div className="container mx-auto px-4">
+              <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>
             </div>
-          </div>
-          <div className="container mx-auto px-4">
-            <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>
-          </div>
+          )}
         </section>
       );
 
@@ -188,10 +199,12 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           <div className="flex flex-col md:flex-row h-full">
             <div className="md:w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             <div className="md:w-1/2 h-full flex items-center justify-center p-6 md:p-12 bg-gray-50">
-              <div className="text-center md:text-left">
-                <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>
-                <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>
-              </div>
+              {(heading || subtext) && (
+                <div className="text-center md:text-left">
+                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -220,10 +233,12 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             />
           )}
           <div className="absolute inset-0 bg-black bg-opacity-40" />
-          <div className={getTextPositionClasses()}>
-            <h1 className={`${fontSizes.heading} font-bold mb-4`} style={{ fontFamily }}>{heading}</h1>
-            <p className={`${fontSizes.subtext} leading-relaxed max-w-2xl`} style={{ fontFamily }}>{subtext}</p>
-          </div>
+          {(heading || subtext) && (
+            <div className={getTextPositionClasses()}>
+              {heading && <h1 className={`${fontSizes.heading} font-bold mb-4`} style={{ fontFamily }}>{heading}</h1>}
+              {subtext && <p className={`${fontSizes.subtext} leading-relaxed max-w-2xl`} style={{ fontFamily }}>{subtext}</p>}
+            </div>
+          )}
         </section>
       );
 
@@ -234,7 +249,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <img 
               src={imageUrl} 
               alt={heading} 
-              className="w-full h-48 md:h-64 lg:h-80 object-cover"
+              className={`w-full h-48 md:h-64 lg:h-80 object-cover ${showShadow ? 'shadow-lg' : ''}`}
             />
           </div>
         </section>
