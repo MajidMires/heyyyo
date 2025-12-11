@@ -81,7 +81,8 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
               <label className="block text-xs font-medium text-gray-700">Heading</label>
               <input
                 type="text"
-                value={settings.heading || 'Your Heading Here'}
+                value={settings.heading || ''}
+                placeholder="Enter heading text (leave empty for no heading)"
                 onChange={(e) => handleTextChange('heading', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
               />
@@ -90,7 +91,8 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             <div className="space-y-2">
               <label className="block text-xs font-medium text-gray-700">Subtext</label>
               <textarea
-                value={settings.subtext || 'Your descriptive text goes here. Engage your customers with compelling copy.'}
+                value={settings.subtext || ''}
+                placeholder="Enter description text (leave empty for no text)"
                 onChange={(e) => handleTextChange('subtext', e.target.value)}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
@@ -137,6 +139,19 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 <option value="left">Left Side</option>
                 <option value="right">Right Side</option>
               </select>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="showShadow"
+                checked={settings.showShadow !== false}
+                onChange={(e) => handleToggle('showShadow', e.target.checked)}
+                className="h-4 w-4 text-blue-600 rounded"
+              />
+              <label htmlFor="showShadow" className="text-xs font-medium text-gray-700">
+                Show Image Shadow
+              </label>
             </div>
 
             <div className="space-y-2">
