@@ -31,8 +31,8 @@ const MenuSettings: React.FC = () => {
             { id: 'standard', name: 'Standard', desc: 'Logo left, menu center, icons right' },
             { id: 'centered', name: 'Centered', desc: 'Logo center, menu below' },
             { id: 'minimal', name: 'Minimal', desc: 'Clean layout with minimal elements' },
-            { id: 'overlay', name: 'Overlay', desc: 'Transparent overlay on hero section' },
-            { id: 'transparent', name: 'Transparent', desc: 'Fully transparent background' },
+            { id: 'overlay', name: 'Overlay', desc: 'Semi-transparent over banner' },
+            { id: 'transparent', name: 'Transparent', desc: 'Fully transparent menu' },
           ].map((template) => (
             <button
               key={template.id}

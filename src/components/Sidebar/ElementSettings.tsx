@@ -123,7 +123,7 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             <div className="space-y-2">
               <label className="block text-xs font-medium text-gray-700">Text Position</label>
               <select
-                value={settings.textPosition || 'bottom-center'}
+                value={settings.textPosition || 'center'}
                 onChange={(e) => handleTextChange('textPosition', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
               >
@@ -140,14 +140,17 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Background Image/Video URL</label>
+              <label className="block text-xs font-medium text-gray-700">Background Media URL (Image/Video)</label>
               <input
                 type="text"
                 value={settings.backgroundMedia || ''}
                 onChange={(e) => handleTextChange('backgroundMedia', e.target.value)}
-                placeholder="https://example.com/image.jpg or video.mp4"
+                placeholder="https://example.com/background.jpg or video.mp4"
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
               />
+              <p className="text-xs text-gray-500">
+                For Hero sections: Use this for background. For other templates: Use Image URL above.
+              </p>
             </div>
 
             <div className="space-y-2">

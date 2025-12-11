@@ -14,10 +14,31 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const getMenuStyle = () => {
     const opacity = menuSettings.opacity / 100;
+    const bgColor = menuSettings.backgroundColor;
+    
+    // Handle transparency for overlay and transparent templates
+    if (menuSettings.template === 'transparent') {
+      return {
+        backgroundColor: 'transparent',
+        color: menuSettings.textColor,
+        fontFamily: menuSettings.fontFamily,
+      };
+    }
+    
+    if (menuSettings.template === 'overlay') {
+      return {
+        backgroundColor: `rgba(255, 255, 255, ${opacity * 0.9})`,
+        color: menuSettings.textColor,
+        fontFamily: menuSettings.fontFamily,
+        backdropFilter: 'blur(10px)',
+      };
+    }
+    
     return {
-      backgroundColor: `${menuSettings.backgroundColor}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`,
+      backgroundColor: bgColor,
       color: menuSettings.textColor,
       fontFamily: menuSettings.fontFamily,
+      opacity: opacity,
     };
   };
 
@@ -27,9 +48,27 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     switch (menuSettings.template) {
       case 'overlay':
       case 'transparent':
-        return `${baseClasses} absolute top-0 left-0 right-0 z-10`;
+        return `${baseClasses} absolute top-0 left-0 right-0 z-20`;
       default:
         return `${baseClasses} relative`;
+    }
+  };
+
+  const getFontSizeClass = () => {
+    switch (menuSettings.fontSize) {
+      case 'small': return 'text-sm';
+      case 'large': return 'text-lg';
+      default: return 'text-base';
+    }
+  };
+
+  const getFontWeightClass = () => {
+    switch (menuSettings.fontWeight) {
+      case 'normal': return 'font-normal';
+      case 'medium': return 'font-medium';
+      case 'semibold': return 'font-semibold';
+      case 'bold': return 'font-bold';
+      default: return 'font-medium';
     }
   };
 
@@ -46,10 +85,10 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     }
     return (
       <div 
-        className="font-bold text-xl flex items-center"
+        className={`font-bold text-xl flex items-center ${getFontSizeClass()} ${getFontWeightClass()}`}
         style={{ 
           fontFamily: menuSettings.fontFamily,
-          fontSize: menuSettings.fontSize === 'small' ? '1rem' : menuSettings.fontSize === 'large' ? '1.5rem' : '1.25rem'
+          color: menuSettings.textColor
         }}
       >
         <ShoppingBag className="mr-2" size={24} style={{ color: primaryColor }} />
@@ -60,7 +99,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const renderNavigation = () => (
     <nav 
-      className="hidden md:flex items-center space-x-6"
+      className={`hidden md:flex items-center space-x-6 ${getFontSizeClass()} ${getFontWeightClass()}`}
       style={{ fontFamily: menuSettings.fontFamily }}
     >
       {menuSettings.menuItems.map((item, index) => (
@@ -71,8 +110,6 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
           style={{ 
             color: menuSettings.textColor,
             fontFamily: menuSettings.fontFamily,
-            fontSize: menuSettings.fontSize === 'small' ? '0.875rem' : menuSettings.fontSize === 'large' ? '1.125rem' : '1rem',
-            fontWeight: menuSettings.fontWeight || 'medium'
           }}
         >
           {item}
@@ -115,12 +152,14 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                 <button className="md:hidden" style={{ color: menuSettings.textColor }}>
                   <Menu size={24} />
                 </button>
-                <div className={menuSettings.logoPosition === 'center' ? 'mx-auto' : ''}>
+                <div className="flex-1 flex justify-center">
                   {renderLogo()}
                 </div>
                 {renderIcons()}
               </div>
-              {renderNavigation()}
+              <div className="flex justify-center">
+                {renderNavigation()}
+              </div>
             </div>
           </div>
         );
@@ -173,7 +212,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     <header className="w-full relative">
       {banner && (
         <div 
-          className="w-full h-36 md:h-48 lg:h-64 bg-cover bg-center"
+          className="w-full h-36 md:h-48 lg:h-64 bg-cover bg-center relative"
           style={{ backgroundImage: `url(${banner})` }}
         >
           <div className="w-full h-full bg-black bg-opacity-30">

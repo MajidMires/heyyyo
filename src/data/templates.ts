@@ -40,7 +40,7 @@ export const templates: ElementTemplate[] = [
   },
   {
     id: 'image-text-7',
-    name: 'Full Width Image Banner',
+    name: 'Image Banner (No Text)',
     type: 'imageWithText',
     thumbnail: 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
