@@ -3,6 +3,7 @@ import { useCustomization } from '../../context/CustomizationContext';
 import { getTemplateById } from '../../data/templates';
 import { Trash2, Settings, Palette } from 'lucide-react';
 import SectionStyler from './SectionStyler';
+import ButtonCustomizer from './ButtonCustomizer';
 
 interface ElementSettingsProps {
   elementId: string;
@@ -207,6 +208,16 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 <option value="'Righteous', cursive">Righteous</option>
               </select>
             </div>
+
+            {/* Button Customizer for Image with Text */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-gray-800">Buttons</h4>
+              <ButtonCustomizer
+                elementId={elementId}
+                buttons={settings.buttons || []}
+                onButtonsChange={(buttons) => updateElementSettings(elementId, { buttons })}
+              />
+            </div>
           </>
         )}
 
@@ -385,6 +396,16 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 </div>
               </div>
             ))}
+
+            {/* Button Customizer for Featured */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-gray-800">Buttons</h4>
+              <ButtonCustomizer
+                elementId={elementId}
+                buttons={settings.buttons || []}
+                onButtonsChange={(buttons) => updateElementSettings(elementId, { buttons })}
+              />
+            </div>
           </>
         )}
       </div>
