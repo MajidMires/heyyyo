@@ -67,6 +67,23 @@ export interface ElementInstance {
   sectionStyle?: SectionStyle;
 }
 
+export interface ButtonStyle {
+  id: string;
+  text: string;
+  backgroundColor: string;
+  textColor: string;
+  borderColor: string;
+  borderWidth: number;
+  borderRadius: number;
+  fontSize: 'small' | 'medium' | 'large';
+  fontWeight: 'normal' | 'medium' | 'semibold' | 'bold';
+  padding: 'small' | 'medium' | 'large';
+  hoverEffect: 'none' | 'lift' | 'glow' | 'scale' | 'fade';
+  animation: 'none' | 'pulse' | 'bounce' | 'shake';
+  link: string;
+  target: '_self' | '_blank';
+}
+
 export interface StoreCustomization {
   elements: ElementInstance[];
   globalSettings: {

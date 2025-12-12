@@ -14,7 +14,6 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const getMenuStyle = () => {
     const opacity = menuSettings.opacity / 100;
-    const bgColor = menuSettings.backgroundColor;
     
     // Handle transparency for overlay and transparent templates
     if (menuSettings.template === 'transparent') {
@@ -26,19 +25,34 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     }
     
     if (menuSettings.template === 'overlay') {
+      // Convert hex to rgba for overlay
+      const hexToRgba = (hex: string, alpha: number) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      };
+      
       return {
-        backgroundColor: `rgba(255, 255, 255, ${opacity * 0.9})`,
+        backgroundColor: hexToRgba(menuSettings.backgroundColor, opacity * 0.9),
         color: menuSettings.textColor,
         fontFamily: menuSettings.fontFamily,
         backdropFilter: 'blur(10px)',
       };
     }
     
+    // For standard, centered, minimal templates
+    const hexToRgba = (hex: string, alpha: number) => {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
+    
     return {
-      backgroundColor: bgColor,
+      backgroundColor: hexToRgba(menuSettings.backgroundColor, opacity),
       color: menuSettings.textColor,
       fontFamily: menuSettings.fontFamily,
-      opacity: opacity,
     };
   };
 
@@ -148,17 +162,25 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
         return (
           <div className="container mx-auto px-4">
             <div className="flex flex-col items-center py-4">
-              <div className="flex items-center justify-between w-full mb-4">
-                <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+              {/* Top row with mobile menu and icons */}
+              <div className="flex items-center justify-between w-full mb-4 md:hidden">
+                <button style={{ color: menuSettings.textColor }}>
                   <Menu size={24} />
                 </button>
-                <div className="flex-1 flex justify-center">
-                  {renderLogo()}
-                </div>
                 {renderIcons()}
               </div>
-              <div className="flex justify-center">
+              
+              {/* Logo - always centered */}
+              <div className="mb-4">
+                {renderLogo()}
+              </div>
+              
+              {/* Navigation and icons row for desktop */}
+              <div className="hidden md:flex items-center justify-center w-full space-x-8">
                 {renderNavigation()}
+                <div className="ml-8">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
           </div>
@@ -173,6 +195,9 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                 {renderNavigation()}
                 {renderIcons()}
               </div>
+              <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+                <Menu size={24} />
+              </button>
             </div>
           </div>
         );
