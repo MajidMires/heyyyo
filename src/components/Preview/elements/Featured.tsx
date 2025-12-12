@@ -1,4 +1,5 @@
 import React from 'react';
+import { ButtonStyle } from '../../../types';
 
 interface FeaturedProps {
   templateId: string;
@@ -8,11 +9,13 @@ interface FeaturedProps {
     item1Title?: string;
     item2Image?: string;
     item2Title?: string;
+    buttons?: ButtonStyle[];
   };
 }
 
 const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
   const title = settings.title || 'Featured Products';
+  const buttons = settings.buttons || [];
 
   const items = [
     {
@@ -47,6 +50,83 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
     },
   ];
 
+  const renderButtons = () => {
+    if (!buttons || buttons.length === 0) return null;
+
+    const getFontSizeValue = (size: string) => {
+      switch (size) {
+        case 'small': return 'text-sm';
+        case 'large': return 'text-lg';
+        default: return 'text-base';
+      }
+    };
+
+    const getPaddingValue = (padding: string) => {
+      switch (padding) {
+        case 'small': return 'px-4 py-2';
+        case 'large': return 'px-8 py-4';
+        default: return 'px-6 py-3';
+      }
+    };
+
+    const getFontWeightValue = (weight: string) => {
+      switch (weight) {
+        case 'normal': return 'font-normal';
+        case 'medium': return 'font-medium';
+        case 'semibold': return 'font-semibold';
+        case 'bold': return 'font-bold';
+        default: return 'font-medium';
+      }
+    };
+
+    const getHoverClass = (effect: string) => {
+      switch (effect) {
+        case 'lift': return 'hover:-translate-y-1 hover:shadow-lg';
+        case 'glow': return 'hover:shadow-xl';
+        case 'scale': return 'hover:scale-105';
+        case 'fade': return 'hover:opacity-80';
+        default: return '';
+      }
+    };
+
+    const getAnimationClass = (animation: string) => {
+      switch (animation) {
+        case 'pulse': return 'animate-pulse';
+        case 'bounce': return 'animate-bounce';
+        case 'shake': return 'animate-shake';
+        default: return '';
+      }
+    };
+
+    return (
+      <div className="flex flex-wrap gap-3 mt-6 justify-center">
+        {buttons.map((button) => (
+          <a
+            key={button.id}
+            href={button.link}
+            target={button.target}
+            className={`
+              inline-block transition-all duration-200 rounded
+              ${getFontSizeValue(button.fontSize)}
+              ${getPaddingValue(button.padding)}
+              ${getFontWeightValue(button.fontWeight)}
+              ${getHoverClass(button.hoverEffect)}
+              ${getAnimationClass(button.animation)}
+            `}
+            style={{
+              backgroundColor: button.backgroundColor,
+              color: button.textColor,
+              border: `${button.borderWidth}px solid ${button.borderColor}`,
+              borderRadius: `${button.borderRadius}px`,
+            }}
+          >
+            {button.text}
+          </a>
+        ))}
+      </div>
+    );
+  };
+
   switch (templateId) {
     case 'featured-1': // Featured Products Grid
       return (
@@ -72,6 +152,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                 </div>
               ))}
             </div>
+            {renderButtons()}
           </div>
         </section>
       );
@@ -82,9 +163,6 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center mb-8">
               <h2 className="text-2xl font-bold">{title}</h2>
-              <button className="mt-2 md:mt-0 text-sm font-medium flex items-center hover:underline">
-                View All <span className="ml-1">→</span>
-              </button>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {items.map((item, index) => (
@@ -104,6 +182,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                 </div>
               ))}
             </div>
+            {renderButtons()}
           </div>
         </section>
       );
@@ -142,6 +221,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                 </div>
               ))}
             </div>
+            {renderButtons()}
           </div>
         </section>
       );
@@ -168,13 +248,11 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <h3 className="text-white text-2xl font-bold mb-2">{category.title}</h3>
-                    <button className="bg-white text-gray-900 px-6 py-2 rounded-md text-sm font-medium transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                      Shop Now
-                    </button>
                   </div>
                 </div>
               ))}
             </div>
+            {renderButtons()}
           </div>
         </section>
       );
@@ -204,9 +282,9 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                     </div>
                   ))}
                 </div>
-                <button className="mt-6 px-6 py-2 bg-gray-900 text-white font-medium rounded-md hover:bg-gray-800 transition-colors">
-                  View Collection
-                </button>
+                <div className="mt-6">
+                  {renderButtons()}
+                </div>
               </div>
               <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
                 <img
@@ -223,9 +301,6 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                   <p className="text-white text-opacity-90 mb-4">
                     Embrace the season with our latest arrivals
                   </p>
-                  <button className="px-6 py-2 bg-white text-gray-900 font-medium rounded-md hover:bg-gray-100 transition-colors">
-                    Explore
-                  </button>
                 </div>
               </div>
             </div>

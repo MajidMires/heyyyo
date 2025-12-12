@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionStyle } from '../../../types';
+import { SectionStyle, ButtonStyle } from '../../../types';
 
 interface ImageWithTextProps {
   templateId: string;
@@ -12,6 +12,8 @@ interface ImageWithTextProps {
     fontSize?: 'small' | 'medium' | 'large';
     textPosition?: string;
     backgroundMedia?: string;
+    showShadow?: boolean;
+    buttons?: ButtonStyle[];
   };
   sectionStyle?: SectionStyle;
 }
@@ -26,7 +28,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
   const fontSize = settings.fontSize || 'medium';
   const textPosition = settings.textPosition || 'bottom-center';
   const backgroundMedia = settings.backgroundMedia || '';
-  const showShadow = settings.showShadow !== false; // Default to true, but can be disabled
+  const showShadow = settings.showShadow !== false;
+  const buttons = settings.buttons || [];
 
   const getFontSize = () => {
     switch (fontSize) {
@@ -51,8 +54,6 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       borderRadius: `${sectionStyle.borderRadius}px`,
       boxShadow: sectionStyle.boxShadow,
       textAlign: sectionStyle.textAlign,
-      maxWidth: sectionStyle.maxWidth,
-      margin: sectionStyle.maxWidth !== '100%' ? `${sectionStyle.margin.top}px auto ${sectionStyle.margin.bottom}px auto` : `${sectionStyle.margin.top}px 0 ${sectionStyle.margin.bottom}px 0`,
     };
 
     if (sectionStyle.backgroundColor !== 'transparent') {
@@ -73,8 +74,13 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
     return style;
   };
 
+  const getContentMaxWidth = () => {
+    if (!sectionStyle || sectionStyle.maxWidth === '100%') return 'w-full';
+    return 'container mx-auto';
+  };
+
   const getTextPositionClasses = () => {
-    const baseClasses = "absolute text-white p-4 md:p-8";
+    const baseClasses = "absolute p-4 md:p-8";
     
     switch (textPosition) {
       case 'center':
@@ -100,25 +106,106 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
     }
   };
 
+  const renderButtons = (isOverlay = false) => {
+    if (!buttons || buttons.length === 0) return null;
+
+    const getFontSizeValue = (size: string) => {
+      switch (size) {
+        case 'small': return 'text-sm';
+        case 'large': return 'text-lg';
+        default: return 'text-base';
+      }
+    };
+
+    const getPaddingValue = (padding: string) => {
+      switch (padding) {
+        case 'small': return 'px-4 py-2';
+        case 'large': return 'px-8 py-4';
+        default: return 'px-6 py-3';
+      }
+    };
+
+    const getFontWeightValue = (weight: string) => {
+      switch (weight) {
+        case 'normal': return 'font-normal';
+        case 'medium': return 'font-medium';
+        case 'semibold': return 'font-semibold';
+        case 'bold': return 'font-bold';
+        default: return 'font-medium';
+      }
+    };
+
+    const getHoverClass = (effect: string) => {
+      switch (effect) {
+        case 'lift': return 'hover:-translate-y-1 hover:shadow-lg';
+        case 'glow': return 'hover:shadow-xl';
+        case 'scale': return 'hover:scale-105';
+        case 'fade': return 'hover:opacity-80';
+        default: return '';
+      }
+    };
+
+    const getAnimationClass = (animation: string) => {
+      switch (animation) {
+        case 'pulse': return 'animate-pulse';
+        case 'bounce': return 'animate-bounce';
+        case 'shake': return 'animate-shake';
+        default: return '';
+      }
+    };
+
+    return (
+      <div className={`flex flex-wrap gap-3 ${isOverlay ? 'mt-6' : 'mt-4'}`}>
+        {buttons.map((button) => (
+          <a
+            key={button.id}
+            href={button.link}
+            target={button.target}
+            className={`
+              inline-block transition-all duration-200 rounded
+              ${getFontSizeValue(button.fontSize)}
+              ${getPaddingValue(button.padding)}
+              ${getFontWeightValue(button.fontWeight)}
+              ${getHoverClass(button.hoverEffect)}
+              ${getAnimationClass(button.animation)}
+            `}
+            style={{
+              backgroundColor: button.backgroundColor,
+              color: button.textColor,
+              border: `${button.borderWidth}px solid ${button.borderColor}`,
+              borderRadius: `${button.borderRadius}px`,
+              fontFamily: fontFamily,
+            }}
+          >
+            {button.text}
+          </a>
+        ))}
+      </div>
+    );
+  };
+
   switch (templateId) {
     case 'image-text-1': // Left Image with Right Text
       return (
         <section style={getSectionStyle()}>
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="md:w-1/2">
-                <img 
-                  src={imageUrl} 
-                  alt={heading} 
-                  className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
-                />
-              </div>
-              {(heading || subtext) && (
+          <div className={getContentMaxWidth()}>
+            <div className="px-4">
+              <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="md:w-1/2">
-                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  />
                 </div>
-              )}
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="md:w-1/2">
+                    {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -127,21 +214,24 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
     case 'image-text-2': // Right Image with Left Text
       return (
         <section style={getSectionStyle()}>
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row-reverse items-center gap-8">
-              <div className="md:w-1/2">
-                <img 
-                  src={imageUrl} 
-                  alt={heading} 
-                  className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
-                />
-              </div>
-              {(heading || subtext) && (
+          <div className={getContentMaxWidth()}>
+            <div className="px-4">
+              <div className="flex flex-col md:flex-row-reverse items-center gap-8">
                 <div className="md:w-1/2">
-                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  />
                 </div>
-              )}
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="md:w-1/2">
+                    {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -149,20 +239,23 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
 
     case 'image-text-3': // Image with Centered Text
       return (
-        <section className="relative" style={getSectionStyle()}>
-          <div className="container mx-auto px-4">
-            <div className={`relative rounded-lg overflow-hidden ${showShadow ? 'shadow-xl' : ''}`}>
-              <img 
-                src={imageUrl} 
-                alt={heading} 
-                className="w-full h-64 md:h-96 object-cover"
-              />
-              {(heading || subtext) && (
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4 md:p-8">
-                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-4 text-white`} style={{ fontFamily }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} text-white max-w-2xl leading-relaxed`} style={{ fontFamily }}>{subtext}</p>}
-                </div>
-              )}
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-4">
+              <div className={`relative rounded-lg overflow-hidden ${showShadow ? 'shadow-xl' : ''}`}>
+                <img 
+                  src={imageUrl} 
+                  alt={heading} 
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-4 md:p-8">
+                    {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: '#ffffff', fontFamily }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} max-w-2xl leading-relaxed mb-4`} style={{ color: '#ffffff', fontFamily }}>{subtext}</p>}
+                    {renderButtons(true)}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -179,15 +272,20 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             />
             {heading && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
-                <div className="container mx-auto">
-                  <h2 className={`${fontSizes.heading} font-bold text-white`} style={{ fontFamily }}>{heading}</h2>
+                <div className={getContentMaxWidth()}>
+                  <div className="px-4">
+                    <h2 className={`${fontSizes.heading} font-bold`} style={{ color: '#ffffff', fontFamily }}>{heading}</h2>
+                  </div>
                 </div>
               </div>
             )}
           </div>
-          {subtext && (
-            <div className="container mx-auto px-4">
-              <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>
+          {(subtext || buttons.length > 0) && (
+            <div className={getContentMaxWidth()}>
+              <div className="px-4">
+                {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                {renderButtons()}
+              </div>
             </div>
           )}
         </section>
@@ -199,10 +297,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           <div className="flex flex-col md:flex-row h-full">
             <div className="md:w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${imageUrl})` }}></div>
             <div className="md:w-1/2 h-full flex items-center justify-center p-6 md:p-12 bg-gray-50">
-              {(heading || subtext) && (
+              {(heading || subtext || buttons.length > 0) && (
                 <div className="text-center md:text-left">
                   {heading && <h2 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                  {renderButtons()}
                 </div>
               )}
             </div>
@@ -233,10 +332,13 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             />
           )}
           <div className="absolute inset-0 bg-black bg-opacity-40" />
-          {(heading || subtext) && (
-            <div className={getTextPositionClasses()}>
-              {heading && <h1 className={`${fontSizes.heading} font-bold mb-4`} style={{ fontFamily }}>{heading}</h1>}
-              {subtext && <p className={`${fontSizes.subtext} leading-relaxed max-w-2xl`} style={{ fontFamily }}>{subtext}</p>}
+          {(heading || subtext || buttons.length > 0) && (
+            <div className="container mx-auto relative z-10 h-full px-4" style={{ maxWidth: sectionStyle?.maxWidth || '100%' }}>
+              <div className={getTextPositionClasses()}>
+                {heading && <h1 className={`${fontSizes.heading} font-bold mb-4`} style={{ color: '#ffffff', fontFamily }}>{heading}</h1>}
+                {subtext && <p className={`${fontSizes.subtext} leading-relaxed max-w-2xl mb-4`} style={{ color: '#ffffff', fontFamily }}>{subtext}</p>}
+                {renderButtons(true)}
+              </div>
             </div>
           )}
         </section>
@@ -245,11 +347,26 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
     case 'image-text-7': // Full Width Image Banner
       return (
         <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-4">
+              <img 
+                src={imageUrl} 
+                alt={heading} 
+                className={`w-full h-48 md:h-64 lg:h-80 object-cover ${showShadow ? 'shadow-lg' : ''}`}
+              />
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-8': // Full Width Image Banner (No Shadow)
+      return (
+        <section style={getSectionStyle()}>
           <div className="w-full">
             <img 
               src={imageUrl} 
               alt={heading} 
-              className={`w-full h-48 md:h-64 lg:h-80 object-cover ${showShadow ? 'shadow-lg' : ''}`}
+              className="w-full h-48 md:h-64 lg:h-80 object-cover"
             />
           </div>
         </section>
