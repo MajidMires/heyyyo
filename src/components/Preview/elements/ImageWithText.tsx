@@ -205,7 +205,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img 
                     src={imageUrl} 
                     alt={heading} 
-                    className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full ${getImageHeight()} object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
