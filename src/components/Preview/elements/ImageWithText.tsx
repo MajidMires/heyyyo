@@ -278,7 +278,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <img 
               src={imageUrl} 
               alt={heading} 
-              className={`w-full ${getImageHeight()} object-cover ${getImagePositionClass()}`}
+              className="w-full h-64 md:h-96 object-cover"
             />
             {heading && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
@@ -362,7 +362,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <img 
                 src={imageUrl} 
                 alt={heading} 
-                className={`w-full h-48 md:h-64 lg:h-80 object-cover ${showShadow ? 'shadow-lg' : ''}`}
+                className={`w-full ${getImageHeight()} object-cover ${showShadow ? 'shadow-lg' : ''}`}
               />
             </div>
           </div>
@@ -376,7 +376,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <img 
               src={imageUrl} 
               alt={heading} 
-              className="w-full h-48 md:h-64 lg:h-80 object-cover"
+              className={`w-full ${getImageHeight()} object-cover`}
             />
           </div>
         </section>

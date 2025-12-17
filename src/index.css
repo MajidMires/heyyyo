@@ -57,3 +57,7 @@ body {
 .pulse { animation: pulse 2s infinite; }
 .bounce { animation: bounce 2s infinite; }
 .shake { animation: shake 2s infinite; }
+
+/* Custom height utilities */
+.h-50 { height: 12.5rem; } /* 200px */
+.h-120 { height: 30rem; } /* 480px */
