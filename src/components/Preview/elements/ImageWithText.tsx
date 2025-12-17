@@ -205,7 +205,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img 
                     src={imageUrl} 
                     alt={heading} 
-                    className={`w-full ${getImageHeight()} object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -278,7 +278,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <img 
               src={imageUrl} 
               alt={heading} 
-              className="w-full h-64 md:h-96 object-cover"
+              className={`w-full ${getImageHeight()} object-cover ${getImagePositionClass()}`}
             />
             {heading && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 md:p-8">
