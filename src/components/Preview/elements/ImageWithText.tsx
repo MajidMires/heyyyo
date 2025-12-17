@@ -41,16 +41,6 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
 
   const fontSizes = getFontSize();
 
-  const getImageHeight = () => {
-    const height = settings.imageHeight || 'medium';
-    switch (height) {
-      case 'small': return 'h-48 md:h-50'; // 200px
-      case 'large': return 'h-80 md:h-96'; // 400px
-      case 'extra-large': return 'h-96 md:h-120'; // 480px
-      default: return 'h-64 md:h-80'; // 320px (medium)
-    }
-  };
-
   const getSectionStyle = (): React.CSSProperties => {
     if (!sectionStyle) return {};
 
@@ -180,7 +170,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               ${getAnimationClass(button.animation)}
             `}
             style={{
-              backgroundColor: `${button.backgroundColor}${Math.round(button.backgroundOpacity * 2.55).toString(16).padStart(2, '0')}`,
+              backgroundColor: button.backgroundColor,
               color: button.textColor,
               border: `${button.borderWidth}px solid ${button.borderColor}`,
               borderRadius: `${button.borderRadius}px`,
@@ -362,7 +352,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <img 
                 src={imageUrl} 
                 alt={heading} 
-                className={`w-full ${getImageHeight()} object-cover ${showShadow ? 'shadow-lg' : ''}`}
+                className={`w-full h-48 md:h-64 lg:h-80 object-cover ${showShadow ? 'shadow-lg' : ''}`}
               />
             </div>
           </div>
@@ -376,7 +366,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <img 
               src={imageUrl} 
               alt={heading} 
-              className={`w-full ${getImageHeight()} object-cover`}
+              className="w-full h-48 md:h-64 lg:h-80 object-cover"
             />
           </div>
         </section>

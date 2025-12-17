@@ -83,7 +83,6 @@ export interface ButtonStyle {
   link: string;
   target: '_self' | '_blank';
 }
-  backgroundOpacity: number;
 
 export interface StoreCustomization {
   elements: ElementInstance[];

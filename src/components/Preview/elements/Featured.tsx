@@ -114,7 +114,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
               ${getAnimationClass(button.animation)}
             `}
             style={{
-              backgroundColor: `${button.backgroundColor}${Math.round(button.backgroundOpacity * 2.55).toString(16).padStart(2, '0')}`,
+              backgroundColor: button.backgroundColor,
               color: button.textColor,
               border: `${button.borderWidth}px solid ${button.borderColor}`,
               borderRadius: `${button.borderRadius}px`,
