@@ -29,6 +29,7 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
     link: '#',
     target: '_self',
   });
+    backgroundOpacity: 100,
 
   const addButton = () => {
     const newButton = createDefaultButton();
@@ -163,7 +164,7 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
                   <div
                     className="px-2 py-1 text-xs rounded transition-all duration-200 cursor-pointer"
                     style={{
-                      backgroundColor: button.backgroundColor,
+                      backgroundColor: `${button.backgroundColor}${Math.round(button.backgroundOpacity * 2.55).toString(16).padStart(2, '0')}`,
                       color: button.textColor,
                       border: `${button.borderWidth}px solid ${button.borderColor}`,
                       borderRadius: `${button.borderRadius}px`,
@@ -173,14 +174,14 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
                     }}
                     onMouseEnter={(e) => {
                       const hoverStyle = getHoverEffectStyle(button.hoverEffect, {
-                        backgroundColor: button.backgroundColor,
+                        backgroundColor: `${button.backgroundColor}${Math.round(button.backgroundOpacity * 2.55).toString(16).padStart(2, '0')}`,
                         color: button.textColor,
                       });
                       Object.assign(e.currentTarget.style, hoverStyle);
                     }}
                     onMouseLeave={(e) => {
                       Object.assign(e.currentTarget.style, {
-                        backgroundColor: button.backgroundColor,
+                        backgroundColor: `${button.backgroundColor}${Math.round(button.backgroundOpacity * 2.55).toString(16).padStart(2, '0')}`,
                         color: button.textColor,
                         transform: 'none',
                         boxShadow: `0 1px 3px rgba(0,0,0,0.1)`,
@@ -241,6 +242,21 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
                         className="w-full h-8 border border-gray-300 rounded"
                       />
                     </div>
+                  </div>
+
+                  {/* Background Opacity */}
+                  <div className="space-y-2">
+                    <label className="block text-xs font-medium text-gray-700">
+                      Background Opacity ({button.backgroundOpacity}%)
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={button.backgroundOpacity}
+                      onChange={(e) => updateButton(button.id, { backgroundOpacity: parseInt(e.target.value) })}
+                      className="w-full"
+                    />
                   </div>
 
                   {/* Size & Style */}

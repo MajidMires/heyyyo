@@ -111,6 +111,20 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             </div>
 
             <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Image Height</label>
+              <select
+                value={settings.imageHeight || 'medium'}
+                onChange={(e) => handleTextChange('imageHeight', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="small">Small (200px)</option>
+                <option value="medium">Medium (320px)</option>
+                <option value="large">Large (400px)</option>
+                <option value="extra-large">Extra Large (480px)</option>
+              </select>
+            </div>
+
+            <div className="space-y-2">
               <label className="block text-xs font-medium text-gray-700">Font Size</label>
               <select
                 value={settings.fontSize || 'medium'}
