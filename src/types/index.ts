@@ -3,8 +3,11 @@ export type CustomizationMode = 'welcome' | 'productCard' | 'productModal' | 'st
 export type SetupStep = 'welcome' | 'productCard' | 'productModal' | 'storefront' | 'complete';
 
 export interface ProductCardSettings {
+  glowColor: string;
+  buttonColor: string;
+}
 export interface MenuSettings {
-  template: 'standard' | 'centered' | 'minimal' | 'overlay' | 'transparent';
+  template: 'standard' | 'centered' | 'minimal' | 'overlay' | 'transparent' | 'logo-center-buttons' | 'split-nav' | 'compact' | 'elegant' | 'modern';
   logoPosition: 'left' | 'center' | 'right';
   opacity: number;
   backgroundColor: string;
@@ -15,6 +18,11 @@ export interface MenuSettings {
   showSearch: boolean;
   showCart: boolean;
   menuItems: string[];
+  leftButtonText?: string;
+  leftButtonLink?: string;
+  rightButtonText?: string;
+  rightButtonLink?: string;
+  buttonStyle?: 'filled' | 'outline' | 'ghost';
 }
 
   glowColor: string;

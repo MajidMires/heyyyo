@@ -33,6 +33,11 @@ const MenuSettings: React.FC = () => {
             { id: 'minimal', name: 'Minimal', desc: 'Clean layout with minimal elements' },
             { id: 'overlay', name: 'Overlay', desc: 'Semi-transparent over banner' },
             { id: 'transparent', name: 'Transparent', desc: 'Fully transparent menu' },
+            { id: 'logo-center-buttons', name: 'Logo Center + Buttons', desc: 'Logo center with buttons on sides' },
+            { id: 'split-nav', name: 'Split Navigation', desc: 'Menu items split around logo' },
+            { id: 'compact', name: 'Compact', desc: 'Condensed layout for mobile-first' },
+            { id: 'elegant', name: 'Elegant', desc: 'Sophisticated serif typography' },
+            { id: 'modern', name: 'Modern', desc: 'Bold contemporary design' },
           ].map((template) => (
             <button
               key={template.id}
@@ -121,9 +126,21 @@ const MenuSettings: React.FC = () => {
             >
               <option value="Inter, sans-serif">Inter</option>
               <option value="'Roboto', sans-serif">Roboto</option>
+              <option value="'Poppins', sans-serif">Poppins</option>
+              <option value="'Nunito', sans-serif">Nunito</option>
+              <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+              <option value="'Lato', sans-serif">Lato</option>
+              <option value="'Oswald', sans-serif">Oswald</option>
+              <option value="'Raleway', sans-serif">Raleway</option>
+              <option value="'Merriweather', serif">Merriweather</option>
               <option value="'Playfair Display', serif">Playfair Display</option>
+              <option value="'Crimson Text', serif">Crimson Text</option>
+              <option value="'Libre Baskerville', serif">Libre Baskerville</option>
               <option value="'Montserrat', sans-serif">Montserrat</option>
               <option value="'Open Sans', sans-serif">Open Sans</option>
+              <option value="'Dancing Script', cursive">Dancing Script</option>
+              <option value="'Pacifico', cursive">Pacifico</option>
+              <option value="'Righteous', cursive">Righteous</option>
               <option value="'Poppins', sans-serif">Poppins</option>
               <option value="'Nunito', sans-serif">Nunito</option>
               <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
@@ -206,6 +223,76 @@ const MenuSettings: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {(menuSettings.template === 'logo-center-buttons' || menuSettings.template === 'split-nav') && (
+        <div>
+          <h3 className="text-sm font-medium text-gray-800 mb-3">Side Buttons</h3>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Left Button Text</label>
+              <input
+                type="text"
+                value={menuSettings.leftButtonText || ''}
+                onChange={(e) => handleSettingChange('leftButtonText', e.target.value)}
+                placeholder="Sign In"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Left Button Link</label>
+              <input
+                type="text"
+                value={menuSettings.leftButtonLink || ''}
+                onChange={(e) => handleSettingChange('leftButtonLink', e.target.value)}
+                placeholder="#"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Right Button Text</label>
+              <input
+                type="text"
+                value={menuSettings.rightButtonText || ''}
+                onChange={(e) => handleSettingChange('rightButtonText', e.target.value)}
+                placeholder="Sign Up"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Right Button Link</label>
+              <input
+                type="text"
+                value={menuSettings.rightButtonLink || ''}
+                onChange={(e) => handleSettingChange('rightButtonLink', e.target.value)}
+                placeholder="#"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Button Style</label>
+              <div className="flex space-x-2">
+                {['filled', 'outline', 'ghost'].map((style) => (
+                  <button
+                    key={style}
+                    onClick={() => handleSettingChange('buttonStyle', style)}
+                    className={`px-3 py-2 text-xs rounded-md border capitalize ${
+                      menuSettings.buttonStyle === style
+                        ? 'bg-blue-100 border-blue-300 text-blue-700'
+                        : 'bg-white border-gray-300 text-gray-700'
+                    }`}
+                  >
+                    {style}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

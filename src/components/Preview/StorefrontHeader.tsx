@@ -41,7 +41,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
       };
     }
     
-    // For standard, centered, minimal templates
+    // For all other templates
     const hexToRgba = (hex: string, alpha: number) => {
       const r = parseInt(hex.slice(1, 3), 16);
       const g = parseInt(hex.slice(3, 5), 16);
@@ -86,6 +86,45 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     }
   };
 
+  const getTemplateFontFamily = () => {
+    switch (menuSettings.template) {
+      case 'elegant':
+        return "'Playfair Display', serif";
+      case 'modern':
+        return "'Oswald', sans-serif";
+      case 'compact':
+        return "'Roboto', sans-serif";
+      default:
+        return menuSettings.fontFamily;
+    }
+  };
+
+  const getTemplateFontWeight = () => {
+    switch (menuSettings.template) {
+      case 'elegant':
+        return 'font-normal';
+      case 'modern':
+        return 'font-bold';
+      case 'compact':
+        return 'font-medium';
+      default:
+        return getFontWeightClass();
+    }
+  };
+
+  const getTemplateFontSize = () => {
+    switch (menuSettings.template) {
+      case 'compact':
+        return 'text-sm';
+      case 'modern':
+        return 'text-lg';
+      case 'elegant':
+        return 'text-base';
+      default:
+        return getFontSizeClass();
+    }
+  };
+
   const renderLogo = () => {
     if (logo) {
       return (
@@ -93,15 +132,15 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
           src={logo} 
           alt="Store Logo" 
           className="h-8 md:h-10 object-contain"
-          style={{ fontFamily: menuSettings.fontFamily }}
+          style={{ fontFamily: getTemplateFontFamily() }}
         />
       );
     }
     return (
       <div 
-        className={`font-bold text-xl flex items-center ${getFontSizeClass()} ${getFontWeightClass()}`}
+        className={`font-bold text-xl flex items-center ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
         style={{ 
-          fontFamily: menuSettings.fontFamily,
+          fontFamily: getTemplateFontFamily(),
           color: menuSettings.textColor
         }}
       >
@@ -113,8 +152,8 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const renderNavigation = () => (
     <nav 
-      className={`hidden md:flex items-center space-x-6 ${getFontSizeClass()} ${getFontWeightClass()}`}
-      style={{ fontFamily: menuSettings.fontFamily }}
+      className={`hidden md:flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
+      style={{ fontFamily: getTemplateFontFamily() }}
     >
       {menuSettings.menuItems.map((item, index) => (
         <a 
@@ -123,7 +162,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
           className="hover:opacity-75 transition-opacity"
           style={{ 
             color: menuSettings.textColor,
-            fontFamily: menuSettings.fontFamily,
+            fontFamily: getTemplateFontFamily(),
           }}
         >
           {item}
@@ -156,13 +195,65 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     </div>
   );
 
+  const renderButton = (text: string, link: string, isPrimary = false) => {
+    const buttonStyle = menuSettings.buttonStyle || 'filled';
+    
+    const getButtonClasses = () => {
+      const baseClasses = "px-4 py-2 rounded-md text-sm font-medium transition-colors";
+      
+      switch (buttonStyle) {
+        case 'outline':
+          return `${baseClasses} border-2 bg-transparent hover:bg-opacity-10`;
+        case 'ghost':
+          return `${baseClasses} bg-transparent hover:bg-opacity-10`;
+        case 'filled':
+        default:
+          return `${baseClasses} hover:opacity-90`;
+      }
+    };
+
+    const getButtonStyle = () => {
+      const color = isPrimary ? primaryColor : menuSettings.textColor;
+      
+      switch (buttonStyle) {
+        case 'outline':
+          return {
+            borderColor: color,
+            color: color,
+            backgroundColor: 'transparent',
+          };
+        case 'ghost':
+          return {
+            color: color,
+            backgroundColor: 'transparent',
+          };
+        case 'filled':
+        default:
+          return {
+            backgroundColor: color,
+            color: isPrimary ? '#ffffff' : menuSettings.backgroundColor,
+          };
+      }
+    };
+
+    return (
+      <a
+        href={link}
+        className={getButtonClasses()}
+        style={getButtonStyle()}
+      >
+        {text}
+      </a>
+    );
+  };
+
   const renderMenuContent = () => {
     switch (menuSettings.template) {
       case 'centered':
         return (
           <div className="container mx-auto px-4">
             <div className="flex flex-col items-center py-4">
-              {/* Top row with mobile menu and icons */}
+              {/* Mobile menu and icons */}
               <div className="flex items-center justify-between w-full mb-4 md:hidden">
                 <button style={{ color: menuSettings.textColor }}>
                   <Menu size={24} />
@@ -170,13 +261,13 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                 {renderIcons()}
               </div>
               
-              {/* Logo - always centered */}
+              {/* Logo - centered */}
               <div className="mb-4">
                 {renderLogo()}
               </div>
               
-              {/* Navigation and icons row for desktop */}
-              <div className="hidden md:flex items-center justify-center w-full space-x-8">
+              {/* Navigation and icons - centered */}
+              <div className="hidden md:flex items-center justify-center space-x-8">
                 {renderNavigation()}
                 <div className="ml-8">
                   {renderIcons()}
@@ -198,6 +289,172 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
               <button className="md:hidden" style={{ color: menuSettings.textColor }}>
                 <Menu size={24} />
               </button>
+            </div>
+          </div>
+        );
+
+      case 'logo-center-buttons':
+        return (
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-4">
+              {/* Left Button */}
+              <div className="flex items-center space-x-4">
+                <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+                  <Menu size={24} />
+                </button>
+                {menuSettings.leftButtonText && (
+                  <div className="hidden md:block">
+                    {renderButton(menuSettings.leftButtonText, menuSettings.leftButtonLink || '#')}
+                  </div>
+                )}
+              </div>
+              
+              {/* Center Logo */}
+              <div className="flex-1 flex justify-center">
+                {renderLogo()}
+              </div>
+              
+              {/* Right Button and Icons */}
+              <div className="flex items-center space-x-4">
+                {menuSettings.rightButtonText && (
+                  <div className="hidden md:block">
+                    {renderButton(menuSettings.rightButtonText, menuSettings.rightButtonLink || '#', true)}
+                  </div>
+                )}
+                {renderIcons()}
+              </div>
+            </div>
+            
+            {/* Navigation below on desktop */}
+            <div className="hidden md:flex justify-center pb-4">
+              {renderNavigation()}
+            </div>
+          </div>
+        );
+
+      case 'split-nav':
+        const halfItems = Math.ceil(menuSettings.menuItems.length / 2);
+        const leftItems = menuSettings.menuItems.slice(0, halfItems);
+        const rightItems = menuSettings.menuItems.slice(halfItems);
+        
+        return (
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-4">
+              {/* Left Navigation */}
+              <div className="flex items-center space-x-6">
+                <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+                  <Menu size={24} />
+                </button>
+                <nav className={`hidden md:flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}>
+                  {leftItems.map((item, index) => (
+                    <a 
+                      key={index} 
+                      href="#" 
+                      className="hover:opacity-75 transition-opacity"
+                      style={{ color: menuSettings.textColor, fontFamily: getTemplateFontFamily() }}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+              
+              {/* Center Logo */}
+              <div className="flex-1 flex justify-center">
+                {renderLogo()}
+              </div>
+              
+              {/* Right Navigation and Icons */}
+              <div className="flex items-center space-x-6">
+                <nav className={`hidden md:flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}>
+                  {rightItems.map((item, index) => (
+                    <a 
+                      key={index} 
+                      href="#" 
+                      className="hover:opacity-75 transition-opacity"
+                      style={{ color: menuSettings.textColor, fontFamily: getTemplateFontFamily() }}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </nav>
+                {renderIcons()}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'compact':
+        return (
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-2">
+              <div className="flex items-center space-x-4">
+                <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+                  <Menu size={20} />
+                </button>
+                {renderLogo()}
+              </div>
+              
+              <div className="hidden md:flex items-center space-x-4">
+                {renderNavigation()}
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                {renderIcons()}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'elegant':
+        return (
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center py-6">
+              {/* Logo centered */}
+              <div className="mb-6">
+                {renderLogo()}
+              </div>
+              
+              {/* Navigation centered */}
+              <div className="flex items-center justify-center space-x-8 mb-4">
+                <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+                  <Menu size={24} />
+                </button>
+                <div className="hidden md:flex items-center space-x-8">
+                  {renderNavigation()}
+                </div>
+              </div>
+              
+              {/* Icons centered */}
+              <div className="hidden md:flex">
+                {renderIcons()}
+              </div>
+              
+              {/* Mobile icons */}
+              <div className="md:hidden absolute top-4 right-4">
+                {renderIcons()}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'modern':
+        return (
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-4 border-b-2" style={{ borderColor: primaryColor }}>
+              <div className="flex items-center space-x-6">
+                <button className="md:hidden" style={{ color: menuSettings.textColor }}>
+                  <Menu size={24} />
+                </button>
+                {renderLogo()}
+                <div className="hidden md:flex">
+                  {renderNavigation()}
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                {renderIcons()}
+              </div>
             </div>
           </div>
         );

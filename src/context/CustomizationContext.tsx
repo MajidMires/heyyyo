@@ -51,6 +51,11 @@ const initialMenuSettings: MenuSettings = {
   showSearch: true,
   showCart: true,
   menuItems: ['Home', 'Shop', 'About', 'Contact'],
+  leftButtonText: 'Sign In',
+  leftButtonLink: '#',
+  rightButtonText: 'Sign Up',
+  rightButtonLink: '#',
+  buttonStyle: 'filled',
 };
 
 const initialProductModalSettings: ProductModalSettings = {
