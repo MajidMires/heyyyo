@@ -131,20 +131,20 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
         <img 
           src={logo} 
           alt="Store Logo" 
-          className="h-8 md:h-10 object-contain"
+          className="h-6 md:h-8 lg:h-10 object-contain"
           style={{ fontFamily: getTemplateFontFamily() }}
         />
       );
     }
     return (
       <div 
-        className={`font-bold text-xl flex items-center ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
+        className={`font-bold text-lg md:text-xl flex items-center ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
         style={{ 
           fontFamily: getTemplateFontFamily(),
           color: menuSettings.textColor
         }}
       >
-        <ShoppingBag className="mr-2" size={24} style={{ color: primaryColor }} />
+        <ShoppingBag className="mr-1 md:mr-2" size={20} style={{ color: primaryColor }} />
         <span>Store Name</span>
       </div>
     );
@@ -152,7 +152,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const renderNavigation = () => (
     <nav 
-      className={`hidden md:flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
+      className={`hidden md:flex items-center space-x-4 lg:space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
       style={{ fontFamily: getTemplateFontFamily() }}
     >
       {menuSettings.menuItems.map((item, index) => (
@@ -172,20 +172,20 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
   );
 
   const renderIcons = () => (
-    <div className="flex items-center space-x-3">
+    <div className="flex items-center space-x-2 md:space-x-3">
       {menuSettings.showSearch && (
         <button className="hover:opacity-75 transition-opacity" style={{ color: menuSettings.textColor }}>
-          <Search size={20} />
+          <Search size={18} className="md:w-5 md:h-5" />
         </button>
       )}
       <button className="hover:opacity-75 transition-opacity" style={{ color: menuSettings.textColor }}>
-        <User size={20} />
+        <User size={18} className="md:w-5 md:h-5" />
       </button>
       {menuSettings.showCart && (
         <button className="relative hover:opacity-75 transition-opacity" style={{ color: menuSettings.textColor }}>
-          <ShoppingCart size={20} />
+          <ShoppingCart size={18} className="md:w-5 md:h-5" />
           <span 
-            className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-xs flex items-center justify-center text-white" 
+            className="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 rounded-full text-xs flex items-center justify-center text-white" 
             style={{ backgroundColor: primaryColor }}
           >
             0
@@ -199,7 +199,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
     const buttonStyle = menuSettings.buttonStyle || 'filled';
     
     const getButtonClasses = () => {
-      const baseClasses = "px-4 py-2 rounded-md text-sm font-medium transition-colors";
+      const baseClasses = "px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm font-medium transition-colors";
       
       switch (buttonStyle) {
         case 'outline':

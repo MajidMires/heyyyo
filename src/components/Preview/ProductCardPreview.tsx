@@ -93,11 +93,11 @@ const ProductCardPreview: React.FC = () => {
     ].filter(Boolean).length;
     
     // Base height + extra height for each hidden element
-    return 48 + (hiddenElements * 8); // 192px base + 32px per hidden element
+    return 32 + (hiddenElements * 6); // Smaller base height for mobile
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 max-w-6xl">
       {products.map((product) => (
         <div
           key={product.id}
@@ -113,36 +113,36 @@ const ProductCardPreview: React.FC = () => {
               src={product.image}
               alt={product.name}
               className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              style={{ height: `${getImageHeight() * 4}px` }}
+              style={{ height: `${getImageHeight() * 3}px` }}
             />
             
             {/* Discount Badge */}
             <div 
-              className="absolute top-2 left-2 px-2 py-1 rounded-full text-white text-xs font-bold"
+              className="absolute top-1 md:top-2 left-1 md:left-2 px-1 md:px-2 py-1 rounded-full text-white text-xs font-bold"
               style={{ backgroundColor: productCardSettings.accentColor }}
             >
               {product.discount}
             </div>
             
             {/* Wishlist Button */}
-            <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors">
-              <Heart size={16} className="text-gray-600" />
+            <button className="absolute top-1 md:top-2 right-1 md:right-2 p-1 md:p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors">
+              <Heart size={12} className="text-gray-600 md:w-4 md:h-4" />
             </button>
             
             {/* Quick Add to Cart */}
-            <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute inset-x-0 bottom-0 p-1 md:p-2 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
               <button 
-                className="w-full py-2 rounded-md text-white text-sm font-medium transition-colors"
+                className="w-full py-1 md:py-2 rounded-md text-white text-xs md:text-sm font-medium transition-colors"
                 style={{ backgroundColor: productCardSettings.accentColor }}
               >
-                <ShoppingCart size={16} className="inline mr-1" />
+                <ShoppingCart size={12} className="inline mr-1 md:w-4 md:h-4" />
                 Add to Cart
               </button>
             </div>
           </div>
 
           {/* Product Details */}
-          <div className="p-4">
+          <div className="p-2 md:p-3 lg:p-4">
             {/* Category */}
             <div className="mb-1">
               <span 
@@ -154,13 +154,13 @@ const ProductCardPreview: React.FC = () => {
             </div>
 
             {/* Product Name */}
-            <h3 className="font-medium text-gray-900 mb-2 line-clamp-2">
+            <h3 className="text-sm md:text-base font-medium text-gray-900 mb-1 md:mb-2 line-clamp-2">
               {product.name}
             </h3>
 
             {/* Rating */}
             {productCardSettings.showRating && (
-              <div className="flex items-center mb-2">
+              <div className="flex items-center mb-1 md:mb-2">
                 <div className="flex">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
@@ -178,9 +178,9 @@ const ProductCardPreview: React.FC = () => {
             )}
 
             {/* Price */}
-            <div className="flex items-center mb-3">
+            <div className="flex items-center mb-2 md:mb-3">
               <span 
-                className="text-lg font-bold"
+                className="text-sm md:text-base lg:text-lg font-bold"
                 style={{ color: productCardSettings.accentColor }}
               >
                 {product.price}
