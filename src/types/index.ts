@@ -25,6 +25,7 @@ export interface MenuSettings {
   buttonStyle?: 'filled' | 'outline' | 'ghost';
 }
 
+export interface ProductCardSettings2 {
   glowColor: string;
   buttonColor: string;
 }
