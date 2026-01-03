@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
+import PlatformPreview from './PlatformPreview';
 import { getTemplateById } from '../../data/templates';
 import WelcomeStep from '../Setup/WelcomeStep';
 import ProductCardStep from '../Setup/ProductCardStep';
@@ -17,7 +18,8 @@ const Preview: React.FC = () => {
     customization, 
     customizationMode, 
     isMobileView, 
-    setIsMobileView 
+    setIsMobileView,
+    viewMode
   } = useCustomization();
   const { elements, globalSettings } = customization;
 
@@ -32,6 +34,11 @@ const Preview: React.FC = () => {
 
   if (customizationMode === 'productModal') {
     return <ProductModalStep />;
+  }
+
+  // Show platform preview when in preview mode
+  if (viewMode === 'preview') {
+    return <PlatformPreview />;
   }
 
   const renderElement = (element: any) => {

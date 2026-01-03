@@ -6,6 +6,7 @@ import ElementSettings from './ElementSettings';
 import GlobalSettings from './GlobalSettings';
 import MenuSettings from './MenuSettings';
 import SectionsList from './SectionsList';
+import StoreManager from './StoreManager';
 import { Settings, Palette, Layers, Plus, ArrowLeft, CheckCircle } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
@@ -21,6 +22,7 @@ const Sidebar: React.FC = () => {
   } = useCustomization();
   
   const [activeTab, setActiveTab] = useState<'add' | 'sections' | 'settings'>('add');
+  const [activeTab, setActiveTab] = useState<'stores' | 'add' | 'sections' | 'settings'>('stores');
   const [elementTypeFilter, setElementTypeFilter] = useState<ElementType | null>(null);
 
   const elementCount = customization.elements.length;
@@ -68,13 +70,24 @@ const Sidebar: React.FC = () => {
         <div className="flex border-b border-gray-200">
           <button
             className={`flex-1 py-3 px-4 text-sm font-medium ${
+              activeTab === 'stores' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('stores')}
+          >
+            <div className="flex items-center justify-center">
+              <CheckCircle size={16} className="mr-1" />
+              Stores
+            </div>
+          </button>
+          <button
+            className={`flex-1 py-3 px-4 text-sm font-medium ${
               activeTab === 'add' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'
             }`}
             onClick={() => setActiveTab('add')}
           >
             <div className="flex items-center justify-center">
               <Plus size={16} className="mr-1" />
-              Add Sections
+              Add
             </div>
           </button>
           <button
@@ -102,6 +115,12 @@ const Sidebar: React.FC = () => {
         </div>
 
         <div className="flex-1 overflow-y-auto">
+          {activeTab === 'stores' && (
+            <div className="p-4">
+              <StoreManager />
+            </div>
+          )}
+
           {activeTab === 'add' && (
             <div className="p-4">
               {maxReached ? (

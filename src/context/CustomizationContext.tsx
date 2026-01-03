@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ProductCardSettings, ProductModalSettings, MenuSettings, SectionStyle, SetupStep, PageType } from '../types';
+import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ProductCardSettings, ProductModalSettings, MenuSettings, SectionStyle, SetupStep, SavedStore, ViewMode } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
 interface CustomizationContextType {
@@ -24,6 +24,14 @@ interface CustomizationContextType {
   currentSetupStep: SetupStep;
   setCurrentSetupStep: (step: SetupStep) => void;
   completeSetupStep: (step: SetupStep) => void;
+  savedStores: SavedStore[];
+  saveStore: (name: string) => void;
+  loadStore: (storeId: string) => void;
+  deleteStore: (storeId: string) => void;
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
+  selectedStoreId: string | null;
+  setSelectedStoreId: (id: string | null) => void;
 }
 
 const initialGlobalSettings = {
@@ -104,6 +112,9 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
   const [sidebarView, setSidebarView] = useState<'sections' | 'sectionSettings'>('sections');
   const [isMobileView, setIsMobileView] = useState(false);
   const [currentSetupStep, setCurrentSetupStep] = useState<SetupStep>('welcome');
+  const [savedStores, setSavedStores] = useState<SavedStore[]>([]);
+  const [viewMode, setViewMode] = useState<ViewMode>('editor');
+  const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
 
   const addElement = (templateId: string, type: ElementType) => {
     if (customization.elements.length >= 5) {
@@ -216,6 +227,32 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
     }));
   };
 
+  const saveStore = (name: string) => {
+    const newStore: SavedStore = {
+      id: uuidv4(),
+      name,
+      customization: { ...customization },
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    setSavedStores(prev => [...prev, newStore]);
+  };
+
+  const loadStore = (storeId: string) => {
+    const store = savedStores.find(s => s.id === storeId);
+    if (store) {
+      setCustomization(store.customization);
+      setSelectedStoreId(storeId);
+    }
+  };
+
+  const deleteStore = (storeId: string) => {
+    setSavedStores(prev => prev.filter(s => s.id !== storeId));
+    if (selectedStoreId === storeId) {
+      setSelectedStoreId(null);
+    }
+  };
+
   return (
     <CustomizationContext.Provider
       value={{
@@ -240,6 +277,14 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
         currentSetupStep,
         setCurrentSetupStep,
         completeSetupStep,
+        savedStores,
+        saveStore,
+        loadStore,
+        deleteStore,
+        viewMode,
+        setViewMode,
+        selectedStoreId,
+        setSelectedStoreId,
       }}
     >
       {children}

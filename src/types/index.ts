@@ -1,6 +1,15 @@
 export type ElementType = 'imageWithText' | 'slideshow' | 'collection' | 'banner' | 'featured';
 export type CustomizationMode = 'welcome' | 'productCard' | 'productModal' | 'storefront';
 export type SetupStep = 'welcome' | 'productCard' | 'productModal' | 'storefront' | 'complete';
+export type ViewMode = 'editor' | 'preview';
+
+export interface SavedStore {
+  id: string;
+  name: string;
+  customization: StoreCustomization;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 export interface ProductCardSettings {
   glowColor: string;
