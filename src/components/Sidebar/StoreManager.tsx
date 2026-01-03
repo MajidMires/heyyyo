@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
-import { Save, Trash2, Eye, Edit, Plus, Store } from 'lucide-react';
+import { Save, Trash2, Eye, CreditCard as Edit, Plus, Store } from 'lucide-react';
 
 const StoreManager: React.FC = () => {
   const { 

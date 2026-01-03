@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
-import { Search, Home, Play, User, Grid3X3, Store } from 'lucide-react';
+import { Search, Home, Play, User, Grid3x3 as Grid3X3, Store } from 'lucide-react';
 import StorefrontHeader from './StorefrontHeader';
 import ImageWithText from './elements/ImageWithText';
 import Slideshow from './elements/Slideshow';
