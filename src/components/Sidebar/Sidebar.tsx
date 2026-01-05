@@ -21,7 +21,6 @@ const Sidebar: React.FC = () => {
     setCustomizationMode
   } = useCustomization();
   
-  const [activeTab, setActiveTab] = useState<'add' | 'sections' | 'settings'>('add');
   const [activeTab, setActiveTab] = useState<'stores' | 'add' | 'sections' | 'settings'>('stores');
   const [elementTypeFilter, setElementTypeFilter] = useState<ElementType | null>(null);
 
