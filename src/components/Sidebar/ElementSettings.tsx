@@ -453,6 +453,172 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             </div>
           </>
         )}
+
+        {template.type === 'testimonial' && (
+          <>
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Section Title</label>
+              <input
+                type="text"
+                value={settings.title || 'What Our Customers Say'}
+                onChange={(e) => handleTextChange('title', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="autoplay"
+                checked={settings.autoplay !== false}
+                onChange={(e) => handleToggle('autoplay', e.target.checked)}
+                className="h-4 w-4 text-blue-600 rounded"
+              />
+              <label htmlFor="autoplay" className="text-xs font-medium text-gray-700">
+                Auto-play Slideshow
+              </label>
+            </div>
+
+            {[1, 2, 3, 4].map((testimonialNum) => (
+              <div key={testimonialNum} className="space-y-2 p-3 border border-gray-200 rounded-md">
+                <h4 className="text-sm font-medium text-gray-800">Testimonial {testimonialNum}</h4>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Customer Name</label>
+                  <input
+                    type="text"
+                    value={settings[`testimonial${testimonialNum}Name`] || `Customer ${testimonialNum}`}
+                    onChange={(e) => handleTextChange(`testimonial${testimonialNum}Name`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Role/Title</label>
+                  <input
+                    type="text"
+                    value={settings[`testimonial${testimonialNum}Role`] || 'Customer'}
+                    onChange={(e) => handleTextChange(`testimonial${testimonialNum}Role`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Testimonial Text</label>
+                  <textarea
+                    value={settings[`testimonial${testimonialNum}Text`] || 'Great product!'}
+                    onChange={(e) => handleTextChange(`testimonial${testimonialNum}Text`, e.target.value)}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Customer Photo URL</label>
+                  <input
+                    type="text"
+                    value={settings[`testimonial${testimonialNum}Image`] || `https://images.pexels.com/photos/77490${testimonialNum}/pexels-photo-77490${testimonialNum}.jpeg?auto=compress&cs=tinysrgb&w=400`}
+                    onChange={(e) => handleImageChange(`testimonial${testimonialNum}Image`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+
+        {template.type === 'about' && (
+          <>
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Section Title</label>
+              <input
+                type="text"
+                value={settings.title || 'Our Story'}
+                onChange={(e) => handleTextChange('title', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Subtitle</label>
+              <input
+                type="text"
+                value={settings.subtitle || 'Building something amazing'}
+                onChange={(e) => handleTextChange('subtitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Description</label>
+              <textarea
+                value={settings.description || 'We are passionate about creating products that make a difference.'}
+                onChange={(e) => handleTextChange('description', e.target.value)}
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-gray-800">Buttons</h4>
+              <ButtonCustomizer
+                elementId={elementId}
+                buttons={settings.buttons || []}
+                onButtonsChange={(buttons) => updateElementSettings(elementId, { buttons })}
+              />
+            </div>
+          </>
+        )}
+
+        {template.type === 'contact' && (
+          <>
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Section Title</label>
+              <input
+                type="text"
+                value={settings.title || 'Get In Touch'}
+                onChange={(e) => handleTextChange('title', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Subtitle</label>
+              <input
+                type="text"
+                value={settings.subtitle || "We'd love to hear from you"}
+                onChange={(e) => handleTextChange('subtitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Address</label>
+              <input
+                type="text"
+                value={settings.address || '123 Business Street, City, State 12345'}
+                onChange={(e) => handleTextChange('address', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Phone</label>
+              <input
+                type="text"
+                value={settings.phone || '+1 (555) 123-4567'}
+                onChange={(e) => handleTextChange('phone', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                value={settings.email || 'hello@company.com'}
+                onChange={(e) => handleTextChange('email', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+          </>
+        )}
       </div>
         )}
 
