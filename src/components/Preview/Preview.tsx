@@ -11,6 +11,9 @@ import Slideshow from './elements/Slideshow';
 import Collection from './elements/Collection';
 import Banner from './elements/Banner';
 import Featured from './elements/Featured';
+import Testimonial from './elements/Testimonial';
+import About from './elements/About';
+import Contact from './elements/Contact';
 import { Home, Smartphone, Monitor } from 'lucide-react';
 
 const Preview: React.FC = () => {
@@ -63,6 +66,12 @@ const Preview: React.FC = () => {
         return <Banner {...props} />;
       case 'featured':
         return <Featured {...props} />;
+      case 'testimonial':
+        return <Testimonial {...props} />;
+      case 'about':
+        return <About {...props} />;
+      case 'contact':
+        return <Contact {...props} />;
       default:
         return null;
     }

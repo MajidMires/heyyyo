@@ -171,6 +171,126 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
         </section>
       );
 
+    case 'banner-6': // Gradient Banner
+      return (
+        <section 
+          className="py-8 md:py-12 lg:py-16 px-3 md:px-4 text-center relative overflow-hidden"
+          style={{ 
+            background: `linear-gradient(135deg, ${backgroundColor} 0%, ${settings.gradientColor || '#8B5CF6'} 100%)`,
+            color: textColor 
+          }}
+        >
+          <div className="container mx-auto relative z-10">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4">{text}</h2>
+            <p className="text-sm md:text-base opacity-90 mb-4 md:mb-6">
+              Don't miss out on this amazing opportunity
+            </p>
+            <a 
+              href={link}
+              className="inline-block px-6 md:px-8 py-3 md:py-4 bg-white bg-opacity-20 backdrop-blur-sm border-2 border-white font-medium rounded-lg hover:bg-opacity-30 transition-all duration-200 text-sm md:text-base"
+              style={{ borderColor: textColor, color: textColor }}
+            >
+              Get Started
+            </a>
+          </div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -translate-y-16 translate-x-16"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full translate-y-12 -translate-x-12"></div>
+        </section>
+      );
+
+    case 'banner-7': // Image Background Banner
+      return (
+        <section 
+          className="py-12 md:py-16 lg:py-20 px-3 md:px-4 text-center relative"
+          style={{
+            backgroundImage: `url(${settings.backgroundImage || 'https://images.pexels.com/photos/6348105/pexels-photo-6348105.jpeg?auto=compress&cs=tinysrgb&w=1200'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="container mx-auto relative z-10">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-white">{text}</h2>
+            <p className="text-base md:text-lg text-white opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">
+              Experience the difference with our premium products
+            </p>
+            <a 
+              href={link}
+              className="inline-block px-8 md:px-10 py-3 md:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm md:text-base"
+            >
+              Discover More
+            </a>
+          </div>
+        </section>
+      );
+
+    case 'banner-8': // Minimal Text Banner
+      return (
+        <section 
+          className="py-6 md:py-8 px-3 md:px-4 border-l-4"
+          style={{ 
+            backgroundColor: `${backgroundColor}10`,
+            borderColor: backgroundColor,
+            color: textColor 
+          }}
+        >
+          <div className="container mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 className="text-lg md:text-xl font-semibold mb-1">{text}</h3>
+                <p className="text-sm md:text-base opacity-75">Limited time offer</p>
+              </div>
+              <a 
+                href={link}
+                className="px-6 py-2 rounded-md font-medium text-sm md:text-base transition-colors"
+                style={{ 
+                  backgroundColor: backgroundColor,
+                  color: 'white'
+                }}
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'banner-9': // Call-to-Action Banner
+      return (
+        <section 
+          className="py-10 md:py-12 lg:py-16 px-3 md:px-4 text-center"
+          style={{ backgroundColor, color: textColor }}
+        >
+          <div className="container mx-auto max-w-4xl">
+            <div className="mb-4 md:mb-6">
+              <span className="inline-block w-16 h-16 md:w-20 md:h-20 rounded-full bg-white bg-opacity-20 flex items-center justify-center mb-4">
+                <span className="text-2xl md:text-3xl">🚀</span>
+              </span>
+            </div>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">{text}</h2>
+            <p className="text-base md:text-lg opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">
+              Join thousands of satisfied customers who have already made the switch
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+              <a 
+                href={link}
+                className="px-8 py-3 bg-white font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm md:text-base"
+                style={{ color: backgroundColor }}
+              >
+                Get Started Now
+              </a>
+              <a 
+                href="#"
+                className="px-8 py-3 border-2 border-white font-semibold rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors text-sm md:text-base"
+                style={{ borderColor: textColor, color: textColor }}
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+
     default:
       return null;
   }

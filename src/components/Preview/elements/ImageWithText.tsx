@@ -13,6 +13,8 @@ interface ImageWithTextProps {
     textPosition?: string;
     backgroundMedia?: string;
     showShadow?: boolean;
+    fontWeight?: string;
+    lineHeight?: string;
     buttons?: ButtonStyle[];
   };
   sectionStyle?: SectionStyle;
@@ -29,13 +31,15 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
   const textPosition = settings.textPosition || 'bottom-center';
   const backgroundMedia = settings.backgroundMedia || '';
   const showShadow = settings.showShadow !== false;
+  const fontWeight = settings.fontWeight || '400';
+  const lineHeight = settings.lineHeight || '1.375';
   const buttons = settings.buttons || [];
 
   const getFontSize = () => {
     switch (fontSize) {
-      case 'small': return { heading: 'text-lg md:text-xl lg:text-2xl', subtext: 'text-xs md:text-sm' };
-      case 'large': return { heading: 'text-2xl md:text-3xl lg:text-5xl', subtext: 'text-base md:text-lg' };
-      default: return { heading: 'text-xl md:text-2xl lg:text-3xl', subtext: 'text-sm md:text-base' };
+      case 'small': return { heading: 'text-base md:text-lg lg:text-xl', subtext: 'text-xs md:text-sm' };
+      case 'large': return { heading: 'text-3xl md:text-4xl lg:text-6xl', subtext: 'text-lg md:text-xl' };
+      default: return { heading: 'text-xl md:text-2xl lg:text-4xl', subtext: 'text-sm md:text-base' };
     }
   };
 
@@ -200,8 +204,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="w-full md:w-1/2 text-center md:text-left">
-                    {heading && <h2 className={`${fontSizes.heading} font-bold mb-2 md:mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-3 md:mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -226,8 +230,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="w-full md:w-1/2 text-center md:text-left">
-                    {heading && <h2 className={`${fontSizes.heading} font-bold mb-2 md:mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-3 md:mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -250,8 +254,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 />
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center p-3 md:p-6 lg:p-8">
-                    {heading && <h2 className={`${fontSizes.heading} font-bold mb-2 md:mb-4`} style={{ color: '#ffffff', fontFamily }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} max-w-sm md:max-w-2xl leading-relaxed mb-3 md:mb-4`} style={{ color: '#ffffff', fontFamily }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: '#ffffff', fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} max-w-sm md:max-w-2xl mb-3 md:mb-4`} style={{ color: '#ffffff', fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                     {renderButtons(true)}
                   </div>
                 )}
@@ -283,7 +287,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           {(subtext || buttons.length > 0) && (
             <div className={getContentMaxWidth()}>
               <div className="px-3 md:px-4 text-center md:text-left">
-                {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-3 md:mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                 {renderButtons()}
               </div>
             </div>
@@ -299,8 +303,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <div className="md:w-1/2 h-full flex items-center justify-center p-4 md:p-8 lg:p-12 bg-gray-50">
               {(heading || subtext || buttons.length > 0) && (
                 <div className="text-center md:text-left">
-                  {heading && <h2 className={`${fontSizes.heading} font-bold mb-2 md:mb-4`} style={{ color: textColor, fontFamily }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} leading-relaxed mb-3 md:mb-4`} style={{ color: textColor, fontFamily }}>{subtext}</p>}
+                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                   {renderButtons()}
                 </div>
               )}
@@ -335,8 +339,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           {(heading || subtext || buttons.length > 0) && (
             <div className="container mx-auto relative z-10 h-full px-3 md:px-4" style={{ maxWidth: sectionStyle?.maxWidth || '100%' }}>
               <div className={getTextPositionClasses()}>
-                {heading && <h1 className={`${fontSizes.heading} font-bold mb-2 md:mb-4`} style={{ color: '#ffffff', fontFamily }}>{heading}</h1>}
-                {subtext && <p className={`${fontSizes.subtext} leading-relaxed max-w-sm md:max-w-2xl mb-3 md:mb-4`} style={{ color: '#ffffff', fontFamily }}>{subtext}</p>}
+                {heading && <h1 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: '#ffffff', fontFamily, fontWeight, lineHeight }}>{heading}</h1>}
+                {subtext && <p className={`${fontSizes.subtext} max-w-sm md:max-w-2xl mb-3 md:mb-4`} style={{ color: '#ffffff', fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                 {renderButtons(true)}
               </div>
             </div>
@@ -359,15 +363,138 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         </section>
       );
 
-    case 'image-text-8': // Full Width Image Banner (No Shadow)
+    case 'image-text-8': // Mobile-First Hero
       return (
         <section style={getSectionStyle()}>
-          <div className="w-full">
-            <img 
-              src={imageUrl} 
-              alt={heading} 
-              className="w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-80 object-cover"
-            />
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="flex flex-col space-y-4">
+                <div className="w-full">
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  />
+                </div>
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="w-full text-center">
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-9': // Stacked Mobile Layout
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="space-y-6 md:space-y-8">
+                {(heading || subtext) && (
+                  <div className="text-center">
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} max-w-2xl mx-auto mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                  </div>
+                )}
+                <div className="w-full">
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-56 sm:h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-xl' : ''}`}
+                  />
+                </div>
+                {buttons.length > 0 && (
+                  <div className="text-center">
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-10': // Card Style with Shadow
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="bg-white rounded-xl shadow-2xl overflow-hidden max-w-4xl mx-auto">
+                <div className="flex flex-col md:flex-row">
+                  <div className="md:w-1/2">
+                    <img 
+                      src={imageUrl} 
+                      alt={heading} 
+                      className="w-full h-48 md:h-full object-cover"
+                    />
+                  </div>
+                  {(heading || subtext || buttons.length > 0) && (
+                    <div className="md:w-1/2 p-6 md:p-8 lg:p-12 flex flex-col justify-center">
+                      {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                      {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                      {renderButtons()}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-11': // Diagonal Split Layout
+      return (
+        <section className="relative overflow-hidden" style={getSectionStyle()}>
+          <div className="flex flex-col md:flex-row min-h-96">
+            <div className="md:w-1/2 relative">
+              <img 
+                src={imageUrl} 
+                alt={heading} 
+                className="w-full h-64 md:h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black opacity-30"></div>
+            </div>
+            {(heading || subtext || buttons.length > 0) && (
+              <div className="md:w-1/2 p-6 md:p-8 lg:p-12 flex flex-col justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white"></div>
+                <div className="relative z-10">
+                  {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                  {renderButtons()}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+
+    case 'image-text-12': // Floating Text Overlay
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="relative">
+                <img 
+                  src={imageUrl} 
+                  alt={heading} 
+                  className={`w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg ${showShadow ? 'shadow-xl' : ''}`}
+                />
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8">
+                    <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg p-4 md:p-6 lg:p-8 shadow-xl">
+                      {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-3`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                      {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                      {renderButtons()}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </section>
       );

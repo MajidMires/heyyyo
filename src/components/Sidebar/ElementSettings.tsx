@@ -206,6 +206,51 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 <option value="'Dancing Script', cursive">Dancing Script</option>
                 <option value="'Pacifico', cursive">Pacifico</option>
                 <option value="'Righteous', cursive">Righteous</option>
+                <option value="'Bebas Neue', cursive">Bebas Neue</option>
+                <option value="'Abril Fatface', cursive">Abril Fatface</option>
+                <option value="'Fredoka One', cursive">Fredoka One</option>
+                <option value="'Lobster', cursive">Lobster</option>
+                <option value="'Comfortaa', cursive">Comfortaa</option>
+                <option value="'Quicksand', sans-serif">Quicksand</option>
+                <option value="'Work Sans', sans-serif">Work Sans</option>
+                <option value="'Fira Sans', sans-serif">Fira Sans</option>
+                <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
+                <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Font Weight</label>
+              <select
+                value={settings.fontWeight || 'normal'}
+                onChange={(e) => handleTextChange('fontWeight', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="100">Thin (100)</option>
+                <option value="200">Extra Light (200)</option>
+                <option value="300">Light (300)</option>
+                <option value="400">Normal (400)</option>
+                <option value="500">Medium (500)</option>
+                <option value="600">Semi Bold (600)</option>
+                <option value="700">Bold (700)</option>
+                <option value="800">Extra Bold (800)</option>
+                <option value="900">Black (900)</option>
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Line Height</label>
+              <select
+                value={settings.lineHeight || 'normal'}
+                onChange={(e) => handleTextChange('lineHeight', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="1">Tight (1)</option>
+                <option value="1.25">Snug (1.25)</option>
+                <option value="1.375">Normal (1.375)</option>
+                <option value="1.5">Relaxed (1.5)</option>
+                <option value="1.625">Loose (1.625)</option>
+                <option value="2">Extra Loose (2)</option>
               </select>
             </div>
 

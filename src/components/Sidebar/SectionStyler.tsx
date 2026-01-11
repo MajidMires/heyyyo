@@ -36,9 +36,16 @@ const SectionStyler: React.FC<SectionStylerProps> = ({ sectionStyle, onStyleChan
             <div className="flex items-center space-x-2">
               <input
                 type="color"
-                value={sectionStyle.backgroundColor === 'transparent' ? '#ffffff' : sectionStyle.backgroundColor}
+                value={sectionStyle.backgroundColor === 'transparent' ? '#000000' : sectionStyle.backgroundColor}
                 onChange={(e) => onStyleChange({ backgroundColor: e.target.value })}
                 className="w-8 h-8 border border-gray-300 rounded"
+              />
+              <input
+                type="text"
+                value={sectionStyle.backgroundColor === 'transparent' ? 'transparent' : sectionStyle.backgroundColor}
+                onChange={(e) => onStyleChange({ backgroundColor: e.target.value })}
+                placeholder="#000000 or rgba(0,0,0,0.5)"
+                className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs"
               />
               <button
                 onClick={() => onStyleChange({ backgroundColor: 'transparent' })}
@@ -51,6 +58,9 @@ const SectionStyler: React.FC<SectionStylerProps> = ({ sectionStyle, onStyleChan
                 Transparent
               </button>
             </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Use hex (#000000), rgb(0,0,0), rgba(0,0,0,0.5) or named colors
+            </p>
           </div>
 
           <div className="space-y-2">

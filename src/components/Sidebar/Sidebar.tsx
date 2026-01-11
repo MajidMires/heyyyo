@@ -191,6 +191,36 @@ const Sidebar: React.FC = () => {
                     >
                       Featured
                     </button>
+                    <button
+                      className={`px-3 py-1 text-xs rounded-full whitespace-nowrap ${
+                        elementTypeFilter === 'testimonial'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                      onClick={() => setElementTypeFilter('testimonial')}
+                    >
+                      Testimonials
+                    </button>
+                    <button
+                      className={`px-3 py-1 text-xs rounded-full whitespace-nowrap ${
+                        elementTypeFilter === 'about'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                      onClick={() => setElementTypeFilter('about')}
+                    >
+                      About
+                    </button>
+                    <button
+                      className={`px-3 py-1 text-xs rounded-full whitespace-nowrap ${
+                        elementTypeFilter === 'contact'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                      onClick={() => setElementTypeFilter('contact')}
+                    >
+                      Contact
+                    </button>
                   </div>
                   <ElementSelector typeFilter={elementTypeFilter} />
                 </>
