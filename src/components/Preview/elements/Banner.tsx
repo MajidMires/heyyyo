@@ -291,6 +291,82 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
         </section>
       );
 
+    case 'banner-10': // Animated Text Banner
+      return (
+        <section 
+          className="py-8 md:py-12 lg:py-16 px-3 md:px-4 text-center overflow-hidden"
+          style={{ backgroundColor, color: textColor }}
+        >
+          <div className="container mx-auto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 animate-pulse">{text}</h2>
+            <div className="flex justify-center items-center space-x-4">
+              <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+              <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+            </div>
+            <a 
+              href={link}
+              className="inline-block mt-6 px-8 py-3 bg-white bg-opacity-20 backdrop-blur-sm border-2 border-white font-medium rounded-lg hover:bg-opacity-30 transition-all duration-200"
+              style={{ borderColor: textColor, color: textColor }}
+            >
+              Learn More
+            </a>
+          </div>
+        </section>
+      );
+
+    case 'banner-11': // Video Background Banner
+      return (
+        <section className="relative py-12 md:py-16 lg:py-20 px-3 md:px-4 text-center overflow-hidden">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src={settings.videoUrl || 'https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4'} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="container mx-auto relative z-10">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-white">{text}</h2>
+            <p className="text-base md:text-lg text-white opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">
+              Experience the difference with our premium products
+            </p>
+            <a 
+              href={link}
+              className="inline-block px-8 md:px-10 py-3 md:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              Discover More
+            </a>
+          </div>
+        </section>
+      );
+
+    case 'banner-12': // Parallax Banner
+      return (
+        <section 
+          className="relative py-20 md:py-32 px-3 md:px-4 text-center bg-fixed bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${settings.backgroundImage || 'https://images.pexels.com/photos/6348105/pexels-photo-6348105.jpeg?auto=compress&cs=tinysrgb&w=1200'})`,
+          }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+          <div className="container mx-auto relative z-10">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white">{text}</h2>
+            <p className="text-lg md:text-xl text-white opacity-90 mb-8 md:mb-10 max-w-3xl mx-auto">
+              Scroll to see the parallax effect in action
+            </p>
+            <a 
+              href={link}
+              className="inline-block px-10 md:px-12 py-4 md:py-5 bg-white text-gray-900 font-bold rounded-lg hover:bg-gray-100 transition-colors text-lg"
+            >
+              Get Started
+            </a>
+          </div>
+        </section>
+      );
+
     default:
       return null;
   }

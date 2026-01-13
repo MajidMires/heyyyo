@@ -273,6 +273,112 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
         </section>
       );
 
+    case 'testimonial-5': // Image Slider Testimonials
+      return (
+        <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4">
+          <div className="container mx-auto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+              {title}
+            </h2>
+            
+            <div className="relative max-w-6xl mx-auto">
+              <div className="overflow-hidden">
+                <div
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                  {testimonials.map((testimonial, index) => (
+                    <div key={index} className="w-full flex-shrink-0 px-4">
+                      <div className="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="md:w-1/2">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-full h-64 md:h-80 object-cover"
+                          />
+                        </div>
+                        <div className="md:w-1/2 p-6 md:p-8">
+                          <Quote className="mb-4 text-blue-600" size={32} />
+                          <p className="text-lg md:text-xl text-gray-700 mb-6 italic">
+                            "{testimonial.text}"
+                          </p>
+                          <div className="flex items-center space-x-4">
+                            <div>
+                              <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                              <p className="text-sm text-gray-600">{testimonial.role}</p>
+                              {renderStars(testimonial.rating)}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <button
+                onClick={prevSlide}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <ChevronLeft size={24} className="text-gray-600" />
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <ChevronRight size={24} className="text-gray-600" />
+              </button>
+            </div>
+            
+            <div className="flex justify-center mt-8 space-x-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'testimonial-6': // Masonry Testimonials
+      return (
+        <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-50">
+          <div className="container mx-auto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+              {title}
+            </h2>
+            
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="break-inside-avoid mb-6 md:mb-8">
+                  <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                        <p className="text-sm text-gray-600">{testimonial.role}</p>
+                        {renderStars(testimonial.rating)}
+                      </div>
+                    </div>
+                    <p className="text-gray-700">"{testimonial.text}"</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+
     default:
       return null;
   }

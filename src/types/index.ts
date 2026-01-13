@@ -1,4 +1,4 @@
-export type ElementType = 'imageWithText' | 'slideshow' | 'collection' | 'banner' | 'featured' | 'testimonial' | 'about' | 'contact';
+export type ElementType = 'imageWithText' | 'slideshow' | 'collection' | 'banner' | 'featured' | 'testimonial' | 'about' | 'contact' | 'newsletter' | 'faq' | 'stats';
 export type CustomizationMode = 'welcome' | 'productCard' | 'productModal' | 'storefront';
 export type SetupStep = 'welcome' | 'productCard' | 'productModal' | 'storefront' | 'complete';
 export type ViewMode = 'editor' | 'preview';

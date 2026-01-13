@@ -14,6 +14,9 @@ import Featured from './elements/Featured';
 import Testimonial from './elements/Testimonial';
 import About from './elements/About';
 import Contact from './elements/Contact';
+import Newsletter from './elements/Newsletter';
+import FAQ from './elements/FAQ';
+import Stats from './elements/Stats';
 import { Home, Smartphone, Monitor } from 'lucide-react';
 
 const Preview: React.FC = () => {
@@ -72,6 +75,12 @@ const Preview: React.FC = () => {
         return <About {...props} />;
       case 'contact':
         return <Contact {...props} />;
+      case 'newsletter':
+        return <Newsletter {...props} />;
+      case 'faq':
+        return <FAQ {...props} />;
+      case 'stats':
+        return <Stats {...props} />;
       default:
         return null;
     }

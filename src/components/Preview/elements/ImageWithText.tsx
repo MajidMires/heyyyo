@@ -499,6 +499,154 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         </section>
       );
 
+    case 'image-text-13': // Parallax Hero Section
+      return (
+        <section className="relative h-screen overflow-hidden" style={getSectionStyle()}>
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-fixed"
+            style={{ backgroundImage: `url(${backgroundMedia || imageUrl})` }}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50" />
+          {(heading || subtext || buttons.length > 0) && (
+            <div className="container mx-auto relative z-10 h-full px-3 md:px-4 flex items-center justify-center">
+              <div className="text-center text-white">
+                {heading && <h1 className={`${fontSizes.heading} mb-4 md:mb-6`} style={{ fontFamily, fontWeight, lineHeight }}>{heading}</h1>}
+                {subtext && <p className={`${fontSizes.subtext} max-w-2xl mx-auto mb-6 md:mb-8`} style={{ fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                {renderButtons(true)}
+              </div>
+            </div>
+          )}
+        </section>
+      );
+
+    case 'image-text-14': // Magazine Style Layout
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div className="md:col-span-2">
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-64 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  />
+                </div>
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="flex flex-col justify-center">
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-15': // Asymmetric Grid Layout
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6">
+                <div className="md:col-span-3">
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-48 md:h-64 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  />
+                </div>
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="md:col-span-2 flex flex-col justify-center">
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-16': // Circular Image with Text
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4 text-center">
+              <div className="max-w-md mx-auto">
+                <img 
+                  src={imageUrl} 
+                  alt={heading} 
+                  className={`w-48 h-48 md:w-64 md:h-64 object-cover rounded-full mx-auto mb-6 md:mb-8 ${showShadow ? 'shadow-xl' : ''}`}
+                />
+                {(heading || subtext || buttons.length > 0) && (
+                  <div>
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-17': // Masonry Style Layout
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="columns-1 md:columns-2 gap-6 md:gap-8">
+                <div className="break-inside-avoid mb-6">
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className={`w-full h-auto object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  />
+                </div>
+                {(heading || subtext || buttons.length > 0) && (
+                  <div className="break-inside-avoid">
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-18': // Polaroid Style Cards
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              <div className="max-w-sm mx-auto">
+                <div className="bg-white p-4 rounded-lg shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                  <img 
+                    src={imageUrl} 
+                    alt={heading} 
+                    className="w-full h-48 md:h-64 object-cover rounded"
+                  />
+                  {(heading || subtext || buttons.length > 0) && (
+                    <div className="mt-4 text-center">
+                      {heading && <h2 className={`${fontSizes.heading} mb-2`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                      {subtext && <p className={`${fontSizes.subtext} mb-3`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                      {renderButtons()}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
     default:
       return null;
   }

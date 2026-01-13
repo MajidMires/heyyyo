@@ -36,13 +36,13 @@ const SectionStyler: React.FC<SectionStylerProps> = ({ sectionStyle, onStyleChan
             <div className="flex items-center space-x-2">
               <input
                 type="color"
-                value={sectionStyle.backgroundColor === 'transparent' ? '#000000' : sectionStyle.backgroundColor}
+                value={sectionStyle.backgroundColor === 'transparent' || sectionStyle.backgroundColor.includes('rgba') || sectionStyle.backgroundColor.includes('rgb') ? '#000000' : sectionStyle.backgroundColor}
                 onChange={(e) => onStyleChange({ backgroundColor: e.target.value })}
                 className="w-8 h-8 border border-gray-300 rounded"
               />
               <input
                 type="text"
-                value={sectionStyle.backgroundColor === 'transparent' ? 'transparent' : sectionStyle.backgroundColor}
+                value={sectionStyle.backgroundColor}
                 onChange={(e) => onStyleChange({ backgroundColor: e.target.value })}
                 placeholder="#000000 or rgba(0,0,0,0.5)"
                 className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs"

@@ -19,6 +19,9 @@ const ElementSelector: React.FC<ElementSelectorProps> = ({ typeFilter }) => {
     'testimonial',
     'about',
     'contact',
+    'newsletter',
+    'faq',
+    'stats',
   ];
 
   const typesToShow = typeFilter ? [typeFilter] : templateTypes;
@@ -41,6 +44,12 @@ const ElementSelector: React.FC<ElementSelectorProps> = ({ typeFilter }) => {
         return 'About/Story';
       case 'contact':
         return 'Contact';
+      case 'newsletter':
+        return 'Newsletter';
+      case 'faq':
+        return 'FAQ';
+      case 'stats':
+        return 'Statistics';
     }
   };
 
