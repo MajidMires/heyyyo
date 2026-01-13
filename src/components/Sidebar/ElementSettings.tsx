@@ -619,6 +619,135 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             </div>
           </>
         )}
+
+        {template.type === 'newsletter' && (
+          <>
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Section Title</label>
+              <input
+                type="text"
+                value={settings.title || 'Stay Updated'}
+                onChange={(e) => handleTextChange('title', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Subtitle</label>
+              <input
+                type="text"
+                value={settings.subtitle || 'Subscribe to our newsletter'}
+                onChange={(e) => handleTextChange('subtitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Description</label>
+              <textarea
+                value={settings.description || 'Get the latest updates and exclusive offers.'}
+                onChange={(e) => handleTextChange('description', e.target.value)}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Button Text</label>
+              <input
+                type="text"
+                value={settings.buttonText || 'Subscribe'}
+                onChange={(e) => handleTextChange('buttonText', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Background Color</label>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="color"
+                  value={settings.backgroundColor || '#3B82F6'}
+                  onChange={(e) => handleColorChange('backgroundColor', e.target.value)}
+                  className="w-8 h-8 border border-gray-300 rounded"
+                />
+                <span className="text-xs text-gray-500">{settings.backgroundColor || '#3B82F6'}</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {template.type === 'faq' && (
+          <>
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Section Title</label>
+              <input
+                type="text"
+                value={settings.title || 'Frequently Asked Questions'}
+                onChange={(e) => handleTextChange('title', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Subtitle</label>
+              <input
+                type="text"
+                value={settings.subtitle || 'Find answers to common questions'}
+                onChange={(e) => handleTextChange('subtitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+          </>
+        )}
+
+        {template.type === 'stats' && (
+          <>
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Section Title</label>
+              <input
+                type="text"
+                value={settings.title || 'Our Achievements'}
+                onChange={(e) => handleTextChange('title', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Subtitle</label>
+              <input
+                type="text"
+                value={settings.subtitle || 'Numbers that speak for themselves'}
+                onChange={(e) => handleTextChange('subtitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+            </div>
+
+            {[1, 2, 3, 4].map((statNum) => (
+              <div key={statNum} className="space-y-2 p-3 border border-gray-200 rounded-md">
+                <h4 className="text-sm font-medium text-gray-800">Statistic {statNum}</h4>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Number</label>
+                  <input
+                    type="text"
+                    value={settings[`stat${statNum}Number`] || (statNum === 1 ? '10000+' : statNum === 2 ? '500' : statNum === 3 ? '99%' : '24')}
+                    onChange={(e) => handleTextChange(`stat${statNum}Number`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Label</label>
+                  <input
+                    type="text"
+                    value={settings[`stat${statNum}Label`] || (statNum === 1 ? 'Happy Customers' : statNum === 2 ? 'Products Sold' : statNum === 3 ? 'Satisfaction Rate' : 'Awards Won')}
+                    onChange={(e) => handleTextChange(`stat${statNum}Label`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
         )}
 
