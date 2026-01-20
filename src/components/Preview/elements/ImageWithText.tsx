@@ -84,29 +84,29 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
   };
 
   const getTextPositionClasses = () => {
-    const baseClasses = "absolute p-4 md:p-6 lg:p-8";
+    const baseClasses = "absolute p-4 md:p-6 lg:p-8 z-10";
     
     switch (textPosition) {
       case 'center':
-        return `${baseClasses} inset-0 flex flex-col items-center justify-center text-center bg-black bg-opacity-40`;
+        return `${baseClasses} inset-0 flex flex-col items-center justify-center text-center`;
       case 'bottom-center':
-        return `${baseClasses} bottom-0 left-0 right-0 text-center bg-gradient-to-t from-black via-black/50 to-transparent`;
+        return `${baseClasses} bottom-0 left-0 right-0 text-center`;
       case 'bottom-left':
-        return `${baseClasses} bottom-0 left-0 bg-gradient-to-t from-black via-black/50 to-transparent max-w-md`;
+        return `${baseClasses} bottom-0 left-0 text-left max-w-xs sm:max-w-sm md:max-w-md`;
       case 'bottom-right':
-        return `${baseClasses} bottom-0 right-0 text-right bg-gradient-to-t from-black via-black/50 to-transparent max-w-md`;
+        return `${baseClasses} bottom-0 right-0 text-right max-w-xs sm:max-w-sm md:max-w-md`;
       case 'top-center':
-        return `${baseClasses} top-0 left-0 right-0 text-center bg-gradient-to-b from-black via-black/50 to-transparent`;
+        return `${baseClasses} top-0 left-0 right-0 text-center`;
       case 'top-left':
-        return `${baseClasses} top-0 left-0 bg-gradient-to-b from-black via-black/50 to-transparent max-w-md`;
+        return `${baseClasses} top-0 left-0 text-left max-w-xs sm:max-w-sm md:max-w-md`;
       case 'top-right':
-        return `${baseClasses} top-0 right-0 text-right bg-gradient-to-b from-black via-black/50 to-transparent max-w-md`;
+        return `${baseClasses} top-0 right-0 text-right max-w-xs sm:max-w-sm md:max-w-md`;
       case 'left':
-        return `${baseClasses} left-0 top-0 bottom-0 flex flex-col justify-center max-w-xs md:max-w-md bg-gradient-to-r from-black via-black/50 to-transparent`;
+        return `${baseClasses} left-0 top-0 bottom-0 flex flex-col justify-center text-left max-w-xs sm:max-w-sm md:max-w-md`;
       case 'right':
-        return `${baseClasses} right-0 top-0 bottom-0 flex flex-col justify-center max-w-xs md:max-w-md text-right bg-gradient-to-l from-black via-black/50 to-transparent`;
+        return `${baseClasses} right-0 top-0 bottom-0 flex flex-col justify-center text-right max-w-xs sm:max-w-sm md:max-w-md`;
       default:
-        return `${baseClasses} bottom-0 left-0 right-0 text-center bg-gradient-to-t from-black via-black/50 to-transparent`;
+        return `${baseClasses} bottom-0 left-0 right-0 text-center`;
     }
   };
 
@@ -199,7 +199,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img 
                     src={imageUrl} 
                     alt={heading} 
-                    className={`w-full h-48 sm:h-56 md:h-64 lg:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -246,12 +246,13 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         <section style={getSectionStyle()}>
           <div className={getContentMaxWidth()}>
             <div className="px-3 md:px-4">
-              <div className={`relative rounded-lg overflow-hidden ${showShadow ? 'shadow-xl' : ''}`}>
+              <div className={`relative rounded-lg overflow-hidden ${showShadow ? 'shadow-xl' : ''} min-h-[300px] sm:min-h-[400px] md:min-h-[500px]`}>
                 <img 
                   src={imageUrl} 
                   alt={heading} 
-                  className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover"
+                  className="w-full h-full min-h-[300px] sm:min-h-[400px] md:min-h-[500px] object-cover"
                 />
+                <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className={getTextPositionClasses()}>
                     {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
@@ -318,7 +319,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       const isVideo = backgroundImageUrl.includes('.mp4') || backgroundImageUrl.includes('.webm') || backgroundImageUrl.includes('.mov');
       
       return (
-        <section className="relative h-screen min-h-96 w-full" style={getSectionStyle()}>
+        <section className="relative h-screen min-h-[400px] sm:min-h-[500px] md:min-h-[600px] w-full" style={getSectionStyle()}>
           {isVideo ? (
             <video
               className="absolute inset-0 w-full h-full object-cover"
@@ -335,8 +336,9 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               style={{ backgroundImage: `url(${backgroundImageUrl})` }}
             />
           )}
+          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
           {(heading || subtext || buttons.length > 0) && (
-            <div className="container mx-auto relative z-10 h-full px-3 md:px-4" style={{ maxWidth: sectionStyle?.maxWidth || '100%' }}>
+            <div className="relative z-20 h-full px-3 md:px-4" style={{ maxWidth: sectionStyle?.maxWidth || '100%' }}>
               <div className={getTextPositionClasses()}>
                 {heading && <h1 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h1>}
                 {subtext && <p className={`${fontSizes.subtext} max-w-sm md:max-w-2xl mb-3 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
@@ -372,7 +374,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img 
                     src={imageUrl} 
                     alt={heading} 
-                    className={`w-full h-56 sm:h-64 md:h-72 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -477,14 +479,25 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         <section style={getSectionStyle()}>
           <div className={getContentMaxWidth()}>
             <div className="px-3 md:px-4">
-              <div className="relative">
+              <div className="relative min-h-[300px] sm:min-h-[400px] md:min-h-[500px]">
                 <img 
                   src={imageUrl} 
                   alt={heading} 
-                  className={`w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg ${showShadow ? 'shadow-xl' : ''}`}
+                  className={`w-full h-full min-h-[300px] sm:min-h-[400px] md:min-h-[500px] object-cover rounded-lg ${showShadow ? 'shadow-xl' : ''}`}
                 />
                 {(heading || subtext || buttons.length > 0) && (
-                  <div className={`absolute ${textPosition.includes('top') ? 'top-4 md:top-8' : 'bottom-4 md:bottom-8'} ${textPosition.includes('left') ? 'left-4 md:left-8 right-auto max-w-sm' : textPosition.includes('right') ? 'right-4 md:right-8 left-auto max-w-sm' : 'left-4 right-4 md:left-8 md:right-8'}`}>
+                  <div className={`absolute z-10 ${
+                    textPosition === 'center' ? 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center' :
+                    textPosition === 'top-center' ? 'top-4 md:top-8 left-1/2 transform -translate-x-1/2 text-center' :
+                    textPosition === 'bottom-center' ? 'bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 text-center' :
+                    textPosition === 'top-left' ? 'top-4 md:top-8 left-4 md:left-8 text-left' :
+                    textPosition === 'top-right' ? 'top-4 md:top-8 right-4 md:right-8 text-right' :
+                    textPosition === 'bottom-left' ? 'bottom-4 md:bottom-8 left-4 md:left-8 text-left' :
+                    textPosition === 'bottom-right' ? 'bottom-4 md:bottom-8 right-4 md:right-8 text-right' :
+                    textPosition === 'left' ? 'top-1/2 left-4 md:left-8 transform -translate-y-1/2 text-left' :
+                    textPosition === 'right' ? 'top-1/2 right-4 md:right-8 transform -translate-y-1/2 text-right' :
+                    'bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2 text-center'
+                  } max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg`}>
                     <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg p-4 md:p-6 lg:p-8 shadow-xl">
                       {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-3`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
                       {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
@@ -500,15 +513,15 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
 
     case 'image-text-13': // Parallax Hero Section
       return (
-        <section className="relative h-screen overflow-hidden" style={getSectionStyle()}>
+        <section className="relative h-screen min-h-[400px] sm:min-h-[500px] md:min-h-[600px] overflow-hidden" style={getSectionStyle()}>
           <div 
             className="absolute inset-0 bg-cover bg-center bg-fixed"
             style={{ backgroundImage: `url(${backgroundMedia || imageUrl})` }}
           />
           <div className="absolute inset-0 bg-black bg-opacity-50" />
           {(heading || subtext || buttons.length > 0) && (
-            <div className="container mx-auto relative z-10 h-full px-3 md:px-4 flex items-center justify-center">
-              <div className="text-center text-white">
+            <div className="relative z-20 h-full px-3 md:px-4">
+              <div className={`${getTextPositionClasses()} text-white`}>
                 {heading && <h1 className={`${fontSizes.heading} mb-4 md:mb-6`} style={{ fontFamily, fontWeight, lineHeight }}>{heading}</h1>}
                 {subtext && <p className={`${fontSizes.subtext} max-w-2xl mx-auto mb-6 md:mb-8`} style={{ fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                 {renderButtons(true)}
