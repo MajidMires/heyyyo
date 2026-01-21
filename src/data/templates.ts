@@ -110,6 +110,24 @@ export const templates: ElementTemplate[] = [
     type: 'imageWithText',
     thumbnail: 'https://images.pexels.com/photos/5868722/pexels-photo-5868722.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
+  {
+    id: 'image-text-20',
+    name: '4 Square Images Grid',
+    type: 'imageWithText',
+    thumbnail: 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=300',
+  },
+  {
+    id: 'image-text-21',
+    name: '3 Images in Row',
+    type: 'imageWithText',
+    thumbnail: 'https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=300',
+  },
+  {
+    id: 'image-text-22',
+    name: '2 Large Images Side by Side',
+    type: 'imageWithText',
+    thumbnail: 'https://images.pexels.com/photos/5632366/pexels-photo-5632366.jpeg?auto=compress&cs=tinysrgb&w=300',
+  },
 
   // Slideshow Templates
   {

@@ -198,10 +198,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <div className="px-3 md:px-4">
               <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 lg:gap-8">
                 <div className="w-full md:w-1/2">
-                  <img 
-                    src={imageUrl} 
-                    alt={heading} 
-                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  <img
+                    src={imageUrl}
+                    alt={heading}
+                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -224,10 +225,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <div className="px-3 md:px-4">
               <div className="flex flex-col md:flex-row-reverse items-center gap-4 md:gap-6 lg:gap-8">
                 <div className="w-full md:w-1/2">
-                  <img 
-                    src={imageUrl} 
-                    alt={heading} 
-                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  <img
+                    src={imageUrl}
+                    alt={heading}
+                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -249,10 +251,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           <div className={getContentMaxWidth()}>
             <div className="px-3 md:px-4">
               <div className={`relative rounded-lg overflow-hidden ${showShadow ? 'shadow-xl' : ''} min-h-[300px] sm:min-h-[400px] md:min-h-[500px]`}>
-                <img 
-                  src={imageUrl} 
-                  alt={heading} 
-                  className="w-full h-full min-h-[300px] sm:min-h-[400px] md:min-h-[500px] object-cover"
+                <img
+                  src={imageUrl}
+                  alt={heading}
+                  className="w-full h-full min-h-[300px] sm:min-h-[400px] md:min-h-[500px]"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -272,10 +275,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       return (
         <section style={getSectionStyle()}>
           <div className={`relative mb-8 ${showShadow ? 'shadow-lg' : ''}`}>
-            <img 
-              src={imageUrl} 
-              alt={heading} 
-              className="w-full h-56 sm:h-64 md:h-80 lg:h-96 object-cover"
+            <img
+              src={imageUrl}
+              alt={heading}
+              className="w-full h-56 sm:h-64 md:h-80 lg:h-96"
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
             />
             {heading && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-6 lg:p-8">
@@ -302,7 +306,10 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       return (
         <section className="h-56 sm:h-64 md:h-80 lg:h-96" style={getSectionStyle()}>
           <div className="flex flex-col md:flex-row h-full">
-            <div className="md:w-1/2 h-full bg-cover bg-center" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+            <div
+              className="md:w-1/2 h-full bg-cover"
+              style={{ backgroundImage: `url(${imageUrl})`, backgroundPosition: 'center' }}
+            ></div>
             <div className="md:w-1/2 h-full flex items-center justify-center p-4 md:p-8 lg:p-12 bg-gray-50">
               {(heading || subtext || buttons.length > 0) && (
                 <div className="text-center md:text-left">
@@ -356,10 +363,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         <section style={getSectionStyle()}>
           <div className={getContentMaxWidth()}>
             <div className="px-3 md:px-4">
-              <img 
-                src={imageUrl} 
-                alt={heading} 
-                className={`w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-80 object-cover ${showShadow ? 'shadow-lg' : ''}`}
+              <img
+                src={imageUrl}
+                alt={heading}
+                className={`w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-80 ${showShadow ? 'shadow-lg' : ''}`}
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
               />
             </div>
           </div>
@@ -373,10 +381,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <div className="px-3 md:px-4">
               <div className="flex flex-col space-y-4">
                 <div className="w-full">
-                  <img 
-                    src={imageUrl} 
-                    alt={heading} 
-                    className={`w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                  <img
+                    src={imageUrl}
+                    alt={heading}
+                    className={`w-full h-64 sm:h-72 md:h-80 rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -656,6 +665,105 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   )}
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-20': // 4 Square Images Grid
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              {(heading || subtext) && (
+                <div className="text-center mb-6 md:mb-8">
+                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                </div>
+              )}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                {[imageUrl, settings.image2, settings.image3, settings.image4].map((img, idx) => (
+                  <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
+                    <img
+                      src={img || imageUrl}
+                      alt={`Gallery ${idx + 1}`}
+                      className="w-full h-48 sm:h-56 md:h-64 lg:h-72"
+                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    />
+                  </div>
+                ))}
+              </div>
+              {buttons.length > 0 && (
+                <div className="mt-6 md:mt-8 text-center">
+                  {renderButtons()}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-21': // 3 Images in Row
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              {(heading || subtext) && (
+                <div className="text-center mb-6 md:mb-8">
+                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+                {[imageUrl, settings.image2, settings.image3].map((img, idx) => (
+                  <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
+                    <img
+                      src={img || imageUrl}
+                      alt={`Gallery ${idx + 1}`}
+                      className="w-full h-56 md:h-64 lg:h-72"
+                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    />
+                  </div>
+                ))}
+              </div>
+              {buttons.length > 0 && (
+                <div className="mt-6 md:mt-8 text-center">
+                  {renderButtons()}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'image-text-22': // 2 Large Images Side by Side
+      return (
+        <section style={getSectionStyle()}>
+          <div className={getContentMaxWidth()}>
+            <div className="px-3 md:px-4">
+              {(heading || subtext) && (
+                <div className="text-center mb-6 md:mb-8">
+                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                {[imageUrl, settings.image2].map((img, idx) => (
+                  <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
+                    <img
+                      src={img || imageUrl}
+                      alt={`Gallery ${idx + 1}`}
+                      className="w-full h-64 md:h-80 lg:h-96"
+                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    />
+                  </div>
+                ))}
+              </div>
+              {buttons.length > 0 && (
+                <div className="mt-6 md:mt-8 text-center">
+                  {renderButtons()}
+                </div>
+              )}
             </div>
           </div>
         </section>
