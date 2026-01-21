@@ -19,6 +19,7 @@ interface ImageWithTextProps {
     fontWeight?: string;
     lineHeight?: string;
     aspectRatio?: 'square' | 'portrait' | 'landscape' | 'wide' | 'tall';
+    focalPoint?: 'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
     buttons?: ButtonStyle[];
   };
   sectionStyle?: SectionStyle;
@@ -38,7 +39,31 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
   const fontWeight = settings.fontWeight || '400';
   const lineHeight = settings.lineHeight || '1.375';
   const aspectRatio = settings.aspectRatio || 'landscape';
+  const focalPoint = settings.focalPoint || 'center';
   const buttons = settings.buttons || [];
+
+  const getFocalPoint = () => {
+    switch (focalPoint) {
+      case 'top':
+        return 'center top';
+      case 'bottom':
+        return 'center bottom';
+      case 'left':
+        return 'left center';
+      case 'right':
+        return 'right center';
+      case 'top-left':
+        return 'left top';
+      case 'top-right':
+        return 'right top';
+      case 'bottom-left':
+        return 'left bottom';
+      case 'bottom-right':
+        return 'right bottom';
+      default:
+        return 'center';
+    }
+  };
 
   const getAspectRatioClasses = () => {
     switch (aspectRatio) {
@@ -241,7 +266,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     src={imageUrl}
                     alt={heading}
                     className={`w-full ${getHeightClasses()} rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -268,7 +293,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     src={imageUrl}
                     alt={heading}
                     className={`w-full ${getHeightClasses()} rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -318,7 +343,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               src={imageUrl}
               alt={heading}
               className={`w-full ${getHeightClasses()}`}
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
             />
             {heading && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-6 lg:p-8">
@@ -347,7 +372,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           <div className="flex flex-col md:flex-row h-full">
             <div
               className="md:w-1/2 h-full bg-cover"
-              style={{ backgroundImage: `url(${imageUrl})`, backgroundPosition: 'center' }}
+              style={{ backgroundImage: `url(${imageUrl})`, backgroundPosition: getFocalPoint() }}
             ></div>
             <div className="md:w-1/2 h-full flex items-center justify-center p-4 md:p-8 lg:p-12 bg-gray-50">
               {(heading || subtext || buttons.length > 0) && (
@@ -370,7 +395,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
         <section className="relative h-screen min-h-[400px] sm:min-h-[500px] md:min-h-[600px] w-full overflow-hidden" style={getSectionStyle()}>
           {isVideo ? (
             <video
-              className="absolute inset-0 w-full h-full max-w-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: getFocalPoint() }}
               autoPlay
               muted
               loop
@@ -380,8 +406,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             </video>
           ) : (
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+              className="absolute inset-0 w-full h-full bg-cover bg-no-repeat"
+              style={{ backgroundImage: `url(${backgroundImageUrl})`, backgroundPosition: getFocalPoint() }}
             />
           )}
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
@@ -406,7 +432,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 src={imageUrl}
                 alt={heading}
                 className={`w-full ${getHeightClasses()} ${showShadow ? 'shadow-lg' : ''}`}
-                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
               />
             </div>
           </div>
@@ -424,7 +450,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     src={imageUrl}
                     alt={heading}
                     className={`w-full ${getHeightClasses()} rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
-                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
                   />
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
@@ -727,7 +753,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                       src={img || imageUrl}
                       alt={`Gallery ${idx + 1}`}
                       className={`w-full ${getHeightClasses()}`}
-                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                      style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
                     />
                   </div>
                 ))}
@@ -760,7 +786,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                       src={img || imageUrl}
                       alt={`Gallery ${idx + 1}`}
                       className={`w-full ${getHeightClasses()}`}
-                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                      style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
                     />
                   </div>
                 ))}
@@ -793,7 +819,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                       src={img || imageUrl}
                       alt={`Gallery ${idx + 1}`}
                       className={`w-full ${getHeightClasses()}`}
-                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                      style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
                     />
                   </div>
                 ))}

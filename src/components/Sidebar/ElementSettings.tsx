@@ -196,6 +196,26 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
               </select>
             </div>
 
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Image Focal Point</label>
+              <select
+                value={settings.focalPoint || 'center'}
+                onChange={(e) => handleTextChange('focalPoint', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="center">Center</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="top-left">Top Left</option>
+                <option value="top-right">Top Right</option>
+                <option value="bottom-left">Bottom Left</option>
+                <option value="bottom-right">Bottom Right</option>
+              </select>
+              <p className="text-xs text-gray-500">Control where the image focuses when cropped</p>
+            </div>
+
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
