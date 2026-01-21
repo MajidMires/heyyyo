@@ -179,6 +179,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               border: `${button.borderWidth}px solid ${button.borderColor}`,
               borderRadius: `${button.borderRadius}px`,
               fontFamily: fontFamily,
+              opacity: (button.opacity || 100) / 100,
+              textDecoration: button.underline ? 'underline' : 'none',
             }}
           >
             {button.text}

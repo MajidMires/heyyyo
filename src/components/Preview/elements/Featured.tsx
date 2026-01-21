@@ -120,6 +120,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
               color: button.textColor,
               border: `${button.borderWidth}px solid ${button.borderColor}`,
               borderRadius: `${button.borderRadius}px`,
+              opacity: (button.opacity || 100) / 100,
+              textDecoration: button.underline ? 'underline' : 'none',
             }}
           >
             {button.text}

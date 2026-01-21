@@ -106,31 +106,45 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <div className="relative h-64 md:h-72 lg:h-80 rounded-lg overflow-hidden">
+            <div className="relative rounded-lg overflow-hidden">
               {slides.map((slide, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 flex items-center transition-all duration-500 transform ${
-                    currentSlide === index ? 'translate-x-0' : 'translate-x-full'
+                  className={`transition-all duration-500 ${
+                    currentSlide === index ? 'block' : 'hidden'
                   }`}
                 >
-                  <div className="w-full md:w-1/2 h-full">
-                    <img
-                      src={slide.image}
-                      alt={slide.heading}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="absolute inset-0 md:relative md:w-1/2 p-4 md:p-6 lg:p-8 bg-black bg-opacity-50 md:bg-gray-50 flex flex-col justify-center">
-                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4 text-white md:text-gray-900">{slide.heading}</h2>
-                    <p className="mb-4 md:mb-6 text-sm md:text-base text-white md:text-gray-600">Discover our amazing products and offers.</p>
-                    <button className="px-4 md:px-6 py-2 bg-blue-600 text-white rounded-md text-sm md:text-base self-start">
-                      Learn More
-                    </button>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full md:w-1/2 h-48 md:h-72 lg:h-80">
+                      <img
+                        src={slide.image}
+                        alt={slide.heading}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="w-full md:w-1/2 p-4 md:p-6 lg:p-8 bg-gray-50 flex flex-col justify-center">
+                      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4 text-gray-900">{slide.heading}</h2>
+                      <p className="mb-4 md:mb-6 text-sm md:text-base text-gray-600">Discover our amazing products and offers.</p>
+                      <button className="px-4 md:px-6 py-2 bg-blue-600 text-white rounded-md text-sm md:text-base self-start">
+                        Learn More
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
-              <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 flex space-x-1 md:space-x-2">
+              <button
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+                onClick={prevSlide}
+              >
+                <ChevronLeft className="text-gray-800" size={16} />
+              </button>
+              <button
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+                onClick={nextSlide}
+              >
+                <ChevronRight className="text-gray-800" size={16} />
+              </button>
+              <div className="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-1 md:space-x-2">
                 {slides.map((_, index) => (
                   <button
                     key={index}
@@ -272,9 +286,9 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">Our Features</h2>
-            <div className="flex overflow-x-hidden relative">
+            <div className="relative overflow-hidden">
               <div
-                className="flex transition-transform duration-500 ease-out w-full"
+                className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {slides.map((slide, index) => (
@@ -284,7 +298,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
                         <img
                           src={slide.image}
                           alt={slide.heading}
-                          className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover rounded-lg"
+                          className="w-full h-48 md:h-56 lg:h-64 object-cover rounded-lg"
                         />
                       </div>
                       <div className="w-full md:w-1/2 p-4 md:p-6 lg:p-8">
@@ -315,6 +329,18 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
                   </div>
                 ))}
               </div>
+              <button
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10"
+                onClick={prevSlide}
+              >
+                <ChevronLeft className="text-gray-800" size={16} />
+              </button>
+              <button
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10"
+                onClick={nextSlide}
+              >
+                <ChevronRight className="text-gray-800" size={16} />
+              </button>
             </div>
             <div className="mt-3 md:mt-4 lg:mt-6 flex justify-center space-x-1 md:space-x-2">
               {slides.map((_, index) => (

@@ -76,12 +76,49 @@ const GlobalSettings: React.FC = () => {
               value={globalSettings.fontFamily}
               onChange={(e) => handleFontChange(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              style={{ fontFamily: globalSettings.fontFamily }}
             >
-              <option value="Inter, sans-serif">Inter</option>
-              <option value="'Roboto', sans-serif">Roboto</option>
-              <option value="'Playfair Display', serif">Playfair Display</option>
-              <option value="'Montserrat', sans-serif">Montserrat</option>
-              <option value="'Open Sans', sans-serif">Open Sans</option>
+              <optgroup label="Sans Serif">
+                <option value="Inter, sans-serif">Inter</option>
+                <option value="'Roboto', sans-serif">Roboto</option>
+                <option value="'Poppins', sans-serif">Poppins</option>
+                <option value="'Nunito', sans-serif">Nunito</option>
+                <option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+                <option value="'Lato', sans-serif">Lato</option>
+                <option value="'Raleway', sans-serif">Raleway</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+                <option value="'Open Sans', sans-serif">Open Sans</option>
+                <option value="'Work Sans', sans-serif">Work Sans</option>
+                <option value="'Fira Sans', sans-serif">Fira Sans</option>
+                <option value="'IBM Plex Sans', sans-serif">IBM Plex Sans</option>
+                <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
+                <option value="'Rubik', sans-serif">Rubik</option>
+                <option value="'Karla', sans-serif">Karla</option>
+                <option value="'PT Sans', sans-serif">PT Sans</option>
+                <option value="'Ubuntu', sans-serif">Ubuntu</option>
+                <option value="'Mukta', sans-serif">Mukta</option>
+                <option value="'Barlow', sans-serif">Barlow</option>
+                <option value="'Quicksand', sans-serif">Quicksand</option>
+                <option value="'Comfortaa', sans-serif">Comfortaa</option>
+              </optgroup>
+              <optgroup label="Serif">
+                <option value="'Merriweather', serif">Merriweather</option>
+                <option value="'Playfair Display', serif">Playfair Display</option>
+                <option value="'Crimson Text', serif">Crimson Text</option>
+                <option value="'Libre Baskerville', serif">Libre Baskerville</option>
+              </optgroup>
+              <optgroup label="Display">
+                <option value="'Oswald', sans-serif">Oswald</option>
+                <option value="'Bebas Neue', cursive">Bebas Neue</option>
+                <option value="'Abril Fatface', cursive">Abril Fatface</option>
+                <option value="'Righteous', cursive">Righteous</option>
+                <option value="'Fredoka One', cursive">Fredoka One</option>
+              </optgroup>
+              <optgroup label="Script & Decorative">
+                <option value="'Dancing Script', cursive">Dancing Script</option>
+                <option value="'Pacifico', cursive">Pacifico</option>
+                <option value="'Lobster', cursive">Lobster</option>
+              </optgroup>
             </select>
           </div>
         </div>

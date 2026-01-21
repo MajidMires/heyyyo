@@ -100,6 +100,8 @@ export interface ButtonStyle {
   animation: 'none' | 'pulse' | 'bounce' | 'shake';
   link: string;
   target: '_self' | '_blank';
+  opacity?: number;
+  underline?: boolean;
 }
 
 export interface StoreCustomization {

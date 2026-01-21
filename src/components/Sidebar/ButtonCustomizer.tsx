@@ -28,6 +28,8 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
     animation: 'none',
     link: '#',
     target: '_self',
+    opacity: 100,
+    underline: false,
   });
 
   const addButton = () => {
@@ -170,6 +172,8 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
                       fontSize: getFontSizeValue(button.fontSize),
                       fontWeight: button.fontWeight,
                       padding: getPaddingValue(button.padding),
+                      opacity: (button.opacity || 100) / 100,
+                      textDecoration: button.underline ? 'underline' : 'none',
                     }}
                     onMouseEnter={(e) => {
                       const hoverStyle = getHoverEffectStyle(button.hoverEffect, {
@@ -297,6 +301,34 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
                         className="w-full"
                       />
                       <span className="text-xs text-gray-500">{button.borderRadius}px</span>
+                    </div>
+                  </div>
+
+                  {/* Opacity & Underline */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-2">
+                      <label className="block text-xs font-medium text-gray-700">Opacity</label>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={button.opacity || 100}
+                        onChange={(e) => updateButton(button.id, { opacity: parseInt(e.target.value) })}
+                        className="w-full"
+                      />
+                      <span className="text-xs text-gray-500">{button.opacity || 100}%</span>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-xs font-medium text-gray-700">Text Style</label>
+                      <label className="flex items-center mt-2">
+                        <input
+                          type="checkbox"
+                          checked={button.underline || false}
+                          onChange={(e) => updateButton(button.id, { underline: e.target.checked })}
+                          className="mr-2"
+                        />
+                        <span className="text-sm">Underline</span>
+                      </label>
                     </div>
                   </div>
 
