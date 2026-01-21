@@ -34,7 +34,7 @@ const ProductCardPreview: React.FC = () => {
   const products = [
     {
       id: 1,
-      name: 'Smart Fitness Watch',
+      name: 'Product 1',
       category: 'Tech',
       price: '£199.99',
       originalPrice: '£249.99',
@@ -47,7 +47,7 @@ const ProductCardPreview: React.FC = () => {
     },
     {
       id: 2,
-      name: 'Organic Night Cream',
+      name: 'Product 2',
       category: 'Health & Beauty',
       price: '£28.99',
       originalPrice: '£42.99',
@@ -60,7 +60,7 @@ const ProductCardPreview: React.FC = () => {
     },
     {
       id: 3,
-      name: 'Designer Leather Tote',
+      name: 'Product 3',
       category: 'Accessories',
       price: '£79.99',
       originalPrice: '£119.99',
@@ -73,7 +73,7 @@ const ProductCardPreview: React.FC = () => {
     },
     {
       id: 4,
-      name: 'Hand-painted Wall Art',
+      name: 'Product 4',
       category: 'Homeware',
       price: '£89.99',
       originalPrice: '£129.99',

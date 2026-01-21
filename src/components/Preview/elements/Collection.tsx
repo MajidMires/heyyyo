@@ -20,37 +20,37 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
   const products = [
     {
       id: 1,
-      name: settings.item1Title || 'Wireless Bluetooth Speaker',
+      name: settings.item1Title || 'Product 1',
       price: settings.item1Price || '$79.99',
       image: settings.item1Image || blackPlaceholder,
     },
     {
       id: 2,
-      name: settings.item2Title || 'Premium Coffee Mug Set',
+      name: settings.item2Title || 'Product 2',
       price: settings.item2Price || '$24.99',
       image: settings.item2Image || blackPlaceholder,
     },
     {
       id: 3,
-      name: settings.item3Title || 'Handcrafted Leather Wallet',
+      name: settings.item3Title || 'Product 3',
       price: settings.item3Price || '$89.99',
       image: settings.item3Image || blackPlaceholder,
     },
     {
       id: 4,
-      name: settings.item4Title || 'Eco-Friendly Water Bottle',
+      name: settings.item4Title || 'Product 4',
       price: settings.item4Price || '$19.99',
       image: settings.item4Image || blackPlaceholder,
     },
     {
       id: 5,
-      name: settings.item5Title || 'Minimalist Desk Organizer',
+      name: settings.item5Title || 'Product 5',
       price: settings.item5Price || '$34.99',
       image: settings.item5Image || blackPlaceholder,
     },
     {
       id: 6,
-      name: 'Artisan Candle Collection',
+      name: 'Product 6',
       price: '$49.99',
       image: blackPlaceholder,
     },

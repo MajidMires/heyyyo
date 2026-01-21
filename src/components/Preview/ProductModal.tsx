@@ -81,7 +81,7 @@ const ProductModal: React.FC = () => {
         <div className="md:w-1/2 bg-white">
           <img
             src="https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Casino T-Shirt - White"
+            alt="Product 1"
             className="w-full max-w-full h-64 md:h-full object-cover"
           />
 
@@ -104,8 +104,8 @@ const ProductModal: React.FC = () => {
           <div className="mb-2">
             <span className="text-sm opacity-80">CLOTHING</span>
           </div>
-          
-          <h2 className="text-2xl font-bold mb-4">CASINO T-SHIRT - WHITE</h2>
+
+          <h2 className="text-2xl font-bold mb-4">PRODUCT 1</h2>
           
           <div className="flex items-center mb-6">
             <span className="text-2xl font-bold">$45.99</span>
