@@ -113,37 +113,130 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             {/* Additional images for grid layouts */}
             {(element.templateId === 'image-text-20' || element.templateId === 'image-text-21' || element.templateId === 'image-text-22') && (
               <>
-                <div className="space-y-2">
-                  <label className="block text-xs font-medium text-gray-700">Image 2 URL</label>
-                  <input
-                    type="text"
-                    value={settings.image2 || 'https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                    onChange={(e) => handleImageChange('image2', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-                  />
+                <div className="border-t pt-4 mt-4">
+                  <h4 className="text-xs font-semibold text-gray-700 mb-3">Image 1</h4>
+                  <div className="space-y-2 mb-3">
+                    <label className="block text-xs font-medium text-gray-700">Title</label>
+                    <input
+                      type="text"
+                      value={settings.image1Title || ''}
+                      onChange={(e) => handleTextChange('image1Title', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      placeholder="Enter title for first image"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-xs font-medium text-gray-700">Description</label>
+                    <textarea
+                      value={settings.image1Description || ''}
+                      onChange={(e) => handleTextChange('image1Description', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      placeholder="Enter description for first image"
+                      rows={2}
+                    />
+                  </div>
+                </div>
+
+                <div className="border-t pt-4 mt-4">
+                  <h4 className="text-xs font-semibold text-gray-700 mb-3">Image 2</h4>
+                  <div className="space-y-2 mb-3">
+                    <label className="block text-xs font-medium text-gray-700">URL</label>
+                    <input
+                      type="text"
+                      value={settings.image2 || 'https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=800'}
+                      onChange={(e) => handleImageChange('image2', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                    />
+                  </div>
+                  <div className="space-y-2 mb-3">
+                    <label className="block text-xs font-medium text-gray-700">Title</label>
+                    <input
+                      type="text"
+                      value={settings.image2Title || ''}
+                      onChange={(e) => handleTextChange('image2Title', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      placeholder="Enter title for second image"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-xs font-medium text-gray-700">Description</label>
+                    <textarea
+                      value={settings.image2Description || ''}
+                      onChange={(e) => handleTextChange('image2Description', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      placeholder="Enter description for second image"
+                      rows={2}
+                    />
+                  </div>
                 </div>
 
                 {(element.templateId === 'image-text-20' || element.templateId === 'image-text-21') && (
-                  <div className="space-y-2">
-                    <label className="block text-xs font-medium text-gray-700">Image 3 URL</label>
-                    <input
-                      type="text"
-                      value={settings.image3 || 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                      onChange={(e) => handleImageChange('image3', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-                    />
+                  <div className="border-t pt-4 mt-4">
+                    <h4 className="text-xs font-semibold text-gray-700 mb-3">Image 3</h4>
+                    <div className="space-y-2 mb-3">
+                      <label className="block text-xs font-medium text-gray-700">URL</label>
+                      <input
+                        type="text"
+                        value={settings.image3 || 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=800'}
+                        onChange={(e) => handleImageChange('image3', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      />
+                    </div>
+                    <div className="space-y-2 mb-3">
+                      <label className="block text-xs font-medium text-gray-700">Title</label>
+                      <input
+                        type="text"
+                        value={settings.image3Title || ''}
+                        onChange={(e) => handleTextChange('image3Title', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                        placeholder="Enter title for third image"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-xs font-medium text-gray-700">Description</label>
+                      <textarea
+                        value={settings.image3Description || ''}
+                        onChange={(e) => handleTextChange('image3Description', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                        placeholder="Enter description for third image"
+                        rows={2}
+                      />
+                    </div>
                   </div>
                 )}
 
                 {element.templateId === 'image-text-20' && (
-                  <div className="space-y-2">
-                    <label className="block text-xs font-medium text-gray-700">Image 4 URL</label>
-                    <input
-                      type="text"
-                      value={settings.image4 || 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                      onChange={(e) => handleImageChange('image4', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-                    />
+                  <div className="border-t pt-4 mt-4">
+                    <h4 className="text-xs font-semibold text-gray-700 mb-3">Image 4</h4>
+                    <div className="space-y-2 mb-3">
+                      <label className="block text-xs font-medium text-gray-700">URL</label>
+                      <input
+                        type="text"
+                        value={settings.image4 || 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=800'}
+                        onChange={(e) => handleImageChange('image4', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                      />
+                    </div>
+                    <div className="space-y-2 mb-3">
+                      <label className="block text-xs font-medium text-gray-700">Title</label>
+                      <input
+                        type="text"
+                        value={settings.image4Title || ''}
+                        onChange={(e) => handleTextChange('image4Title', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                        placeholder="Enter title for fourth image"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-xs font-medium text-gray-700">Description</label>
+                      <textarea
+                        value={settings.image4Description || ''}
+                        onChange={(e) => handleTextChange('image4Description', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                        placeholder="Enter description for fourth image"
+                        rows={2}
+                      />
+                    </div>
                   </div>
                 )}
               </>

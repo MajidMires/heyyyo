@@ -10,6 +10,14 @@ interface ImageWithTextProps {
     image2?: string;
     image3?: string;
     image4?: string;
+    image1Title?: string;
+    image2Title?: string;
+    image3Title?: string;
+    image4Title?: string;
+    image1Description?: string;
+    image2Description?: string;
+    image3Description?: string;
+    image4Description?: string;
     textColor?: string;
     fontFamily?: string;
     fontSize?: 'small' | 'medium' | 'large';
@@ -41,6 +49,12 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
   const aspectRatio = settings.aspectRatio || 'landscape';
   const focalPoint = settings.focalPoint || 'center';
   const buttons = settings.buttons || [];
+
+  const [selectedImage, setSelectedImage] = React.useState<{
+    url: string;
+    title: string;
+    description: string;
+  } | null>(null);
 
   const getFocalPoint = () => {
     switch (focalPoint) {
@@ -736,102 +750,276 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       );
 
     case 'image-text-20': // 4 Square Images Grid
+      const images = [
+        { url: imageUrl, title: settings.image1Title || '', description: settings.image1Description || '' },
+        { url: settings.image2 || imageUrl, title: settings.image2Title || '', description: settings.image2Description || '' },
+        { url: settings.image3 || imageUrl, title: settings.image3Title || '', description: settings.image3Description || '' },
+        { url: settings.image4 || imageUrl, title: settings.image4Title || '', description: settings.image4Description || '' },
+      ];
+
       return (
-        <section style={getSectionStyle()}>
-          <div className={getContentMaxWidth()}>
-            <div className="px-3 md:px-4">
-              {(heading || subtext) && (
-                <div className="text-center mb-6 md:mb-8">
-                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
-                </div>
-              )}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                {[imageUrl, settings.image2, settings.image3, settings.image4].map((img, idx) => (
-                  <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
-                    <img
-                      src={img || imageUrl}
-                      alt={`Gallery ${idx + 1}`}
-                      className={`w-full ${getHeightClasses()}`}
-                      style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
-                    />
+        <>
+          <section style={getSectionStyle()}>
+            <div className={getContentMaxWidth()}>
+              <div className="px-3 md:px-4">
+                {(heading || subtext) && (
+                  <div className="text-center mb-6 md:mb-8">
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                   </div>
-                ))}
-              </div>
-              {buttons.length > 0 && (
-                <div className="mt-6 md:mt-8 text-center">
-                  {renderButtons()}
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  {images.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className={`group relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''} cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105`}
+                      onClick={() => setSelectedImage(img)}
+                    >
+                      <img
+                        src={img.url}
+                        alt={img.title || `Gallery ${idx + 1}`}
+                        className={`w-full ${getHeightClasses()} transition-transform duration-300 group-hover:scale-110`}
+                        style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
+                      />
+                      {img.title && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <h3 className="text-white font-semibold text-lg mb-1">{img.title}</h3>
+                            {img.description && (
+                              <p className="text-white/90 text-sm line-clamp-2">{img.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              )}
+                {buttons.length > 0 && (
+                  <div className="mt-6 md:mt-8 text-center">
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {selectedImage && (
+            <div
+              className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 animate-fadeIn"
+              onClick={() => setSelectedImage(null)}
+            >
+              <div
+                className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto animate-scaleIn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative">
+                  <button
+                    onClick={() => setSelectedImage(null)}
+                    className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <img
+                    src={selectedImage.url}
+                    alt={selectedImage.title}
+                    className="w-full h-auto max-h-[60vh] object-contain"
+                  />
+                  <div className="p-6">
+                    {selectedImage.title && (
+                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily }}>{selectedImage.title}</h2>
+                    )}
+                    {selectedImage.description && (
+                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily }}>{selectedImage.description}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       );
 
     case 'image-text-21': // 3 Images in Row
+      const images3 = [
+        { url: imageUrl, title: settings.image1Title || '', description: settings.image1Description || '' },
+        { url: settings.image2 || imageUrl, title: settings.image2Title || '', description: settings.image2Description || '' },
+        { url: settings.image3 || imageUrl, title: settings.image3Title || '', description: settings.image3Description || '' },
+      ];
+
       return (
-        <section style={getSectionStyle()}>
-          <div className={getContentMaxWidth()}>
-            <div className="px-3 md:px-4">
-              {(heading || subtext) && (
-                <div className="text-center mb-6 md:mb-8">
-                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
-                </div>
-              )}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-                {[imageUrl, settings.image2, settings.image3].map((img, idx) => (
-                  <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
-                    <img
-                      src={img || imageUrl}
-                      alt={`Gallery ${idx + 1}`}
-                      className={`w-full ${getHeightClasses()}`}
-                      style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
-                    />
+        <>
+          <section style={getSectionStyle()}>
+            <div className={getContentMaxWidth()}>
+              <div className="px-3 md:px-4">
+                {(heading || subtext) && (
+                  <div className="text-center mb-6 md:mb-8">
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                   </div>
-                ))}
-              </div>
-              {buttons.length > 0 && (
-                <div className="mt-6 md:mt-8 text-center">
-                  {renderButtons()}
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+                  {images3.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className={`group relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''} cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105`}
+                      onClick={() => setSelectedImage(img)}
+                    >
+                      <img
+                        src={img.url}
+                        alt={img.title || `Gallery ${idx + 1}`}
+                        className={`w-full ${getHeightClasses()} transition-transform duration-300 group-hover:scale-110`}
+                        style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
+                      />
+                      {img.title && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <h3 className="text-white font-semibold text-lg mb-1">{img.title}</h3>
+                            {img.description && (
+                              <p className="text-white/90 text-sm line-clamp-2">{img.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              )}
+                {buttons.length > 0 && (
+                  <div className="mt-6 md:mt-8 text-center">
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {selectedImage && (
+            <div
+              className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 animate-fadeIn"
+              onClick={() => setSelectedImage(null)}
+            >
+              <div
+                className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto animate-scaleIn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative">
+                  <button
+                    onClick={() => setSelectedImage(null)}
+                    className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <img
+                    src={selectedImage.url}
+                    alt={selectedImage.title}
+                    className="w-full h-auto max-h-[60vh] object-contain"
+                  />
+                  <div className="p-6">
+                    {selectedImage.title && (
+                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily }}>{selectedImage.title}</h2>
+                    )}
+                    {selectedImage.description && (
+                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily }}>{selectedImage.description}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       );
 
     case 'image-text-22': // 2 Large Images Side by Side
+      const images2 = [
+        { url: imageUrl, title: settings.image1Title || '', description: settings.image1Description || '' },
+        { url: settings.image2 || imageUrl, title: settings.image2Title || '', description: settings.image2Description || '' },
+      ];
+
       return (
-        <section style={getSectionStyle()}>
-          <div className={getContentMaxWidth()}>
-            <div className="px-3 md:px-4">
-              {(heading || subtext) && (
-                <div className="text-center mb-6 md:mb-8">
-                  {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
-                </div>
-              )}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                {[imageUrl, settings.image2].map((img, idx) => (
-                  <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
-                    <img
-                      src={img || imageUrl}
-                      alt={`Gallery ${idx + 1}`}
-                      className={`w-full ${getHeightClasses()}`}
-                      style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
-                    />
+        <>
+          <section style={getSectionStyle()}>
+            <div className={getContentMaxWidth()}>
+              <div className="px-3 md:px-4">
+                {(heading || subtext) && (
+                  <div className="text-center mb-6 md:mb-8">
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                   </div>
-                ))}
-              </div>
-              {buttons.length > 0 && (
-                <div className="mt-6 md:mt-8 text-center">
-                  {renderButtons()}
+                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  {images2.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className={`group relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''} cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105`}
+                      onClick={() => setSelectedImage(img)}
+                    >
+                      <img
+                        src={img.url}
+                        alt={img.title || `Gallery ${idx + 1}`}
+                        className={`w-full ${getHeightClasses()} transition-transform duration-300 group-hover:scale-110`}
+                        style={{ objectFit: 'cover', objectPosition: getFocalPoint() }}
+                      />
+                      {img.title && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <h3 className="text-white font-semibold text-lg mb-1">{img.title}</h3>
+                            {img.description && (
+                              <p className="text-white/90 text-sm line-clamp-2">{img.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              )}
+                {buttons.length > 0 && (
+                  <div className="mt-6 md:mt-8 text-center">
+                    {renderButtons()}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {selectedImage && (
+            <div
+              className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 animate-fadeIn"
+              onClick={() => setSelectedImage(null)}
+            >
+              <div
+                className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto animate-scaleIn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative">
+                  <button
+                    onClick={() => setSelectedImage(null)}
+                    className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <img
+                    src={selectedImage.url}
+                    alt={selectedImage.title}
+                    className="w-full h-auto max-h-[60vh] object-contain"
+                  />
+                  <div className="p-6">
+                    {selectedImage.title && (
+                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily }}>{selectedImage.title}</h2>
+                    )}
+                    {selectedImage.description && (
+                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily }}>{selectedImage.description}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </>
       );
 
     default:
