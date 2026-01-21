@@ -14,43 +14,45 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
   const itemsPerRow = settings.itemsPerRow || '3';
   const showPrices = settings.showPrices !== false;
 
+  const blackPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23000000"/%3E%3C/svg%3E';
+
   // Sample products for preview
   const products = [
     {
       id: 1,
       name: settings.item1Title || 'Wireless Bluetooth Speaker',
       price: settings.item1Price || '$79.99',
-      image: settings.item1Image || 'https://images.pexels.com/photos/5625005/pexels-photo-5625005.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: settings.item1Image || blackPlaceholder,
     },
     {
       id: 2,
       name: settings.item2Title || 'Premium Coffee Mug Set',
       price: settings.item2Price || '$24.99',
-      image: settings.item2Image || 'https://images.pexels.com/photos/5868722/pexels-photo-5868722.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: settings.item2Image || blackPlaceholder,
     },
     {
       id: 3,
       name: settings.item3Title || 'Handcrafted Leather Wallet',
       price: settings.item3Price || '$89.99',
-      image: settings.item3Image || 'https://images.pexels.com/photos/5632366/pexels-photo-5632366.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: settings.item3Image || blackPlaceholder,
     },
     {
       id: 4,
       name: settings.item4Title || 'Eco-Friendly Water Bottle',
       price: settings.item4Price || '$19.99',
-      image: settings.item4Image || 'https://images.pexels.com/photos/5705490/pexels-photo-5705490.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: settings.item4Image || blackPlaceholder,
     },
     {
       id: 5,
       name: settings.item5Title || 'Minimalist Desk Organizer',
       price: settings.item5Price || '$34.99',
-      image: settings.item5Image || 'https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: settings.item5Image || blackPlaceholder,
     },
     {
       id: 6,
       name: 'Artisan Candle Collection',
       price: '$49.99',
-      image: 'https://images.pexels.com/photos/5704412/pexels-photo-5704412.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: blackPlaceholder,
     },
   ];
 

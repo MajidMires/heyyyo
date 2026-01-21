@@ -29,6 +29,8 @@ const ProductCardPreview: React.FC = () => {
     }
   };
 
+  const blackPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect width="400" height="400" fill="%23000000"/%3E%3C/svg%3E';
+
   const products = [
     {
       id: 1,
@@ -39,7 +41,7 @@ const ProductCardPreview: React.FC = () => {
       discount: '-20%',
       rating: 4,
       reviews: 312,
-      image: 'https://images.pexels.com/photos/5625005/pexels-photo-5625005.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: blackPlaceholder,
       inStock: true,
       fastShipping: true,
     },
@@ -52,7 +54,7 @@ const ProductCardPreview: React.FC = () => {
       discount: '-33%',
       rating: 4,
       reviews: 198,
-      image: 'https://images.pexels.com/photos/5868722/pexels-photo-5868722.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: blackPlaceholder,
       inStock: true,
       fastShipping: true,
     },
@@ -65,7 +67,7 @@ const ProductCardPreview: React.FC = () => {
       discount: '-33%',
       rating: 4,
       reviews: 145,
-      image: 'https://images.pexels.com/photos/5632366/pexels-photo-5632366.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: blackPlaceholder,
       inStock: true,
       fastShipping: false,
     },
@@ -78,7 +80,7 @@ const ProductCardPreview: React.FC = () => {
       discount: '-31%',
       rating: 5,
       reviews: 76,
-      image: 'https://images.pexels.com/photos/5705490/pexels-photo-5705490.jpeg?auto=compress&cs=tinysrgb&w=400',
+      image: blackPlaceholder,
       inStock: true,
       fastShipping: false,
     },

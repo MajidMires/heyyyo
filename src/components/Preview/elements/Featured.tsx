@@ -17,35 +17,37 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
   const title = settings.title || 'Featured Products';
   const buttons = settings.buttons || [];
 
+  const blackPlaceholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="800"%3E%3Crect width="800" height="800" fill="%23000000"/%3E%3C/svg%3E';
+
   const items = [
     {
       id: 1,
       title: settings.item1Title || 'Premium Wireless Headphones',
-      image: settings.item1Image || 'https://images.pexels.com/photos/5704412/pexels-photo-5704412.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: settings.item1Image || blackPlaceholder,
       price: settings.item1Price || '$129.99',
     },
     {
       id: 2,
       title: settings.item2Title || 'Smart Fitness Watch',
-      image: settings.item2Image || 'https://images.pexels.com/photos/5704414/pexels-photo-5704414.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: settings.item2Image || blackPlaceholder,
       price: settings.item2Price || '$199.99',
     },
     {
       id: 3,
       title: settings.item3Title || 'Organic Skincare Set',
-      image: settings.item3Image || 'https://images.pexels.com/photos/5709664/pexels-photo-5709664.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: settings.item3Image || blackPlaceholder,
       price: settings.item3Price || '$89.99',
     },
     {
       id: 4,
       title: settings.item4Title || 'Designer Leather Bag',
-      image: settings.item4Image || 'https://images.pexels.com/photos/6348105/pexels-photo-6348105.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: settings.item4Image || blackPlaceholder,
       price: settings.item4Price || '$249.99',
     },
     {
       id: 5,
       title: settings.item5Title || 'Artisan Coffee Blend',
-      image: settings.item5Image || 'https://images.pexels.com/photos/5709667/pexels-photo-5709667.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: settings.item5Image || blackPlaceholder,
       price: settings.item5Price || '$34.99',
     },
   ];
