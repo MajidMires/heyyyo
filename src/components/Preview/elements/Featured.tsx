@@ -137,7 +137,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
             <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {items.map((item) => (
                 <div key={item.id} className="group">
                   <div className="relative mb-2 md:mb-3 aspect-square overflow-hidden rounded-lg bg-gray-100">
@@ -168,7 +168,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
             <div className="flex flex-col md:flex-row justify-between items-center mb-4 md:mb-6 lg:mb-8">
               <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
               {items.map((item, index) => (
                 <div key={item.id} className="relative">
                   <div className="relative mb-2 md:mb-3 overflow-hidden rounded-lg">

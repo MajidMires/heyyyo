@@ -7,6 +7,9 @@ interface ImageWithTextProps {
     heading?: string;
     subtext?: string;
     imageUrl?: string;
+    image2?: string;
+    image3?: string;
+    image4?: string;
     textColor?: string;
     fontFamily?: string;
     fontSize?: 'small' | 'medium' | 'large';
@@ -15,6 +18,7 @@ interface ImageWithTextProps {
     showShadow?: boolean;
     fontWeight?: string;
     lineHeight?: string;
+    aspectRatio?: 'square' | 'portrait' | 'landscape' | 'wide' | 'tall';
     buttons?: ButtonStyle[];
   };
   sectionStyle?: SectionStyle;
@@ -33,7 +37,42 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
   const showShadow = settings.showShadow !== false;
   const fontWeight = settings.fontWeight || '400';
   const lineHeight = settings.lineHeight || '1.375';
+  const aspectRatio = settings.aspectRatio || 'landscape';
   const buttons = settings.buttons || [];
+
+  const getAspectRatioClasses = () => {
+    switch (aspectRatio) {
+      case 'square':
+        return 'aspect-square';
+      case 'portrait':
+        return 'aspect-[3/4]';
+      case 'landscape':
+        return 'aspect-[4/3]';
+      case 'wide':
+        return 'aspect-[16/9]';
+      case 'tall':
+        return 'aspect-[9/16]';
+      default:
+        return 'aspect-[4/3]';
+    }
+  };
+
+  const getHeightClasses = () => {
+    switch (aspectRatio) {
+      case 'square':
+        return 'h-64 sm:h-72 md:h-80 lg:h-96';
+      case 'portrait':
+        return 'h-72 sm:h-80 md:h-96 lg:h-[28rem]';
+      case 'landscape':
+        return 'h-56 sm:h-64 md:h-72 lg:h-80';
+      case 'wide':
+        return 'h-48 sm:h-56 md:h-64 lg:h-72';
+      case 'tall':
+        return 'h-96 sm:h-[28rem] md:h-[32rem] lg:h-[36rem]';
+      default:
+        return 'h-56 sm:h-64 md:h-72 lg:h-80';
+    }
+  };
 
   const getFontSize = () => {
     switch (fontSize) {
@@ -201,7 +240,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img
                     src={imageUrl}
                     alt={heading}
-                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full ${getHeightClasses()} rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
                   />
                 </div>
@@ -228,7 +267,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img
                     src={imageUrl}
                     alt={heading}
-                    className={`w-full h-56 sm:h-64 md:h-72 lg:h-80 rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full ${getHeightClasses()} rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
                   />
                 </div>
@@ -278,7 +317,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
             <img
               src={imageUrl}
               alt={heading}
-              className="w-full h-56 sm:h-64 md:h-80 lg:h-96"
+              className={`w-full ${getHeightClasses()}`}
               style={{ objectFit: 'cover', objectPosition: 'center' }}
             />
             {heading && (
@@ -366,7 +405,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <img
                 src={imageUrl}
                 alt={heading}
-                className={`w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-80 ${showShadow ? 'shadow-lg' : ''}`}
+                className={`w-full ${getHeightClasses()} ${showShadow ? 'shadow-lg' : ''}`}
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
               />
             </div>
@@ -384,7 +423,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   <img
                     src={imageUrl}
                     alt={heading}
-                    className={`w-full h-64 sm:h-72 md:h-80 rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
+                    className={`w-full ${getHeightClasses()} rounded-lg ${showShadow ? 'shadow-lg' : ''}`}
                     style={{ objectFit: 'cover', objectPosition: 'center' }}
                   />
                 </div>
@@ -681,13 +720,13 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
                 </div>
               )}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 {[imageUrl, settings.image2, settings.image3, settings.image4].map((img, idx) => (
                   <div key={idx} className={`relative overflow-hidden rounded-lg ${showShadow ? 'shadow-lg' : ''}`}>
                     <img
                       src={img || imageUrl}
                       alt={`Gallery ${idx + 1}`}
-                      className="w-full h-48 sm:h-56 md:h-64 lg:h-72"
+                      className={`w-full ${getHeightClasses()}`}
                       style={{ objectFit: 'cover', objectPosition: 'center' }}
                     />
                   </div>
@@ -720,7 +759,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     <img
                       src={img || imageUrl}
                       alt={`Gallery ${idx + 1}`}
-                      className="w-full h-56 md:h-64 lg:h-72"
+                      className={`w-full ${getHeightClasses()}`}
                       style={{ objectFit: 'cover', objectPosition: 'center' }}
                     />
                   </div>
@@ -753,7 +792,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     <img
                       src={img || imageUrl}
                       alt={`Gallery ${idx + 1}`}
-                      className="w-full h-64 md:h-80 lg:h-96"
+                      className={`w-full ${getHeightClasses()}`}
                       style={{ objectFit: 'cover', objectPosition: 'center' }}
                     />
                   </div>

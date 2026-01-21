@@ -62,16 +62,16 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
       case '1':
         return 'grid-cols-1';
       case '2':
-        return 'grid-cols-1 sm:grid-cols-2';
+        return 'grid-cols-1 md:grid-cols-2';
       case '4':
-        return 'grid-cols-2 sm:grid-cols-2 md:grid-cols-4';
+        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-4';
       case '5':
-        return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5';
+        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
       case '6':
-        return 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6';
+        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6';
       case '3':
       default:
-        return 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3';
+        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
     }
   };
 

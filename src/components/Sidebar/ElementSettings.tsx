@@ -110,6 +110,45 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
               />
             </div>
 
+            {/* Additional images for grid layouts */}
+            {(element.templateId === 'image-text-20' || element.templateId === 'image-text-21' || element.templateId === 'image-text-22') && (
+              <>
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Image 2 URL</label>
+                  <input
+                    type="text"
+                    value={settings.image2 || 'https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg?auto=compress&cs=tinysrgb&w=800'}
+                    onChange={(e) => handleImageChange('image2', e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
+
+                {(element.templateId === 'image-text-20' || element.templateId === 'image-text-21') && (
+                  <div className="space-y-2">
+                    <label className="block text-xs font-medium text-gray-700">Image 3 URL</label>
+                    <input
+                      type="text"
+                      value={settings.image3 || 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=800'}
+                      onChange={(e) => handleImageChange('image3', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                    />
+                  </div>
+                )}
+
+                {element.templateId === 'image-text-20' && (
+                  <div className="space-y-2">
+                    <label className="block text-xs font-medium text-gray-700">Image 4 URL</label>
+                    <input
+                      type="text"
+                      value={settings.image4 || 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=800'}
+                      onChange={(e) => handleImageChange('image4', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                    />
+                  </div>
+                )}
+              </>
+            )}
+
             <div className="space-y-2">
               <label className="block text-xs font-medium text-gray-700">Font Size</label>
               <select
@@ -139,6 +178,21 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 <option value="top-right">Top Right</option>
                 <option value="left">Left Side</option>
                 <option value="right">Right Side</option>
+              </select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Image Aspect Ratio</label>
+              <select
+                value={settings.aspectRatio || 'landscape'}
+                onChange={(e) => handleTextChange('aspectRatio', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="square">Square (1:1)</option>
+                <option value="portrait">Portrait (3:4)</option>
+                <option value="landscape">Landscape (4:3)</option>
+                <option value="wide">Wide (16:9)</option>
+                <option value="tall">Tall (9:16)</option>
               </select>
             </div>
 
