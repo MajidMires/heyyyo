@@ -319,10 +319,10 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
       const isVideo = backgroundImageUrl.includes('.mp4') || backgroundImageUrl.includes('.webm') || backgroundImageUrl.includes('.mov');
       
       return (
-        <section className="relative h-screen min-h-[400px] sm:min-h-[500px] md:min-h-[600px] w-full" style={getSectionStyle()}>
+        <section className="relative h-screen min-h-[400px] sm:min-h-[500px] md:min-h-[600px] w-full overflow-hidden" style={getSectionStyle()}>
           {isVideo ? (
             <video
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full max-w-full object-cover"
               autoPlay
               muted
               loop
@@ -331,7 +331,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <source src={backgroundImageUrl} type="video/mp4" />
             </video>
           ) : (
-            <div 
+            <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${backgroundImageUrl})` }}
             />

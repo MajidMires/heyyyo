@@ -82,17 +82,17 @@ const ProductModal: React.FC = () => {
           <img
             src="https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=800"
             alt="Casino T-Shirt - White"
-            className="w-full h-64 md:h-full object-cover"
+            className="w-full max-w-full h-64 md:h-full object-cover"
           />
-          
+
           {/* Thumbnail Images */}
-          <div className="flex p-4 space-x-2 bg-white">
+          <div className="flex p-4 space-x-2 bg-white overflow-x-auto">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="w-16 h-16 bg-gray-100 rounded-md overflow-hidden">
+              <div key={i} className="w-16 h-16 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
                 <img
                   src={`https://images.pexels.com/photos/570966${i}/pexels-photo-570966${i}.jpeg?auto=compress&cs=tinysrgb&w=200`}
                   alt={`Product view ${i}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full max-w-full object-cover"
                 />
               </div>
             ))}
@@ -153,7 +153,7 @@ const ProductModal: React.FC = () => {
                   <img
                     src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100"
                     alt="Sarah M."
-                    className="w-8 h-8 rounded-full object-cover"
+                    className="w-8 h-8 flex-shrink-0 rounded-full object-cover max-w-full"
                   />
                   <div>
                     <div className="flex items-center mb-1">
@@ -169,12 +169,12 @@ const ProductModal: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-3">
                   <img
                     src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100"
                     alt="Emma W."
-                    className="w-8 h-8 rounded-full object-cover"
+                    className="w-8 h-8 flex-shrink-0 rounded-full object-cover max-w-full"
                   />
                   <div>
                     <div className="flex items-center mb-1">

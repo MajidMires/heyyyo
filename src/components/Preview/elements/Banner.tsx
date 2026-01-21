@@ -319,7 +319,7 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
       return (
         <section className="relative py-12 md:py-16 lg:py-20 px-3 md:px-4 text-center overflow-hidden">
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full max-w-full object-cover"
             autoPlay
             muted
             loop

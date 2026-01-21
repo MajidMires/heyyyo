@@ -104,7 +104,7 @@ const Preview: React.FC = () => {
     <div className={getPreviewContainerClass()}>
       <div className={getContentContainerClass()}>
         <div
-          className="w-full h-full overflow-auto flex flex-col"
+          className="w-full h-full overflow-x-hidden overflow-y-auto flex flex-col"
           style={{
             backgroundColor: globalSettings.backgroundColor,
             fontFamily: globalSettings.fontFamily,
