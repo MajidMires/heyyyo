@@ -81,20 +81,20 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
             <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
-            <div className={`grid ${getGridCols()} gap-3 md:gap-4 lg:gap-6`}>
+            <div className={`grid ${getGridCols()} gap-4 md:gap-6`}>
               {products.map((product) => (
                 <div key={product.id} className="group">
-                  <div className="relative mb-2 md:mb-3 lg:mb-4 overflow-hidden rounded-lg bg-gray-100">
+                  <div className="relative mb-3 overflow-hidden rounded-lg bg-gray-100 aspect-square">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-32 sm:h-40 md:h-48 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <button className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white py-1 md:py-2 text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white py-2 text-xs md:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       Quick View
                     </button>
                   </div>
-                  <h3 className="text-sm md:text-base lg:text-lg font-medium">{product.name}</h3>
+                  <h3 className="text-sm md:text-base font-medium">{product.name}</h3>
                   {showPrices && <p className="text-sm md:text-base text-gray-700">{product.price}</p>}
                 </div>
               ))}
@@ -111,16 +111,16 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">{title}</h2>
               <p className="text-sm md:text-base text-gray-600">Our most popular products for this season</p>
             </div>
-            <div className={`grid ${getGridCols()} gap-4 md:gap-6 lg:gap-8`}>
+            <div className={`grid ${getGridCols()} gap-4 md:gap-6`}>
               {products.slice(0, parseInt(itemsPerRow, 10)).map((product) => (
                 <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-                  <div className="relative">
+                  <div className="relative aspect-square">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-32 sm:h-40 md:h-48 lg:h-56 xl:h-72 object-cover"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-1 md:top-2 right-1 md:right-2 bg-red-500 text-white text-xs font-bold px-1 md:px-2 py-1 rounded">
+                    <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                       SALE
                     </div>
                   </div>
@@ -159,11 +159,13 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                   {products.map((product) => (
                     <div key={product.id} className="w-40 sm:w-48 md:w-56 lg:w-64 flex-shrink-0">
                       <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-32 sm:h-40 md:h-48 lg:h-64 object-cover"
-                        />
+                        <div className="aspect-square overflow-hidden">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                         <div className="p-2 md:p-3 lg:p-4">
                           <h3 className="text-sm md:text-base lg:text-lg font-medium mb-1">{product.name}</h3>
                           {showPrices && <p className="text-sm md:text-base text-gray-700">{product.price}</p>}
@@ -205,14 +207,14 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                 </button>
               </div>
             </div>
-            <div className={`grid ${getGridCols()} gap-3 md:gap-4 lg:gap-6`}>
+            <div className={`grid ${getGridCols()} gap-4 md:gap-6`}>
               {products.map((product) => (
                 <div key={product.id} className="group">
-                  <div className="relative mb-2 md:mb-3 lg:mb-4 overflow-hidden rounded-lg">
+                  <div className="relative mb-3 overflow-hidden rounded-lg aspect-square">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-32 sm:h-40 md:h-48 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
                     <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 lg:p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">

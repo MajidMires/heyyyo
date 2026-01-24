@@ -451,12 +451,103 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                   {renderNavigation()}
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-4">
                 {renderIcons()}
               </div>
             </div>
           </div>
+        );
+
+      case 'mobile-bottom':
+        return (
+          <>
+            {/* Top Bar */}
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between py-3">
+                {renderLogo()}
+                <div className="hidden md:flex items-center space-x-6">
+                  {renderNavigation()}
+                  {renderIcons()}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Bottom Navigation */}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t" style={{ backgroundColor: menuSettings.backgroundColor, borderColor: primaryColor }}>
+              <div className="grid grid-cols-4 gap-1 px-2 py-2">
+                {menuSettings.menuItems.slice(0, 4).map((item, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="flex flex-col items-center justify-center py-2 rounded-lg hover:bg-opacity-10 transition-colors"
+                    style={{ color: menuSettings.textColor }}
+                  >
+                    <div className="w-6 h-6 mb-1 flex items-center justify-center">
+                      {index === 0 && <ShoppingBag size={20} />}
+                      {index === 1 && <Search size={20} />}
+                      {index === 2 && <User size={20} />}
+                      {index === 3 && <ShoppingCart size={20} />}
+                    </div>
+                    <span className="text-xs font-medium">{item}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
+        );
+
+      case 'mobile-drawer':
+        return (
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-3">
+              <button className="md:hidden p-2" style={{ color: menuSettings.textColor }}>
+                <Menu size={24} />
+              </button>
+              {renderLogo()}
+              <div className="hidden md:flex items-center space-x-6">
+                {renderNavigation()}
+              </div>
+              {renderIcons()}
+            </div>
+          </div>
+        );
+
+      case 'mobile-tabs':
+        return (
+          <>
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between py-3">
+                {renderLogo()}
+                <div className="hidden md:flex items-center space-x-6">
+                  {renderNavigation()}
+                  {renderIcons()}
+                </div>
+                <div className="md:hidden">
+                  {renderIcons()}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Tabs */}
+            <div className="md:hidden border-t" style={{ borderColor: primaryColor }}>
+              <div className="flex overflow-x-auto px-4 py-2 space-x-4">
+                {menuSettings.menuItems.map((item, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors"
+                    style={{
+                      color: index === 0 ? '#ffffff' : menuSettings.textColor,
+                      backgroundColor: index === 0 ? primaryColor : 'transparent',
+                    }}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
         );
 
       default: // standard, overlay, transparent
