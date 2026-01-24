@@ -89,7 +89,7 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
               <p className="text-lg text-gray-300">{subtitle}</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="mb-4 flex justify-center">

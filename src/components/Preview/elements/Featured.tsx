@@ -271,7 +271,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                 <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 lg:mb-8">
                   Discover our carefully curated selection of premium products, designed to elevate your lifestyle.
                 </p>
-                <div className="grid grid-cols-2 gap-3 md:gap-4">
+                <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-4">
                   {items.slice(0, 2).map((item) => (
                     <div key={item.id} className="group">
                       <div className="relative mb-2 md:mb-3 aspect-square overflow-hidden rounded-lg">
