@@ -64,14 +64,14 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
       case '2':
         return 'grid-cols-1 md:grid-cols-2';
       case '4':
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-4';
+        return 'grid-cols-1 md:grid-cols-4';
       case '5':
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5';
+        return 'grid-cols-1 md:grid-cols-5';
       case '6':
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6';
+        return 'grid-cols-1 md:grid-cols-6';
       case '3':
       default:
-        return 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
+        return 'grid-cols-1 md:grid-cols-3';
     }
   };
 
@@ -237,7 +237,7 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
-            <div className="columns-1 sm:columns-2 md:columns-3 gap-3 md:gap-4">
+            <div className="columns-1 md:columns-3 gap-4">
               {products.map((product, index) => (
                 <div 
                   key={product.id} 
