@@ -38,9 +38,9 @@ const MenuSettings: React.FC = () => {
             { id: 'compact', name: 'Compact', desc: 'Condensed layout for mobile-first' },
             { id: 'elegant', name: 'Elegant', desc: 'Sophisticated serif typography' },
             { id: 'modern', name: 'Modern', desc: 'Bold contemporary design' },
-            { id: 'mobile-bottom', name: 'Mobile Bottom Nav', desc: 'Fixed bottom navigation for mobile' },
-            { id: 'mobile-drawer', name: 'Mobile Drawer', desc: 'Slide-in menu drawer for mobile' },
-            { id: 'mobile-tabs', name: 'Mobile Tabs', desc: 'Tab-style navigation optimized for mobile' },
+            { id: 'stacked', name: 'Stacked', desc: 'Logo top, navigation below in a row' },
+            { id: 'stacked-centered', name: 'Stacked Centered', desc: 'Centered logo with centered nav below' },
+            { id: 'luxury', name: 'Luxury', desc: 'Clean minimal with utility links' },
           ].map((template) => (
             <button
               key={template.id}
