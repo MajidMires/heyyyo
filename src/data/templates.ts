@@ -352,6 +352,18 @@ export const templates: ElementTemplate[] = [
     type: 'featured',
     thumbnail: 'https://images.pexels.com/photos/5632366/pexels-photo-5632366.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
+  {
+    id: 'featured-9',
+    name: 'Connected Grid with Dividers',
+    type: 'featured',
+    thumbnail: 'https://images.pexels.com/photos/5709664/pexels-photo-5709664.jpeg?auto=compress&cs=tinysrgb&w=300',
+  },
+  {
+    id: 'featured-10',
+    name: 'Seamless Connected Grid',
+    type: 'featured',
+    thumbnail: 'https://images.pexels.com/photos/6348105/pexels-photo-6348105.jpeg?auto=compress&cs=tinysrgb&w=300',
+  },
 
   // Testimonial Templates
   {

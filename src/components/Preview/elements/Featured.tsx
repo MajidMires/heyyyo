@@ -52,6 +52,13 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
     },
   ];
 
+  const hexToRgba = (hex: string, opacity: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+  };
+
   const renderButtons = () => {
     if (!buttons || buttons.length === 0) return null;
 
@@ -116,11 +123,10 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
               ${getAnimationClass(button.animation)}
             `}
             style={{
-              backgroundColor: button.backgroundColor,
+              backgroundColor: hexToRgba(button.backgroundColor, button.opacity || 100),
               color: button.textColor,
               border: `${button.borderWidth}px solid ${button.borderColor}`,
               borderRadius: `${button.borderRadius}px`,
-              opacity: (button.opacity || 100) / 100,
               textDecoration: button.underline ? 'underline' : 'none',
             }}
           >
@@ -308,6 +314,150 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+      );
+
+    case 'featured-6': // Hero Product Showcase
+      return (
+        <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4 bg-gray-50">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+              <div className="relative aspect-square overflow-hidden rounded-lg">
+                <img
+                  src={items[0].image}
+                  alt={items[0].title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex flex-col justify-center">
+                <span className="text-sm font-medium text-blue-600 mb-2">FEATURED PRODUCT</span>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{items[0].title}</h2>
+                <p className="text-base md:text-lg text-gray-600 mb-6">
+                  Experience premium quality with our flagship product. Meticulously crafted for those who demand excellence.
+                </p>
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="text-3xl font-bold">{items[0].price}</span>
+                  <span className="text-sm text-gray-500 line-through">$199.99</span>
+                </div>
+                {renderButtons()}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'featured-7': // Product Carousel Style
+      return (
+        <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
+          <div className="container mx-auto">
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">{title}</h2>
+            <div className="flex flex-col md:flex-row gap-4">
+              {items.slice(0, 3).map((item) => (
+                <div key={item.id} className="flex-1 group">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-lg mb-3">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-white text-base md:text-lg font-semibold mb-1">{item.title}</h3>
+                      <p className="text-white text-sm">{item.price}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {renderButtons()}
+          </div>
+        </section>
+      );
+
+    case 'featured-8': // Interactive Product Grid
+      return (
+        <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4 bg-gray-900">
+          <div className="container mx-auto">
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center text-white">{title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {items.slice(0, 4).map((item) => (
+                <div key={item.id} className="group relative overflow-hidden rounded-lg aspect-video">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                    <h3 className="text-white text-lg md:text-xl font-bold mb-2">{item.title}</h3>
+                    <p className="text-white text-base md:text-lg mb-4">{item.price}</p>
+                    <button className="bg-white text-gray-900 px-6 py-2 rounded-md font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {renderButtons()}
+          </div>
+        </section>
+      );
+
+    case 'featured-9': // Connected Grid with Dividers
+      return (
+        <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
+          <div className="container mx-auto">
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">{title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 border border-gray-200 rounded-lg overflow-hidden">
+              {items.slice(0, 3).map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`group relative ${index !== items.slice(0, 3).length - 1 ? 'md:border-r border-gray-200' : ''}`}
+                >
+                  <div className="relative aspect-square overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4 bg-white">
+                    <h3 className="text-sm md:text-base font-medium mb-1">{item.title}</h3>
+                    <p className="text-gray-600 text-sm md:text-base">{item.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {renderButtons()}
+          </div>
+        </section>
+      );
+
+    case 'featured-10': // Seamless Connected Grid
+      return (
+        <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4 bg-gray-100">
+          <div className="container mx-auto">
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">{title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+              {items.slice(0, 4).map((item) => (
+                <div key={item.id} className="group relative">
+                  <div className="relative aspect-square overflow-hidden border border-white">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <h3 className="text-white text-lg md:text-xl font-bold mb-2">{item.title}</h3>
+                      <p className="text-white text-base">{item.price}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {renderButtons()}
           </div>
         </section>
       );

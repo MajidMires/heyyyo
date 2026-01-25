@@ -188,6 +188,13 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
     }
   };
 
+  const hexToRgba = (hex: string, opacity: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+  };
+
   const renderButtons = (isOverlay = false) => {
     if (!buttons || buttons.length === 0) return null;
 
@@ -252,12 +259,11 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               ${getAnimationClass(button.animation)}
             `}
             style={{
-              backgroundColor: button.backgroundColor,
+              backgroundColor: hexToRgba(button.backgroundColor, button.opacity || 100),
               color: button.textColor,
               border: `${button.borderWidth}px solid ${button.borderColor}`,
               borderRadius: `${button.borderRadius}px`,
               fontFamily: fontFamily,
-              opacity: (button.opacity || 100) / 100,
               textDecoration: button.underline ? 'underline' : 'none',
             }}
           >

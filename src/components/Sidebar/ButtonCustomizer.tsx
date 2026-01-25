@@ -13,6 +13,13 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
   const [expandedButton, setExpandedButton] = useState<string | null>(null);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
+  const hexToRgba = (hex: string, opacity: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+  };
+
   const createDefaultButton = (): ButtonStyle => ({
     id: uuidv4(),
     text: 'Button Text',
@@ -165,30 +172,28 @@ const ButtonCustomizer: React.FC<ButtonCustomizerProps> = ({ buttons, onButtonsC
                   <div
                     className="px-2 py-1 text-xs rounded transition-all duration-200 cursor-pointer"
                     style={{
-                      backgroundColor: button.backgroundColor,
+                      backgroundColor: hexToRgba(button.backgroundColor, button.opacity || 100),
                       color: button.textColor,
                       border: `${button.borderWidth}px solid ${button.borderColor}`,
                       borderRadius: `${button.borderRadius}px`,
                       fontSize: getFontSizeValue(button.fontSize),
                       fontWeight: button.fontWeight,
                       padding: getPaddingValue(button.padding),
-                      opacity: (button.opacity || 100) / 100,
                       textDecoration: button.underline ? 'underline' : 'none',
                     }}
                     onMouseEnter={(e) => {
                       const hoverStyle = getHoverEffectStyle(button.hoverEffect, {
-                        backgroundColor: button.backgroundColor,
+                        backgroundColor: hexToRgba(button.backgroundColor, button.opacity || 100),
                         color: button.textColor,
                       });
                       Object.assign(e.currentTarget.style, hoverStyle);
                     }}
                     onMouseLeave={(e) => {
                       Object.assign(e.currentTarget.style, {
-                        backgroundColor: button.backgroundColor,
+                        backgroundColor: hexToRgba(button.backgroundColor, button.opacity || 100),
                         color: button.textColor,
                         transform: 'none',
                         boxShadow: `0 1px 3px rgba(0,0,0,0.1)`,
-                        opacity: 1,
                       });
                     }}
                   >
