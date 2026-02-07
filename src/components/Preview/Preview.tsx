@@ -104,7 +104,7 @@ const Preview: React.FC = () => {
     <div className={getPreviewContainerClass()}>
       <div className={getContentContainerClass()}>
         <div
-          className="w-full h-full overflow-x-hidden overflow-y-auto flex flex-col"
+          className="w-full h-full overflow-x-hidden overflow-y-auto flex flex-col relative"
           style={{
             backgroundColor: globalSettings.backgroundColor,
             fontFamily: globalSettings.fontFamily,
@@ -112,7 +112,7 @@ const Preview: React.FC = () => {
         >
           {/* Mobile/Desktop Toggle */}
           {!isMobileView && (
-            <div className="absolute top-4 right-4 z-10 flex items-center space-x-2 bg-white rounded-lg shadow-md p-2">
+            <div className="absolute top-4 right-4 z-30 flex items-center space-x-2 bg-white rounded-lg shadow-md p-2">
               <button
                 onClick={() => setIsMobileView(false)}
                 className={`p-2 rounded-md transition-colors ${
@@ -136,7 +136,7 @@ const Preview: React.FC = () => {
 
           {/* Mobile view back button */}
           {isMobileView && (
-            <div className="absolute top-2 right-2 z-10">
+            <div className="absolute top-2 right-2 z-30">
               <button
                 onClick={() => setIsMobileView(false)}
                 className="p-2 bg-white rounded-full shadow-md text-gray-600 hover:bg-gray-100"
