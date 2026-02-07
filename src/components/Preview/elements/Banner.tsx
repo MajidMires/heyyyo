@@ -37,11 +37,15 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
   const getImagePosition = () => {
     const position = settings.imagePosition || 'center';
     switch (position) {
-      case 'top': return 'top';
-      case 'bottom': return 'bottom';
-      case 'left': return 'left';
-      case 'right': return 'right';
-      default: return 'center';
+      case 'top': return 'center top';
+      case 'bottom': return 'center bottom';
+      case 'left': return 'left center';
+      case 'right': return 'right center';
+      case 'top-left': return 'left top';
+      case 'top-right': return 'right top';
+      case 'bottom-left': return 'left bottom';
+      case 'bottom-right': return 'right bottom';
+      default: return 'center center';
     }
   };
 
