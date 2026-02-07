@@ -291,8 +291,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="w-full md:w-1/2 text-center md:text-left">
-                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -318,8 +318,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="w-full md:w-1/2 text-center md:text-left">
-                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -344,8 +344,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className={getTextPositionClasses()}>
-                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} max-w-sm md:max-w-2xl mb-3 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} max-w-sm md:max-w-2xl mb-3 md:mb-4`} style={{ color: textColor === '#000000' ? '#ffffff' : textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons(true)}
                   </div>
                 )}
@@ -369,7 +369,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 md:p-6 lg:p-8">
                 <div className={getContentMaxWidth()}>
                   <div className="px-3 md:px-4">
-                    <h2 className={`${fontSizes.heading} font-bold`} style={{ color: '#ffffff', fontFamily }}>{heading}</h2>
+                    <h2 className={`${fontSizes.heading} font-bold`} style={{ color: '#ffffff', fontFamily, whiteSpace: 'pre-line' }}>{heading}</h2>
                   </div>
                 </div>
               </div>
@@ -378,7 +378,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
           {(subtext || buttons.length > 0) && (
             <div className={getContentMaxWidth()}>
               <div className="px-3 md:px-4 text-center md:text-left">
-                {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                 {renderButtons()}
               </div>
             </div>
@@ -398,7 +398,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               {(heading || subtext || buttons.length > 0) && (
                 <div className="text-center md:text-left">
                   {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                  {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                   {renderButtons()}
                 </div>
               )}
@@ -475,8 +475,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="w-full text-center">
-                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -596,7 +596,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   } max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg`}>
                     <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-lg p-4 md:p-6 lg:p-8 shadow-xl">
                       {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-3`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                      {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                      {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                       {renderButtons()}
                     </div>
                   </div>
@@ -642,8 +642,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="flex flex-col justify-center">
-                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -668,8 +668,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="md:col-span-2 flex flex-col justify-center">
-                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -692,8 +692,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 />
                 {(heading || subtext || buttons.length > 0) && (
                   <div>
-                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -718,8 +718,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                 </div>
                 {(heading || subtext || buttons.length > 0) && (
                   <div className="break-inside-avoid">
-                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-4 md:mb-6`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                     {renderButtons()}
                   </div>
                 )}
@@ -770,8 +770,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <div className="px-3 md:px-4">
                 {(heading || subtext) && (
                   <div className="text-center mb-6 md:mb-8">
-                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                   </div>
                 )}
                 <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
@@ -790,9 +790,9 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                       {img.title && (
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-0 left-0 right-0 p-4">
-                            <h3 className="text-white font-semibold text-lg mb-1">{img.title}</h3>
+                            <h3 className="text-white font-semibold text-lg mb-1" style={{ whiteSpace: 'pre-line' }}>{img.title}</h3>
                             {img.description && (
-                              <p className="text-white/90 text-sm line-clamp-2">{img.description}</p>
+                              <p className="text-white/90 text-sm line-clamp-2" style={{ whiteSpace: 'pre-line' }}>{img.description}</p>
                             )}
                           </div>
                         </div>
@@ -834,10 +834,10 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   />
                   <div className="p-6">
                     {selectedImage.title && (
-                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily }}>{selectedImage.title}</h2>
+                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily, whiteSpace: 'pre-line' }}>{selectedImage.title}</h2>
                     )}
                     {selectedImage.description && (
-                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily }}>{selectedImage.description}</p>
+                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily, whiteSpace: 'pre-line' }}>{selectedImage.description}</p>
                     )}
                   </div>
                 </div>
@@ -861,8 +861,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <div className="px-3 md:px-4">
                 {(heading || subtext) && (
                   <div className="text-center mb-6 md:mb-8">
-                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                   </div>
                 )}
                 <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-6">
@@ -881,9 +881,9 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                       {img.title && (
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-0 left-0 right-0 p-4">
-                            <h3 className="text-white font-semibold text-lg mb-1">{img.title}</h3>
+                            <h3 className="text-white font-semibold text-lg mb-1" style={{ whiteSpace: 'pre-line' }}>{img.title}</h3>
                             {img.description && (
-                              <p className="text-white/90 text-sm line-clamp-2">{img.description}</p>
+                              <p className="text-white/90 text-sm line-clamp-2" style={{ whiteSpace: 'pre-line' }}>{img.description}</p>
                             )}
                           </div>
                         </div>
@@ -925,10 +925,10 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   />
                   <div className="p-6">
                     {selectedImage.title && (
-                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily }}>{selectedImage.title}</h2>
+                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily, whiteSpace: 'pre-line' }}>{selectedImage.title}</h2>
                     )}
                     {selectedImage.description && (
-                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily }}>{selectedImage.description}</p>
+                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily, whiteSpace: 'pre-line' }}>{selectedImage.description}</p>
                     )}
                   </div>
                 </div>
@@ -951,8 +951,8 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
               <div className="px-3 md:px-4">
                 {(heading || subtext) && (
                   <div className="text-center mb-6 md:mb-8">
-                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight }}>{heading}</h2>}
-                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight }}>{subtext}</p>}
+                    {heading && <h2 className={`${fontSizes.heading} mb-2 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight, lineHeight, whiteSpace: 'pre-line' }}>{heading}</h2>}
+                    {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                   </div>
                 )}
                 <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
@@ -971,9 +971,9 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                       {img.title && (
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <div className="absolute bottom-0 left-0 right-0 p-4">
-                            <h3 className="text-white font-semibold text-lg mb-1">{img.title}</h3>
+                            <h3 className="text-white font-semibold text-lg mb-1" style={{ whiteSpace: 'pre-line' }}>{img.title}</h3>
                             {img.description && (
-                              <p className="text-white/90 text-sm line-clamp-2">{img.description}</p>
+                              <p className="text-white/90 text-sm line-clamp-2" style={{ whiteSpace: 'pre-line' }}>{img.description}</p>
                             )}
                           </div>
                         </div>
@@ -1015,10 +1015,10 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                   />
                   <div className="p-6">
                     {selectedImage.title && (
-                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily }}>{selectedImage.title}</h2>
+                      <h2 className="text-2xl font-bold mb-3" style={{ fontFamily, whiteSpace: 'pre-line' }}>{selectedImage.title}</h2>
                     )}
                     {selectedImage.description && (
-                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily }}>{selectedImage.description}</p>
+                      <p className="text-gray-700 text-lg leading-relaxed" style={{ fontFamily, whiteSpace: 'pre-line' }}>{selectedImage.description}</p>
                     )}
                   </div>
                 </div>

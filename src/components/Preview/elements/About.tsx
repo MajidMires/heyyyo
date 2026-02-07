@@ -58,38 +58,38 @@ const About: React.FC<AboutProps> = ({ templateId, settings }) => {
           <div className="container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>
                   {title}
                 </h2>
-                <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   {subtitle}
                 </p>
-                <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-700 mb-6 md:mb-8 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   {description}
                 </p>
                 
                 <div className="grid grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
                   <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1">
+                    <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1" style={{ whiteSpace: 'pre-line' }}>
                       {settings.stat1Number || '10K+'}
                     </div>
-                    <div className="text-sm md:text-base text-gray-600">
+                    <div className="text-sm md:text-base text-gray-600" style={{ whiteSpace: 'pre-line' }}>
                       {settings.stat1Label || 'Happy Customers'}
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1">
+                    <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1" style={{ whiteSpace: 'pre-line' }}>
                       {settings.stat2Number || '5+'}
                     </div>
-                    <div className="text-sm md:text-base text-gray-600">
+                    <div className="text-sm md:text-base text-gray-600" style={{ whiteSpace: 'pre-line' }}>
                       {settings.stat2Label || 'Years Experience'}
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1">
+                    <div className="text-2xl md:text-3xl font-bold text-blue-600 mb-1" style={{ whiteSpace: 'pre-line' }}>
                       {settings.stat3Number || '99%'}
                     </div>
-                    <div className="text-sm md:text-base text-gray-600">
+                    <div className="text-sm md:text-base text-gray-600" style={{ whiteSpace: 'pre-line' }}>
                       {settings.stat3Label || 'Satisfaction Rate'}
                     </div>
                   </div>
@@ -118,10 +118,10 @@ const About: React.FC<AboutProps> = ({ templateId, settings }) => {
         <section className="py-12 md:py-16 lg:py-20 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>
                 {title}
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
                 {description}
               </p>
             </div>
@@ -168,21 +168,21 @@ const About: React.FC<AboutProps> = ({ templateId, settings }) => {
         <section className="py-12 md:py-16 lg:py-20 px-3 md:px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>
                 {title}
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
                 {subtitle}
               </p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center mb-12">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-6">Our Mission</h3>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold mb-6" style={{ whiteSpace: 'pre-line' }}>Our Mission</h3>
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6" style={{ whiteSpace: 'pre-line' }}>
                   {description}
                 </p>
-                <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
                   We believe in creating products that not only meet your needs but exceed your expectations in every way possible.
                 </p>
               </div>
@@ -215,8 +215,8 @@ const About: React.FC<AboutProps> = ({ templateId, settings }) => {
               ].map((value, index) => (
                 <div key={index} className="text-center p-6 bg-white rounded-lg shadow-md">
                   <div className="text-4xl mb-4">{value.icon}</div>
-                  <h4 className="text-xl md:text-2xl font-semibold mb-3">{value.title}</h4>
-                  <p className="text-gray-600">{value.description}</p>
+                  <h4 className="text-xl md:text-2xl font-semibold mb-3" style={{ whiteSpace: 'pre-line' }}>{value.title}</h4>
+                  <p className="text-gray-600" style={{ whiteSpace: 'pre-line' }}>{value.description}</p>
                 </div>
               ))}
             </div>

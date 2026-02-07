@@ -1,4 +1,5 @@
 import React from 'react';
+import { ButtonStyle } from '../../types';
 
 interface BannerProps {
   templateId: string;
@@ -7,6 +8,13 @@ interface BannerProps {
     backgroundColor?: string;
     textColor?: string;
     link?: string;
+    heading?: string;
+    subtext?: string;
+    backgroundImage?: string;
+    imagePosition?: string;
+    videoUrl?: string;
+    gradientColor?: string;
+    buttons?: ButtonStyle[];
   };
 }
 
@@ -15,6 +23,53 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
   const backgroundColor = settings.backgroundColor || '#3B82F6';
   const textColor = settings.textColor || '#FFFFFF';
   const link = settings.link || '#';
+  const heading = settings.heading || text;
+  const subtext = settings.subtext || '';
+  const buttons = settings.buttons || [];
+
+  const hexToRgba = (hex: string, opacity: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`;
+  };
+
+  const getImagePosition = () => {
+    const position = settings.imagePosition || 'center';
+    switch (position) {
+      case 'top': return 'top';
+      case 'bottom': return 'bottom';
+      case 'left': return 'left';
+      case 'right': return 'right';
+      default: return 'center';
+    }
+  };
+
+  const renderButtons = () => {
+    if (!buttons || buttons.length === 0) return null;
+
+    return (
+      <div className="flex flex-wrap gap-3 justify-center">
+        {buttons.map((button) => (
+          <a
+            key={button.id}
+            href={button.link}
+            target={button.target}
+            className="inline-block px-6 py-3 rounded-md font-medium transition-all duration-200"
+            style={{
+              backgroundColor: hexToRgba(button.backgroundColor, button.opacity || 100),
+              color: button.textColor,
+              border: `${button.borderWidth}px solid ${button.borderColor}`,
+              borderRadius: `${button.borderRadius}px`,
+              textDecoration: button.underline ? 'underline' : 'none',
+            }}
+          >
+            {button.text}
+          </a>
+        ))}
+      </div>
+    );
+  };
 
   switch (templateId) {
     case 'banner-1': // Full Width Banner
@@ -24,7 +79,7 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
           style={{ backgroundColor, color: textColor }}
         >
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4">{text}</h2>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
             <a 
               href={link}
               className="inline-block px-4 md:px-6 py-2 border-2 font-medium rounded-md hover:bg-opacity-90 transition-colors text-sm md:text-base"
@@ -38,26 +93,26 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
 
     case 'banner-2': // Announcement Banner
       return (
-        <section 
+        <section
           className="py-2 md:py-3 px-3 md:px-4 text-center"
           style={{ backgroundColor, color: textColor }}
         >
           <div className="container mx-auto">
-            <p className="text-xs md:text-sm font-medium">{text}</p>
+            <p className="text-xs md:text-sm font-medium" style={{ whiteSpace: 'pre-line' }}>{heading}</p>
           </div>
         </section>
       );
 
     case 'banner-3': // Promotion Banner
       return (
-        <section 
+        <section
           className="py-6 md:py-8 lg:py-10 px-3 md:px-4"
           style={{ backgroundColor, color: textColor }}
         >
           <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-center md:text-left">
-              <h3 className="text-lg md:text-xl font-bold">{text}</h3>
-              <p className="text-sm md:text-base opacity-90">Limited time offer. Don't miss out!</p>
+              <h3 className="text-lg md:text-xl font-bold" style={{ whiteSpace: 'pre-line' }}>{heading}</h3>
+              <p className="text-sm md:text-base opacity-90" style={{ whiteSpace: 'pre-line' }}>Limited time offer. Don't miss out!</p>
             </div>
             <a 
               href={link}
@@ -85,15 +140,15 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
               >
                 Limited Time
               </span>
-              <h2 
+              <h2
                 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 md:mb-4"
-                style={{ color: textColor }}
+                style={{ color: textColor, whiteSpace: 'pre-line' }}
               >
                 {text}
               </h2>
-              <p 
+              <p
                 className="mb-4 md:mb-6 text-sm md:text-base lg:text-lg"
-                style={{ color: textColor }}
+                style={{ color: textColor, whiteSpace: 'pre-line' }}
               >
                 Use code SUMMER20 at checkout
               </p>
@@ -128,9 +183,9 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
                   >
                     Limited Time Offer
                   </p>
-                  <h3 
+                  <h3
                     className="text-lg md:text-xl lg:text-2xl font-bold"
-                    style={{ color: textColor }}
+                    style={{ color: textColor, whiteSpace: 'pre-line' }}
                   >
                     {text}
                   </h3>
@@ -181,8 +236,8 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
           }}
         >
           <div className="container mx-auto relative z-10">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4">{text}</h2>
-            <p className="text-sm md:text-base opacity-90 mb-4 md:mb-6">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
+            <p className="text-sm md:text-base opacity-90 mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>
               Don't miss out on this amazing opportunity
             </p>
             <a 
@@ -200,26 +255,32 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
 
     case 'banner-7': // Image Background Banner
       return (
-        <section 
+        <section
           className="py-12 md:py-16 lg:py-20 px-3 md:px-4 text-center relative"
           style={{
             backgroundImage: `url(${settings.backgroundImage || 'https://images.pexels.com/photos/6348105/pexels-photo-6348105.jpeg?auto=compress&cs=tinysrgb&w=1200'})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: getImagePosition(),
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="container mx-auto relative z-10">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-white">{text}</h2>
-            <p className="text-base md:text-lg text-white opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">
-              Experience the difference with our premium products
-            </p>
-            <a 
-              href={link}
-              className="inline-block px-8 md:px-10 py-3 md:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm md:text-base"
-            >
-              Discover More
-            </a>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-white" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
+            {subtext && (
+              <p className="text-base md:text-lg text-white opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
+                {subtext}
+              </p>
+            )}
+            {buttons.length > 0 ? (
+              renderButtons()
+            ) : (
+              <a
+                href={link}
+                className="inline-block px-8 md:px-10 py-3 md:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm md:text-base"
+              >
+                Discover More
+              </a>
+            )}
           </div>
         </section>
       );
@@ -237,8 +298,8 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div>
-                <h3 className="text-lg md:text-xl font-semibold mb-1">{text}</h3>
-                <p className="text-sm md:text-base opacity-75">Limited time offer</p>
+                <h3 className="text-lg md:text-xl font-semibold mb-1" style={{ whiteSpace: 'pre-line' }}>{heading}</h3>
+                <p className="text-sm md:text-base opacity-75" style={{ whiteSpace: 'pre-line' }}>Limited time offer</p>
               </div>
               <a 
                 href={link}
@@ -267,8 +328,8 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
                 <span className="text-2xl md:text-3xl">🚀</span>
               </span>
             </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">{text}</h2>
-            <p className="text-base md:text-lg opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
+            <p className="text-base md:text-lg opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
               Join thousands of satisfied customers who have already made the switch
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
@@ -298,7 +359,7 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
           style={{ backgroundColor, color: textColor }}
         >
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 animate-pulse">{text}</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 animate-pulse" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
             <div className="flex justify-center items-center space-x-4">
               <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
               <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -329,40 +390,56 @@ const Banner: React.FC<BannerProps> = ({ templateId, settings }) => {
           </video>
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="container mx-auto relative z-10">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-white">{text}</h2>
-            <p className="text-base md:text-lg text-white opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">
-              Experience the difference with our premium products
-            </p>
-            <a 
-              href={link}
-              className="inline-block px-8 md:px-10 py-3 md:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Discover More
-            </a>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-white" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
+            {subtext && (
+              <p className="text-base md:text-lg text-white opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
+                {subtext}
+              </p>
+            )}
+            {buttons.length > 0 ? (
+              renderButtons()
+            ) : (
+              <a
+                href={link}
+                className="inline-block px-8 md:px-10 py-3 md:py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                Discover More
+              </a>
+            )}
           </div>
         </section>
       );
 
     case 'banner-12': // Parallax Banner
       return (
-        <section 
-          className="relative py-20 md:py-32 px-3 md:px-4 text-center bg-fixed bg-cover bg-center"
+        <section
+          className="relative py-20 md:py-32 px-3 md:px-4 text-center bg-fixed bg-cover"
           style={{
             backgroundImage: `url(${settings.backgroundImage || 'https://images.pexels.com/photos/6348105/pexels-photo-6348105.jpeg?auto=compress&cs=tinysrgb&w=1200'})`,
+            backgroundPosition: getImagePosition(),
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-60"></div>
           <div className="container mx-auto relative z-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white">{text}</h2>
-            <p className="text-lg md:text-xl text-white opacity-90 mb-8 md:mb-10 max-w-3xl mx-auto">
-              Scroll to see the parallax effect in action
-            </p>
-            <a 
-              href={link}
-              className="inline-block px-10 md:px-12 py-4 md:py-5 bg-white text-gray-900 font-bold rounded-lg hover:bg-gray-100 transition-colors text-lg"
-            >
-              Get Started
-            </a>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white" style={{ whiteSpace: 'pre-line' }}>{heading}</h2>
+            {subtext && (
+              <p
+                className="text-lg md:text-xl text-white opacity-90 mb-8 md:mb-10 max-w-3xl mx-auto"
+                style={{ whiteSpace: 'pre-line' }}
+              >
+                {subtext}
+              </p>
+            )}
+            {buttons.length > 0 ? (
+              renderButtons()
+            ) : (
+              <a
+                href={link}
+                className="inline-block px-10 md:px-12 py-4 md:py-5 bg-white text-gray-900 font-bold rounded-lg hover:bg-gray-100 transition-colors text-lg"
+              >
+                Get Started
+              </a>
+            )}
           </div>
         </section>
       );

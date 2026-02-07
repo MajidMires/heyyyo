@@ -142,7 +142,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-4">
               {items.map((item) => (
                 <div key={item.id} className="group">
@@ -157,8 +157,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                       Quick View
                     </button>
                   </div>
-                  <h3 className="text-xs md:text-sm font-medium text-center">{item.title}</h3>
-                  <p className="text-xs md:text-sm text-gray-600 text-center">{item.price}</p>
+                  <h3 className="text-xs md:text-sm font-medium text-center" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                  <p className="text-xs md:text-sm text-gray-600 text-center" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                 </div>
               ))}
             </div>
@@ -187,8 +187,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                       #{index + 1}
                     </div>
                   </div>
-                  <h3 className="text-xs md:text-sm font-medium">{item.title}</h3>
-                  <p className="text-gray-600 text-xs md:text-sm">{item.price}</p>
+                  <h3 className="text-xs md:text-sm font-medium" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                  <p className="text-gray-600 text-xs md:text-sm" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                 </div>
               ))}
             </div>
@@ -226,8 +226,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                       </button>
                     </div>
                   </div>
-                  <h3 className="text-base md:text-lg font-medium">{item.title}</h3>
-                  <p className="text-sm md:text-base text-gray-600">{item.price}</p>
+                  <h3 className="text-base md:text-lg font-medium" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                  <p className="text-sm md:text-base text-gray-600" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                 </div>
               ))}
             </div>
@@ -240,7 +240,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-6">
               {[
                 { id: 1, title: items[0].title, image: items[0].image },
@@ -257,7 +257,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2">{category.title}</h3>
+                    <h3 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-2" style={{ whiteSpace: 'pre-line' }}>{category.title}</h3>
                   </div>
                 </div>
               ))}
@@ -273,8 +273,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
           <div className="container mx-auto">
             <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 lg:mb-6">{title}</h2>
-                <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 lg:mb-8">
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 lg:mb-6" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+                <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 lg:mb-8" style={{ whiteSpace: 'pre-line' }}>
                   Discover our carefully curated selection of premium products, designed to elevate your lifestyle.
                 </p>
                 <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-4">
@@ -332,8 +332,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
               </div>
               <div className="flex flex-col justify-center">
                 <span className="text-sm font-medium text-blue-600 mb-2">FEATURED PRODUCT</span>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{items[0].title}</h2>
-                <p className="text-base md:text-lg text-gray-600 mb-6">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4" style={{ whiteSpace: 'pre-line' }}>{items[0].title}</h2>
+                <p className="text-base md:text-lg text-gray-600 mb-6" style={{ whiteSpace: 'pre-line' }}>
                   Experience premium quality with our flagship product. Meticulously crafted for those who demand excellence.
                 </p>
                 <div className="flex items-center gap-4 mb-6">
@@ -351,7 +351,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="flex flex-col md:flex-row gap-4">
               {items.slice(0, 3).map((item) => (
                 <div key={item.id} className="flex-1 group">
@@ -363,8 +363,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-white text-base md:text-lg font-semibold mb-1">{item.title}</h3>
-                      <p className="text-white text-sm">{item.price}</p>
+                      <h3 className="text-white text-base md:text-lg font-semibold mb-1" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                      <p className="text-white text-sm" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                     </div>
                   </div>
                 </div>
@@ -390,8 +390,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                    <h3 className="text-white text-lg md:text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-white text-base md:text-lg mb-4">{item.price}</p>
+                    <h3 className="text-white text-lg md:text-xl font-bold mb-2" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                    <p className="text-white text-base md:text-lg mb-4" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                     <button className="bg-white text-gray-900 px-6 py-2 rounded-md font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                       View Details
                     </button>
@@ -408,7 +408,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 border border-gray-200 rounded-lg overflow-hidden">
               {items.slice(0, 3).map((item, index) => (
                 <div
@@ -423,8 +423,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                     />
                   </div>
                   <div className="p-4 bg-white">
-                    <h3 className="text-sm md:text-base font-medium mb-1">{item.title}</h3>
-                    <p className="text-gray-600 text-sm md:text-base">{item.price}</p>
+                    <h3 className="text-sm md:text-base font-medium mb-1" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                    <p className="text-gray-600 text-sm md:text-base" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                   </div>
                 </div>
               ))}
@@ -438,7 +438,7 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4 bg-gray-100">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-6 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {items.slice(0, 4).map((item) => (
                 <div key={item.id} className="group relative">
@@ -450,8 +450,8 @@ const Featured: React.FC<FeaturedProps> = ({ templateId, settings }) => {
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <h3 className="text-white text-lg md:text-xl font-bold mb-2">{item.title}</h3>
-                      <p className="text-white text-base">{item.price}</p>
+                      <h3 className="text-white text-lg md:text-xl font-bold mb-2" style={{ whiteSpace: 'pre-line' }}>{item.title}</h3>
+                      <p className="text-white text-base" style={{ whiteSpace: 'pre-line' }}>{item.price}</p>
                     </div>
                   </div>
                 </div>

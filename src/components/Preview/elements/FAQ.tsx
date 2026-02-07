@@ -77,8 +77,8 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-8 md:mb-12">
               <HelpCircle className="mx-auto mb-4 text-blue-600" size={48} />
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
-              <p className="text-lg text-gray-600">{subtitle}</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-lg text-gray-600" style={{ whiteSpace: 'pre-line' }}>{subtitle}</p>
             </div>
 
             <div className="space-y-4">
@@ -88,7 +88,7 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
                     onClick={() => toggleFAQ(index)}
                     className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                   >
-                    <span className="font-semibold text-gray-900">{faq.question}</span>
+                    <span className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{faq.question}</span>
                     {openFAQ === index ? (
                       <ChevronUp className="text-gray-500 flex-shrink-0" size={20} />
                     ) : (
@@ -97,7 +97,7 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
                   </button>
                   {openFAQ === index && (
                     <div className="px-6 pb-4">
-                      <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                      <p className="text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>{faq.answer}</p>
                     </div>
                   )}
                 </div>
@@ -112,8 +112,8 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
-              <p className="text-lg text-gray-600">{subtitle}</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-lg text-gray-600" style={{ whiteSpace: 'pre-line' }}>{subtitle}</p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -135,8 +135,8 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
             <div className="grid md:grid-cols-2 gap-6">
               {filteredFAQs.map((faq, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-sm p-6">
-                  <h3 className="font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                  <h3 className="font-semibold text-gray-900 mb-3" style={{ whiteSpace: 'pre-line' }}>{faq.question}</h3>
+                  <p className="text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>{faq.answer}</p>
                   {faq.category && (
                     <span className="inline-block mt-3 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full capitalize">
                       {faq.category}
@@ -181,7 +181,7 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
                       onClick={() => toggleFAQ(index)}
                       className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                     >
-                      <span className="font-semibold text-gray-900">{faq.question}</span>
+                      <span className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{faq.question}</span>
                       {openFAQ === index ? (
                         <ChevronUp className="text-gray-500 flex-shrink-0" size={20} />
                       ) : (
@@ -190,7 +190,7 @@ const FAQ: React.FC<FAQProps> = ({ templateId, settings }) => {
                     </button>
                     {openFAQ === index && (
                       <div className="px-6 pb-4">
-                        <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                        <p className="text-gray-700 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>{faq.answer}</p>
                       </div>
                     )}
                   </div>

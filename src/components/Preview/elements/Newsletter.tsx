@@ -31,8 +31,8 @@ const Newsletter: React.FC<NewsletterProps> = ({ templateId, settings }) => {
           <div className="container mx-auto text-center">
             <div className="max-w-2xl mx-auto">
               <Mail className="mx-auto mb-4 md:mb-6" size={48} style={{ color: textColor }} />
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">{title}</h2>
-              <p className="text-base md:text-lg opacity-90 mb-6 md:mb-8">{description}</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-base md:text-lg opacity-90 mb-6 md:mb-8" style={{ whiteSpace: 'pre-line' }}>{description}</p>
               
               <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
@@ -61,8 +61,8 @@ const Newsletter: React.FC<NewsletterProps> = ({ templateId, settings }) => {
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/2 p-6 md:p-8 lg:p-12">
                   <Gift className="mb-4 text-blue-600" size={48} />
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">{title}</h2>
-                  <p className="text-gray-600 mb-6">{description}</p>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+                  <p className="text-gray-600 mb-6" style={{ whiteSpace: 'pre-line' }}>{description}</p>
                   
                   <div className="space-y-3 mb-6">
                     {[
@@ -113,8 +113,8 @@ const Newsletter: React.FC<NewsletterProps> = ({ templateId, settings }) => {
                   <Mail className="text-blue-600" size={32} />
                 </div>
                 
-                <h2 className="text-xl md:text-2xl font-bold mb-2 text-gray-900">{title}</h2>
-                <p className="text-gray-600 mb-6">{subtitle}</p>
+                <h2 className="text-xl md:text-2xl font-bold mb-2 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+                <p className="text-gray-600 mb-6" style={{ whiteSpace: 'pre-line' }}>{subtitle}</p>
                 
                 <div className="space-y-3 mb-6">
                   <input

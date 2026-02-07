@@ -106,7 +106,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12" style={{ whiteSpace: 'pre-line' }}>
               {title}
             </h2>
             
@@ -120,7 +120,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                     <div key={index} className="w-full flex-shrink-0 px-4">
                       <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 text-center">
                         <Quote className="mx-auto mb-4 text-blue-600" size={32} />
-                        <p className="text-lg md:text-xl text-gray-700 mb-6 italic">
+                        <p className="text-lg md:text-xl text-gray-700 mb-6 italic" style={{ whiteSpace: 'pre-line' }}>
                           "{testimonial.text}"
                         </p>
                         <div className="flex items-center justify-center space-x-4">
@@ -130,8 +130,8 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                             className="w-12 h-12 rounded-full object-cover"
                           />
                           <div className="text-left">
-                            <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                            <p className="text-sm text-gray-600">{testimonial.role}</p>
+                            <h4 className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{testimonial.name}</h4>
+                            <p className="text-sm text-gray-600" style={{ whiteSpace: 'pre-line' }}>{testimonial.role}</p>
                             {renderStars(testimonial.rating)}
                           </div>
                         </div>
@@ -175,7 +175,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12" style={{ whiteSpace: 'pre-line' }}>
               {title}
             </h2>
             
@@ -189,10 +189,10 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                   />
                   <div className="p-6">
                     {renderStars(testimonial.rating)}
-                    <p className="text-gray-700 mt-3 mb-4">"{testimonial.text}"</p>
+                    <p className="text-gray-700 mt-3 mb-4" style={{ whiteSpace: 'pre-line' }}>"{testimonial.text}"</p>
                     <div>
-                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                      <p className="text-sm text-gray-600">{testimonial.role}</p>
+                      <h4 className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{testimonial.name}</h4>
+                      <p className="text-sm text-gray-600" style={{ whiteSpace: 'pre-line' }}>{testimonial.role}</p>
                     </div>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-900 text-white">
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12" style={{ whiteSpace: 'pre-line' }}>
               {title}
             </h2>
             
@@ -225,9 +225,9 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                       </button>
                     </div>
                   </div>
-                  <p className="text-lg md:text-xl mb-4 italic">"{testimonial.text}"</p>
-                  <h4 className="font-semibold text-xl">{testimonial.name}</h4>
-                  <p className="text-gray-300">{testimonial.role}</p>
+                  <p className="text-lg md:text-xl mb-4 italic" style={{ whiteSpace: 'pre-line' }}>"{testimonial.text}"</p>
+                  <h4 className="font-semibold text-xl" style={{ whiteSpace: 'pre-line' }}>{testimonial.name}</h4>
+                  <p className="text-gray-300" style={{ whiteSpace: 'pre-line' }}>{testimonial.role}</p>
                   <div className="flex justify-center mt-2">
                     {renderStars(testimonial.rating)}
                   </div>
@@ -242,7 +242,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12" style={{ whiteSpace: 'pre-line' }}>
               {title}
             </h2>
             
@@ -258,12 +258,12 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <div>
-                          <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                          <p className="text-sm text-gray-600">{testimonial.role}</p>
+                          <h4 className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{testimonial.name}</h4>
+                          <p className="text-sm text-gray-600" style={{ whiteSpace: 'pre-line' }}>{testimonial.role}</p>
                         </div>
                         {renderStars(testimonial.rating)}
                       </div>
-                      <p className="text-gray-700">"{testimonial.text}"</p>
+                      <p className="text-gray-700" style={{ whiteSpace: 'pre-line' }}>"{testimonial.text}"</p>
                     </div>
                   </div>
                 </div>
@@ -277,7 +277,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12" style={{ whiteSpace: 'pre-line' }}>
               {title}
             </h2>
             
@@ -299,13 +299,13 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                         </div>
                         <div className="md:w-1/2 p-6 md:p-8">
                           <Quote className="mb-4 text-blue-600" size={32} />
-                          <p className="text-lg md:text-xl text-gray-700 mb-6 italic">
+                          <p className="text-lg md:text-xl text-gray-700 mb-6 italic" style={{ whiteSpace: 'pre-line' }}>
                             "{testimonial.text}"
                           </p>
                           <div className="flex items-center space-x-4">
                             <div>
-                              <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                              <p className="text-sm text-gray-600">{testimonial.role}</p>
+                              <h4 className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{testimonial.name}</h4>
+                              <p className="text-sm text-gray-600" style={{ whiteSpace: 'pre-line' }}>{testimonial.role}</p>
                               {renderStars(testimonial.rating)}
                             </div>
                           </div>
@@ -350,7 +350,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12" style={{ whiteSpace: 'pre-line' }}>
               {title}
             </h2>
             
@@ -370,7 +370,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ templateId, settings }) => {
                         {renderStars(testimonial.rating)}
                       </div>
                     </div>
-                    <p className="text-gray-700">"{testimonial.text}"</p>
+                    <p className="text-gray-700" style={{ whiteSpace: 'pre-line' }}>"{testimonial.text}"</p>
                   </div>
                 </div>
               ))}

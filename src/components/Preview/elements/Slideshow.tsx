@@ -72,7 +72,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
               }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                <h2 className="text-white text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-center px-3 md:px-4">{slide.heading}</h2>
+                <h2 className="text-white text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-center px-3 md:px-4" style={{ whiteSpace: 'pre-line' }}>{slide.heading}</h2>
               </div>
             </div>
           ))}
@@ -123,7 +123,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
                       />
                     </div>
                     <div className="w-full md:w-1/2 p-4 md:p-6 lg:p-8 bg-gray-50 flex flex-col justify-center">
-                      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4 text-gray-900">{slide.heading}</h2>
+                      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{slide.heading}</h2>
                       <p className="mb-4 md:mb-6 text-sm md:text-base text-gray-600">Discover our amazing products and offers.</p>
                       <button className="px-4 md:px-6 py-2 bg-blue-600 text-white rounded-md text-sm md:text-base self-start">
                         Learn More
@@ -164,7 +164,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">Featured Products</h2>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center" style={{ whiteSpace: 'pre-line' }}>Featured Products</h2>
             <div className="relative">
               <div className="overflow-hidden">
                 <div
@@ -180,7 +180,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
                           className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover"
                         />
                         <div className="p-3 md:p-4 lg:p-6">
-                          <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-1 md:mb-2">{slide.heading}</h3>
+                          <h3 className="text-base md:text-lg lg:text-xl font-semibold mb-1 md:mb-2" style={{ whiteSpace: 'pre-line' }}>{slide.heading}</h3>
                           <p className="text-sm md:text-base text-gray-600 mb-2 md:mb-3 lg:mb-4">
                             Premium quality product for your collection.
                           </p>
@@ -228,7 +228,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
       return (
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 md:mb-8 lg:mb-10 text-center">Customer Testimonials</h2>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 md:mb-8 lg:mb-10 text-center" style={{ whiteSpace: 'pre-line' }}>Customer Testimonials</h2>
             <div className="max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto relative">
               {[1, 2, 3].map((_, index) => (
                 <div
@@ -285,7 +285,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">Our Features</h2>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center" style={{ whiteSpace: 'pre-line' }}>Our Features</h2>
             <div className="relative overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-out"
@@ -302,7 +302,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ templateId, settings }) => {
                         />
                       </div>
                       <div className="w-full md:w-1/2 p-4 md:p-6 lg:p-8">
-                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3 lg:mb-4">{slide.heading}</h3>
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-3 lg:mb-4" style={{ whiteSpace: 'pre-line' }}>{slide.heading}</h3>
                         <ul className="space-y-2 md:space-y-3">
                           <li className="flex items-start">
                             <span className="text-green-500 mr-2">✓</span>

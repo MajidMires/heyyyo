@@ -517,13 +517,50 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
         {template.type === 'banner' && (
           <>
             <div className="space-y-2">
-              <label className="block text-xs font-medium text-gray-700">Banner Text</label>
+              <label className="block text-xs font-medium text-gray-700">Banner Heading</label>
+              <textarea
+                value={settings.heading || settings.text || 'Special Promotion: 20% Off All Products!'}
+                onChange={(e) => handleTextChange('heading', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                rows={2}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Banner Subtext</label>
+              <textarea
+                value={settings.subtext || ''}
+                onChange={(e) => handleTextChange('subtext', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                rows={3}
+                placeholder="Add descriptive text (supports line breaks)"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Background Image URL</label>
               <input
                 type="text"
-                value={settings.text || 'Special Promotion: 20% Off All Products!'}
-                onChange={(e) => handleTextChange('text', e.target.value)}
+                value={settings.backgroundImage || ''}
+                onChange={(e) => handleTextChange('backgroundImage', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="For image/video/parallax banners"
               />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Image Position</label>
+              <select
+                value={settings.imagePosition || 'center'}
+                onChange={(e) => handleTextChange('imagePosition', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              >
+                <option value="center">Center</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+              </select>
             </div>
 
             <div className="space-y-2">
@@ -559,6 +596,7 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                 value={settings.link || '#'}
                 onChange={(e) => handleTextChange('link', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="Fallback link if no buttons added"
               />
             </div>
           </>

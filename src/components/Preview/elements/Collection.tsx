@@ -80,7 +80,7 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className={`grid ${getGridCols()} gap-4 md:gap-6`}>
               {products.map((product) => (
                 <div key={product.id} className="group">
@@ -94,8 +94,8 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                       Quick View
                     </button>
                   </div>
-                  <h3 className="text-sm md:text-base font-medium">{product.name}</h3>
-                  {showPrices && <p className="text-sm md:text-base text-gray-700">{product.price}</p>}
+                  <h3 className="text-sm md:text-base font-medium" style={{ whiteSpace: 'pre-line' }}>{product.name}</h3>
+                  {showPrices && <p className="text-sm md:text-base text-gray-700" style={{ whiteSpace: 'pre-line' }}>{product.price}</p>}
                 </div>
               ))}
             </div>
@@ -108,8 +108,8 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
             <div className="mb-4 md:mb-6 lg:mb-8 text-center">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">{title}</h2>
-              <p className="text-sm md:text-base text-gray-600">Our most popular products for this season</p>
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-sm md:text-base text-gray-600" style={{ whiteSpace: 'pre-line' }}>Our most popular products for this season</p>
             </div>
             <div className={`grid ${getGridCols()} gap-4 md:gap-6`}>
               {products.slice(0, parseInt(itemsPerRow, 10)).map((product) => (
@@ -125,7 +125,7 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                     </div>
                   </div>
                   <div className="p-2 md:p-3 lg:p-4">
-                    <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1">{product.name}</h3>
+                    <h3 className="text-sm md:text-base lg:text-lg font-semibold mb-1" style={{ whiteSpace: 'pre-line' }}>{product.name}</h3>
                     {showPrices && (
                       <div className="flex items-center">
                         <span className="text-xs md:text-sm text-gray-400 line-through mr-1 md:mr-2">${(parseFloat(product.price.substring(1)) * 1.2).toFixed(2)}</span>
@@ -152,7 +152,7 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8">{title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 lg:mb-8" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="relative">
               <div className="overflow-x-auto pb-4 hide-scrollbar">
                 <div className="flex space-x-3 md:space-x-4" style={{ width: 'max-content' }}>
@@ -167,8 +167,8 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                           />
                         </div>
                         <div className="p-2 md:p-3 lg:p-4">
-                          <h3 className="text-sm md:text-base lg:text-lg font-medium mb-1">{product.name}</h3>
-                          {showPrices && <p className="text-sm md:text-base text-gray-700">{product.price}</p>}
+                          <h3 className="text-sm md:text-base lg:text-lg font-medium mb-1" style={{ whiteSpace: 'pre-line' }}>{product.name}</h3>
+                          {showPrices && <p className="text-sm md:text-base text-gray-700" style={{ whiteSpace: 'pre-line' }}>{product.price}</p>}
                           <button className="mt-2 md:mt-3 w-full py-1 md:py-1.5 border border-gray-300 text-xs md:text-sm font-medium rounded hover:bg-gray-50 transition-colors">
                             Add to Cart
                           </button>
@@ -188,7 +188,7 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
             <div className="mb-4 md:mb-6 lg:mb-8">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">{title}</h2>
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
               <div className="flex overflow-x-auto space-x-2 pb-2 md:pb-4 hide-scrollbar">
                 <button className="px-3 md:px-4 py-1 md:py-2 bg-gray-800 text-white rounded-full text-xs md:text-sm whitespace-nowrap">
                   All Products
@@ -223,8 +223,8 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                       </button>
                     </div>
                   </div>
-                  <h3 className="text-sm md:text-base lg:text-lg font-medium">{product.name}</h3>
-                  {showPrices && <p className="text-sm md:text-base text-gray-700">{product.price}</p>}
+                  <h3 className="text-sm md:text-base lg:text-lg font-medium" style={{ whiteSpace: 'pre-line' }}>{product.name}</h3>
+                  {showPrices && <p className="text-sm md:text-base text-gray-700" style={{ whiteSpace: 'pre-line' }}>{product.price}</p>}
                 </div>
               ))}
             </div>
@@ -236,7 +236,7 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
       return (
         <section className="py-6 md:py-8 lg:py-12 px-3 md:px-4">
           <div className="container mx-auto">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center">{title}</h2>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 text-center" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
             <div className="columns-1 md:columns-3 gap-4">
               {products.map((product, index) => (
                 <div 
@@ -251,8 +251,8 @@ const Collection: React.FC<CollectionProps> = ({ templateId, settings }) => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70" />
                   <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 lg:p-4">
-                    <h3 className="text-sm md:text-base lg:text-lg font-semibold text-white">{product.name}</h3>
-                    {showPrices && <p className="text-sm md:text-base text-white opacity-80">{product.price}</p>}
+                    <h3 className="text-sm md:text-base lg:text-lg font-semibold text-white" style={{ whiteSpace: 'pre-line' }}>{product.name}</h3>
+                    {showPrices && <p className="text-sm md:text-base text-white opacity-80" style={{ whiteSpace: 'pre-line' }}>{product.price}</p>}
                     <button className="mt-1 md:mt-2 px-2 md:px-3 lg:px-4 py-1 bg-white text-gray-800 text-xs md:text-sm font-medium rounded hover:bg-gray-100 transition-colors">
                       View Details
                     </button>

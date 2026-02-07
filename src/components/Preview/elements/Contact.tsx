@@ -28,10 +28,10 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
         <section className="py-12 md:py-16 lg:py-20 px-3 md:px-4">
           <div className="container mx-auto">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>
                 {title}
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
                 {subtitle}
               </p>
             </div>
@@ -113,7 +113,7 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
                     <MapPin className="text-blue-600 mt-1" size={24} />
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Address</h4>
-                      <p className="text-gray-600">{address}</p>
+                      <p className="text-gray-600" style={{ whiteSpace: 'pre-line' }}>{address}</p>
                     </div>
                   </div>
                   
@@ -121,7 +121,7 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
                     <Phone className="text-blue-600 mt-1" size={24} />
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
-                      <p className="text-gray-600">{phone}</p>
+                      <p className="text-gray-600" style={{ whiteSpace: 'pre-line' }}>{phone}</p>
                     </div>
                   </div>
                   
@@ -129,7 +129,7 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
                     <Mail className="text-blue-600 mt-1" size={24} />
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
-                      <p className="text-gray-600">{email}</p>
+                      <p className="text-gray-600" style={{ whiteSpace: 'pre-line' }}>{email}</p>
                     </div>
                   </div>
                   
@@ -137,7 +137,7 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
                     <Clock className="text-blue-600 mt-1" size={24} />
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">Business Hours</h4>
-                      <p className="text-gray-600">{hours}</p>
+                      <p className="text-gray-600" style={{ whiteSpace: 'pre-line' }}>{hours}</p>
                     </div>
                   </div>
                 </div>
@@ -160,10 +160,10 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
         <section className="py-12 md:py-16 lg:py-20 px-3 md:px-4 bg-gray-50">
           <div className="container mx-auto">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ whiteSpace: 'pre-line' }}>
                 {title}
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
                 {subtitle}
               </p>
             </div>
@@ -219,11 +219,11 @@ const Contact: React.FC<ContactProps> = ({ templateId, settings }) => {
                   <div className="space-y-3">
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <p className="text-gray-700 font-medium">{phone}</p>
+                      <p className="text-gray-700 font-medium" style={{ whiteSpace: 'pre-line' }}>{phone}</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
-                      <p className="text-gray-700 font-medium">{email}</p>
+                      <p className="text-gray-700 font-medium" style={{ whiteSpace: 'pre-line' }}>{email}</p>
                     </div>
                   </div>
                 </div>

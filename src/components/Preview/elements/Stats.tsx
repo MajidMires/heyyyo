@@ -85,8 +85,8 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gray-900 text-white">
           <div className="container mx-auto">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{title}</h2>
-              <p className="text-lg text-gray-300">{subtitle}</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-lg text-gray-300" style={{ whiteSpace: 'pre-line' }}>{subtitle}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
@@ -98,7 +98,7 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
                   <div className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2" style={{ color: stat.color }}>
                     {formatNumber(counters[index] || 0, stat.number)}
                   </div>
-                  <div className="text-sm md:text-base text-gray-300">{stat.label}</div>
+                  <div className="text-sm md:text-base text-gray-300" style={{ whiteSpace: 'pre-line' }}>{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -111,8 +111,8 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4">
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
-              <p className="text-lg text-gray-600">{subtitle}</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-lg text-gray-600" style={{ whiteSpace: 'pre-line' }}>{subtitle}</p>
             </div>
 
             <div className="space-y-6 md:space-y-8">
@@ -123,7 +123,7 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center space-x-3">
                         {getIcon(stat.icon || 'trending-up', stat.color || '#3B82F6')}
-                        <span className="font-semibold text-gray-900">{stat.label}</span>
+                        <span className="font-semibold text-gray-900" style={{ whiteSpace: 'pre-line' }}>{stat.label}</span>
                       </div>
                       <span className="text-2xl font-bold" style={{ color: stat.color }}>
                         {formatNumber(counters[index] || 0, stat.number)}
@@ -151,8 +151,8 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
         <section className="py-8 md:py-12 lg:py-16 px-3 md:px-4 bg-gradient-to-br from-blue-50 to-indigo-100">
           <div className="container mx-auto">
             <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900">{title}</h2>
-              <p className="text-lg text-gray-600">{subtitle}</p>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900" style={{ whiteSpace: 'pre-line' }}>{title}</h2>
+              <p className="text-lg text-gray-600" style={{ whiteSpace: 'pre-line' }}>{subtitle}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -167,7 +167,7 @@ const Stats: React.FC<StatsProps> = ({ templateId, settings }) => {
                   <div className="text-3xl md:text-4xl font-bold mb-2" style={{ color: stat.color }}>
                     {formatNumber(counters[index] || 0, stat.number)}
                   </div>
-                  <div className="text-sm md:text-base text-gray-600">{stat.label}</div>
+                  <div className="text-sm md:text-base text-gray-600" style={{ whiteSpace: 'pre-line' }}>{stat.label}</div>
                 </div>
               ))}
             </div>
