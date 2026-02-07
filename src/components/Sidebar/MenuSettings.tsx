@@ -31,8 +31,8 @@ const MenuSettings: React.FC = () => {
             { id: 'standard', name: 'Standard', desc: 'Logo left, menu center, icons right' },
             { id: 'centered', name: 'Centered', desc: 'Logo center, menu below' },
             { id: 'minimal', name: 'Minimal', desc: 'Clean layout with minimal elements' },
-            { id: 'overlay', name: 'Overlay', desc: 'Semi-transparent over banner' },
-            { id: 'transparent', name: 'Transparent', desc: 'Fully transparent menu' },
+            { id: 'overlay', name: 'Overlay', desc: 'Blurred background over banner' },
+            { id: 'transparent', name: 'Transparent', desc: 'Adjustable transparency (use opacity slider)' },
             { id: 'logo-center-buttons', name: 'Logo Center + Buttons', desc: 'Logo center with buttons on sides' },
             { id: 'split-nav', name: 'Split Navigation', desc: 'Menu items split around logo' },
             { id: 'compact', name: 'Compact', desc: 'Condensed layout for mobile-first' },
@@ -82,7 +82,7 @@ const MenuSettings: React.FC = () => {
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="block text-xs font-medium text-gray-700">
-              Opacity ({menuSettings.opacity}%)
+              Background Opacity ({menuSettings.opacity}%)
             </label>
             <input
               type="range"
@@ -92,6 +92,7 @@ const MenuSettings: React.FC = () => {
               onChange={(e) => handleSettingChange('opacity', parseInt(e.target.value))}
               className="w-full"
             />
+            <p className="text-xs text-gray-500">Works with all menu templates</p>
           </div>
 
           <div className="space-y-2">

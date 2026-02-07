@@ -14,46 +14,29 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const getMenuStyle = () => {
     const opacity = menuSettings.opacity / 100;
-    
-    // Handle transparency for overlay and transparent templates
-    if (menuSettings.template === 'transparent') {
-      return {
-        backgroundColor: 'transparent',
-        color: menuSettings.textColor,
-        fontFamily: menuSettings.fontFamily,
-      };
-    }
-    
-    if (menuSettings.template === 'overlay') {
-      // Convert hex to rgba for overlay
-      const hexToRgba = (hex: string, alpha: number) => {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-      };
-      
-      return {
-        backgroundColor: hexToRgba(menuSettings.backgroundColor, opacity * 0.9),
-        color: menuSettings.textColor,
-        fontFamily: menuSettings.fontFamily,
-        backdropFilter: 'blur(10px)',
-      };
-    }
-    
-    // For all other templates
+
     const hexToRgba = (hex: string, alpha: number) => {
       const r = parseInt(hex.slice(1, 3), 16);
       const g = parseInt(hex.slice(3, 5), 16);
       const b = parseInt(hex.slice(5, 7), 16);
       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     };
-    
-    return {
+
+    const baseStyle = {
       backgroundColor: hexToRgba(menuSettings.backgroundColor, opacity),
       color: menuSettings.textColor,
       fontFamily: menuSettings.fontFamily,
     };
+
+    // Add backdrop blur for overlay template
+    if (menuSettings.template === 'overlay') {
+      return {
+        ...baseStyle,
+        backdropFilter: 'blur(10px)',
+      };
+    }
+
+    return baseStyle;
   };
 
   const getMenuClasses = () => {
