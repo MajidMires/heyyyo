@@ -20,14 +20,14 @@ import Stats from './elements/Stats';
 import { Home, Smartphone, Monitor } from 'lucide-react';
 
 const Preview: React.FC = () => {
-  const { 
-    customization, 
-    customizationMode, 
-    isMobileView, 
+  const {
+    customization,
+    customizationMode,
+    isMobileView,
     setIsMobileView,
     viewMode
   } = useCustomization();
-  const { elements, globalSettings } = customization;
+  const { elements, globalSettings, menuSettings } = customization;
 
   // Show setup steps based on customization mode
   if (customizationMode === 'welcome') {
@@ -147,29 +147,65 @@ const Preview: React.FC = () => {
             </div>
           )}
 
-          <StorefrontHeader
-            logo={globalSettings.logo}
-            banner={globalSettings.banner}
-            primaryColor={globalSettings.primaryColor}
-          />
-          
-          {elements.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center p-8 text-center">
-              <div>
-                <p className="text-gray-500 mb-2">
-                  Your storefront preview will appear here.
-                </p>
-                <p className="text-gray-400 text-sm">
-                  Add sections from the sidebar to customize your store.
-                </p>
+          {menuSettings.overlayContent ? (
+            <>
+              {/* Overlay menu positioned absolutely */}
+              <div className="absolute top-0 left-0 right-0 z-20">
+                <StorefrontHeader
+                  logo={globalSettings.logo}
+                  banner={globalSettings.banner}
+                  primaryColor={globalSettings.primaryColor}
+                />
               </div>
-            </div>
+
+              {/* Content without menu spacing */}
+              {elements.length === 0 ? (
+                <div className="flex-1 flex items-center justify-center p-8 text-center">
+                  <div>
+                    <p className="text-gray-500 mb-2">
+                      Your storefront preview will appear here.
+                    </p>
+                    <p className="text-gray-400 text-sm">
+                      Add sections from the sidebar to customize your store.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex-1">
+                  {elements
+                    .sort((a, b) => a.order - b.order)
+                    .map(renderElement)}
+                </div>
+              )}
+            </>
           ) : (
-            <div className="flex-1">
-              {elements
-                .sort((a, b) => a.order - b.order)
-                .map(renderElement)}
-            </div>
+            <>
+              {/* Standard inline menu */}
+              <StorefrontHeader
+                logo={globalSettings.logo}
+                banner={globalSettings.banner}
+                primaryColor={globalSettings.primaryColor}
+              />
+
+              {elements.length === 0 ? (
+                <div className="flex-1 flex items-center justify-center p-8 text-center">
+                  <div>
+                    <p className="text-gray-500 mb-2">
+                      Your storefront preview will appear here.
+                    </p>
+                    <p className="text-gray-400 text-sm">
+                      Add sections from the sidebar to customize your store.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex-1">
+                  {elements
+                    .sort((a, b) => a.order - b.order)
+                    .map(renderElement)}
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

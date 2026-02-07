@@ -64,6 +64,7 @@ const initialMenuSettings: MenuSettings = {
   rightButtonText: 'Sign Up',
   rightButtonLink: '#',
   buttonStyle: 'filled',
+  overlayContent: false,
 };
 
 const initialProductModalSettings: ProductModalSettings = {

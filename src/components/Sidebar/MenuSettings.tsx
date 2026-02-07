@@ -59,6 +59,27 @@ const MenuSettings: React.FC = () => {
       </div>
 
       <div>
+        <h3 className="text-sm font-medium text-gray-800 mb-3">Position</h3>
+        <div className="space-y-3">
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="overlayContent"
+              checked={menuSettings.overlayContent}
+              onChange={(e) => handleSettingChange('overlayContent', e.target.checked)}
+              className="h-4 w-4 text-blue-600 rounded"
+            />
+            <label htmlFor="overlayContent" className="text-xs font-medium text-gray-700">
+              Overlay Content
+            </label>
+          </div>
+          <p className="text-xs text-gray-500">
+            When enabled, the menu floats over the first section instead of taking up space
+          </p>
+        </div>
+      </div>
+
+      <div>
         <h3 className="text-sm font-medium text-gray-800 mb-3">Logo Position</h3>
         <div className="flex space-x-2">
           {['left', 'center', 'right'].map((position) => (

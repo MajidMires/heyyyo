@@ -32,6 +32,7 @@ export interface MenuSettings {
   rightButtonText?: string;
   rightButtonLink?: string;
   buttonStyle?: 'filled' | 'outline' | 'ghost';
+  overlayContent: boolean;
 }
 
 export interface ProductCardSettings2 {

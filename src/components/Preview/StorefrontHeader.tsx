@@ -40,15 +40,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
   };
 
   const getMenuClasses = () => {
-    const baseClasses = "w-full transition-all duration-300";
-    
-    switch (menuSettings.template) {
-      case 'overlay':
-      case 'transparent':
-        return `${baseClasses} absolute top-0 left-0 right-0 z-20`;
-      default:
-        return `${baseClasses} relative`;
-    }
+    return "w-full transition-all duration-300 relative";
   };
 
   const getFontSizeClass = () => {
