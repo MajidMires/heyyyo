@@ -865,7 +865,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                   </div>
                 )}
-                <div className="flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   {images3.map((img, idx) => (
                     <div
                       key={idx}
@@ -955,7 +955,7 @@ const ImageWithText: React.FC<ImageWithTextProps> = ({ templateId, settings, sec
                     {subtext && <p className={`${fontSizes.subtext} mb-3 md:mb-4`} style={{ color: textColor, fontFamily, fontWeight: '400', lineHeight, whiteSpace: 'pre-line' }}>{subtext}</p>}
                   </div>
                 )}
-                <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   {images2.map((img, idx) => (
                     <div
                       key={idx}
