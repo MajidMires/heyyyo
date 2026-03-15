@@ -1,5 +1,6 @@
 import React from 'react';
 import { SectionStyle } from '../../types';
+import ImageInput from './ImageInput';
 
 interface SectionStylerProps {
   sectionStyle: SectionStyle;
@@ -63,16 +64,12 @@ const SectionStyler: React.FC<SectionStylerProps> = ({ sectionStyle, onStyleChan
             </p>
           </div>
 
-          <div className="space-y-2">
-            <label className="block text-xs font-medium text-gray-700">Background Image URL</label>
-            <input
-              type="text"
-              value={sectionStyle.backgroundImage || ''}
-              onChange={(e) => onStyleChange({ backgroundImage: e.target.value })}
-              placeholder="https://example.com/image.jpg"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
-            />
-          </div>
+          <ImageInput
+            label="Background Image URL"
+            value={sectionStyle.backgroundImage || ''}
+            onChange={(value) => onStyleChange({ backgroundImage: value })}
+            placeholder="https://example.com/image.jpg"
+          />
 
           <div className="space-y-2">
             <label className="block text-xs font-medium text-gray-700">
