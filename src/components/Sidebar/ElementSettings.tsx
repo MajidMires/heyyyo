@@ -174,11 +174,12 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                   <div className="border-t pt-4 mt-4">
                     <h4 className="text-xs font-semibold text-gray-700 mb-3">Image 3</h4>
                     <div className="space-y-2 mb-3">
-                      <ImageInput
-                        label="URL"
+                      <label className="block text-xs font-medium text-gray-700">URL</label>
+                      <input
+                        type="text"
                         value={settings.image3 || 'https://images.pexels.com/photos/5632398/pexels-photo-5632398.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                        onChange={(value) => handleImageChange('image3', value)}
-                        placeholder="https://images.pexels.com/..."
+                        onChange={(e) => handleImageChange('image3', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                       />
                     </div>
                     <div className="space-y-2 mb-3">
@@ -208,11 +209,12 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                   <div className="border-t pt-4 mt-4">
                     <h4 className="text-xs font-semibold text-gray-700 mb-3">Image 4</h4>
                     <div className="space-y-2 mb-3">
-                      <ImageInput
-                        label="URL"
+                      <label className="block text-xs font-medium text-gray-700">URL</label>
+                      <input
+                        type="text"
                         value={settings.image4 || 'https://images.pexels.com/photos/5816294/pexels-photo-5816294.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                        onChange={(value) => handleImageChange('image4', value)}
-                        placeholder="https://images.pexels.com/..."
+                        onChange={(e) => handleImageChange('image4', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                       />
                     </div>
                     <div className="space-y-2 mb-3">
@@ -320,13 +322,19 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
               </label>
             </div>
 
-            <ImageInput
-              label="Background Media URL (Image/Video)"
-              value={settings.backgroundMedia || ''}
-              onChange={(value) => handleTextChange('backgroundMedia', value)}
-              placeholder="https://example.com/background.jpg or video.mp4"
-              helpText="For Hero sections: Use this for background. For other templates: Use Image URL above."
-            />
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Background Media URL (Image/Video)</label>
+              <input
+                type="text"
+                value={settings.backgroundMedia || ''}
+                onChange={(e) => handleTextChange('backgroundMedia', e.target.value)}
+                placeholder="https://example.com/background.jpg or video.mp4"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+              />
+              <p className="text-xs text-gray-500">
+                For Hero sections: Use this for background. For other templates: Use Image URL above.
+              </p>
+            </div>
 
             <div className="space-y-2">
               <label className="block text-xs font-medium text-gray-700">Text Color</label>
@@ -440,12 +448,15 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
             {[1, 2, 3, 4, 5].map((slideNum) => (
               <div key={slideNum} className="space-y-2 p-3 border border-gray-200 rounded-md">
                 <h4 className="text-sm font-medium text-gray-800">Slide {slideNum}</h4>
-                <ImageInput
-                  label="Image URL"
-                  value={settings[`slide${slideNum}Url`] || `https://images.pexels.com/photos/570966${slideNum}/pexels-photo-570966${slideNum}.jpeg?auto=compress&cs=tinysrgb&w=800`}
-                  onChange={(value) => handleImageChange(`slide${slideNum}Url`, value)}
-                  placeholder="https://images.pexels.com/..."
-                />
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Image URL</label>
+                  <input
+                    type="text"
+                    value={settings[`slide${slideNum}Url`] || `https://images.pexels.com/photos/570966${slideNum}/pexels-photo-570966${slideNum}.jpeg?auto=compress&cs=tinysrgb&w=800`}
+                    onChange={(e) => handleImageChange(`slide${slideNum}Url`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
                 <div className="space-y-2">
                   <label className="block text-xs font-medium text-gray-700">Heading</label>
                   <input
@@ -526,13 +537,17 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
               />
             </div>
 
-            <ImageInput
-              label="Background Image URL"
-              value={settings.backgroundImage || ''}
-              onChange={(value) => handleTextChange('backgroundImage', value)}
-              placeholder="https://images.pexels.com/..."
-              helpText="For Banner 7, 11, and 12 only"
-            />
+            <div className="space-y-2">
+              <label className="block text-xs font-medium text-gray-700">Background Image URL</label>
+              <input
+                type="text"
+                value={settings.backgroundImage || ''}
+                onChange={(e) => handleTextChange('backgroundImage', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                placeholder="https://images.pexels.com/..."
+              />
+              <p className="text-xs text-gray-500">For Banner 7, 11, and 12 only</p>
+            </div>
 
             {settings.backgroundImage && (
               <div className="space-y-2">
@@ -619,12 +634,15 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                   />
                 </div>
-                <ImageInput
-                  label="Product Image URL"
-                  value={settings[`item${itemNum}Image`] || `https://images.pexels.com/photos/570441${itemNum}/pexels-photo-570441${itemNum}.jpeg?auto=compress&cs=tinysrgb&w=800`}
-                  onChange={(value) => handleImageChange(`item${itemNum}Image`, value)}
-                  placeholder="https://images.pexels.com/..."
-                />
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Product Image URL</label>
+                  <input
+                    type="text"
+                    value={settings[`item${itemNum}Image`] || `https://images.pexels.com/photos/570441${itemNum}/pexels-photo-570441${itemNum}.jpeg?auto=compress&cs=tinysrgb&w=800`}
+                    onChange={(e) => handleImageChange(`item${itemNum}Image`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
                 <div className="space-y-2">
                   <label className="block text-xs font-medium text-gray-700">Product Price</label>
                   <input
@@ -704,12 +722,15 @@ const ElementSettings: React.FC<ElementSettingsProps> = ({ elementId }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
                   />
                 </div>
-                <ImageInput
-                  label="Customer Photo URL"
-                  value={settings[`testimonial${testimonialNum}Image`] || `https://images.pexels.com/photos/77490${testimonialNum}/pexels-photo-77490${testimonialNum}.jpeg?auto=compress&cs=tinysrgb&w=400`}
-                  onChange={(value) => handleImageChange(`testimonial${testimonialNum}Image`, value)}
-                  placeholder="https://images.pexels.com/..."
-                />
+                <div className="space-y-2">
+                  <label className="block text-xs font-medium text-gray-700">Customer Photo URL</label>
+                  <input
+                    type="text"
+                    value={settings[`testimonial${testimonialNum}Image`] || `https://images.pexels.com/photos/77490${testimonialNum}/pexels-photo-77490${testimonialNum}.jpeg?auto=compress&cs=tinysrgb&w=400`}
+                    onChange={(e) => handleImageChange(`testimonial${testimonialNum}Image`, e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                  />
+                </div>
               </div>
             ))}
           </>

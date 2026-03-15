@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
-import ImageInput from './ImageInput';
 
 const GlobalSettings: React.FC = () => {
   const { customization, updateGlobalSettings } = useCustomization();
@@ -128,19 +127,45 @@ const GlobalSettings: React.FC = () => {
       <div>
         <h3 className="text-sm font-medium text-gray-800 mb-3">Branding</h3>
         <div className="space-y-4">
-          <ImageInput
-            label="Logo URL"
-            value={globalSettings.logo || ''}
-            onChange={(value) => handleLogoChange(value)}
-            placeholder="Enter logo image URL"
-          />
+          <div className="space-y-2">
+            <label className="block text-xs font-medium text-gray-700">Logo URL</label>
+            <input
+              type="text"
+              value={globalSettings.logo || ''}
+              onChange={(e) => handleLogoChange(e.target.value)}
+              placeholder="Enter logo image URL"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+            />
+            {globalSettings.logo && (
+              <div className="mt-2 p-2 border border-gray-200 rounded-md bg-gray-50">
+                <img
+                  src={globalSettings.logo}
+                  alt="Logo Preview"
+                  className="h-10 object-contain mx-auto"
+                />
+              </div>
+            )}
+          </div>
 
-          <ImageInput
-            label="Banner URL"
-            value={globalSettings.banner || ''}
-            onChange={(value) => handleBannerChange(value)}
-            placeholder="Enter banner image URL"
-          />
+          <div className="space-y-2">
+            <label className="block text-xs font-medium text-gray-700">Banner URL</label>
+            <input
+              type="text"
+              value={globalSettings.banner || ''}
+              onChange={(e) => handleBannerChange(e.target.value)}
+              placeholder="Enter banner image URL"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+            />
+            {globalSettings.banner && (
+              <div className="mt-2 p-2 border border-gray-200 rounded-md bg-gray-50">
+                <img
+                  src={globalSettings.banner}
+                  alt="Banner Preview"
+                  className="w-full h-20 object-cover rounded-md"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
