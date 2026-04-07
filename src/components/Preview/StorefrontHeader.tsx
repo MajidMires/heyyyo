@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCustomization } from '../../context/CustomizationContext';
-import { ShoppingBag, Search, User, ShoppingCart } from 'lucide-react';
+import { ShoppingBag, Search, User, ShoppingCart, Menu, X } from 'lucide-react';
 
 interface StorefrontHeaderProps {
   logo?: string;
@@ -11,6 +11,7 @@ interface StorefrontHeaderProps {
 const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, primaryColor }) => {
   const { customization } = useCustomization();
   const { menuSettings } = customization;
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const getMenuStyle = () => {
     const opacity = menuSettings.opacity / 100;
@@ -127,7 +128,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   const renderNavigation = () => (
     <nav
-      className={`flex items-center space-x-4 lg:space-x-6 overflow-x-auto ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
+      className={`hidden md:flex items-center space-x-4 lg:space-x-6 overflow-x-auto ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
       style={{ fontFamily: getTemplateFontFamily() }}
     >
       {menuSettings.menuItems.map((item, index) => (
@@ -145,6 +146,58 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
       ))}
     </nav>
   );
+
+  const renderMobileMenuButton = () => (
+    <button
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      className="md:hidden flex items-center justify-center"
+      style={{ color: menuSettings.textColor }}
+    >
+      {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+    </button>
+  );
+
+  const renderMobileMenu = () => {
+    if (!mobileMenuOpen) return null;
+
+    return (
+      <div
+        className="fixed inset-0 md:hidden z-40 top-16"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: menuSettings.backgroundColor,
+            opacity: menuSettings.opacity / 100,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <nav className="flex flex-col space-y-4 p-4">
+            {menuSettings.menuItems.map((item, index) => (
+              <a
+                key={index}
+                href="#"
+                className="py-2 hover:opacity-75 transition-opacity text-sm"
+                style={{
+                  color: menuSettings.textColor,
+                  fontFamily: getTemplateFontFamily(),
+                }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+          <div className="border-t p-4" style={{ borderColor: `${menuSettings.textColor}20` }}>
+            <div className="flex flex-col space-y-3">
+              {renderIcons()}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const renderIcons = () => (
     <div className="flex items-center space-x-2 md:space-x-3">
@@ -227,11 +280,14 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
       case 'centered':
         return (
           <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center py-4">
-              <div className="mb-4">
+            <div className="flex md:flex-col items-center justify-between md:justify-center py-4">
+              <div className="md:mb-4">
                 {renderLogo()}
               </div>
-              <div className="flex items-center justify-center space-x-8">
+              <div className="md:hidden">
+                {renderMobileMenuButton()}
+              </div>
+              <div className="hidden md:flex items-center justify-center space-x-8">
                 {renderNavigation()}
                 <div className="ml-8">
                   {renderIcons()}
@@ -246,9 +302,12 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between py-6">
               {renderLogo()}
-              <div className="flex items-center space-x-8">
+              <div className="hidden md:flex items-center space-x-8">
                 {renderNavigation()}
                 {renderIcons()}
+              </div>
+              <div className="md:hidden">
+                {renderMobileMenuButton()}
               </div>
             </div>
           </div>
@@ -258,26 +317,31 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
         return (
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between py-4">
-              <div className="flex items-center space-x-4">
+              <div className="hidden md:flex items-center space-x-4">
                 {menuSettings.leftButtonText && (
                   <div>
                     {renderButton(menuSettings.leftButtonText, menuSettings.leftButtonLink || '#')}
                   </div>
                 )}
               </div>
-              <div className="flex-1 flex justify-center">
+              <div className="flex-1 md:flex-none flex justify-center md:justify-center">
                 {renderLogo()}
               </div>
               <div className="flex items-center space-x-4">
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
                 {menuSettings.rightButtonText && (
-                  <div>
+                  <div className="hidden md:block">
                     {renderButton(menuSettings.rightButtonText, menuSettings.rightButtonLink || '#', true)}
                   </div>
                 )}
-                {renderIcons()}
+                <div className="hidden md:flex">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
-            <div className="flex justify-center pb-4">
+            <div className="hidden md:flex justify-center pb-4">
               {renderNavigation()}
             </div>
           </div>
@@ -291,7 +355,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
         return (
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between py-4">
-              <div className="flex items-center space-x-6">
+              <div className="hidden md:flex items-center space-x-6">
                 <nav className={`flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}>
                   {leftItems.map((item, index) => (
                     <a
@@ -309,7 +373,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                 {renderLogo()}
               </div>
               <div className="flex items-center space-x-6">
-                <nav className={`flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}>
+                <nav className={`hidden md:flex items-center space-x-6 ${getTemplateFontSize()} ${getTemplateFontWeight()}`}>
                   {rightItems.map((item, index) => (
                     <a
                       key={index}
@@ -321,7 +385,12 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                     </a>
                   ))}
                 </nav>
-                {renderIcons()}
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
+                <div className="hidden md:flex">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
           </div>
@@ -334,11 +403,16 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
               <div className="flex items-center space-x-4">
                 {renderLogo()}
               </div>
-              <div className="flex items-center space-x-4">
+              <div className="hidden md:flex items-center space-x-4">
                 {renderNavigation()}
               </div>
               <div className="flex items-center space-x-2">
-                {renderIcons()}
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
+                <div className="hidden md:flex">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
           </div>
@@ -347,14 +421,17 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
       case 'elegant':
         return (
           <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center py-6">
-              <div className="mb-6">
+            <div className="flex md:flex-col items-center justify-between md:justify-center py-6">
+              <div className="md:mb-6">
                 {renderLogo()}
               </div>
-              <div className="flex items-center justify-center space-x-8 mb-4">
+              <div className="md:hidden">
+                {renderMobileMenuButton()}
+              </div>
+              <div className="hidden md:flex items-center justify-center space-x-8 mb-4">
                 {renderNavigation()}
               </div>
-              <div>
+              <div className="hidden md:block">
                 {renderIcons()}
               </div>
             </div>
@@ -367,12 +444,17 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
             <div className="flex items-center justify-between py-4 border-b-2" style={{ borderColor: primaryColor }}>
               <div className="flex items-center space-x-6">
                 {renderLogo()}
-                <div>
+                <div className="hidden md:block">
                   {renderNavigation()}
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                {renderIcons()}
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
+                <div className="hidden md:flex">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
           </div>
@@ -384,10 +466,15 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
             <div className="flex items-center justify-between py-4">
               {renderLogo()}
               <div className="flex items-center space-x-4">
-                {renderIcons()}
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
+                <div className="hidden md:flex">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
-            <div className="border-t" style={{ borderColor: `${menuSettings.textColor}20` }}>
+            <div className="hidden md:block border-t" style={{ borderColor: `${menuSettings.textColor}20` }}>
               <nav
                 className={`flex items-center justify-start space-x-6 py-3 overflow-x-auto ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
                 style={{ fontFamily: getTemplateFontFamily() }}
@@ -413,10 +500,15 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
       case 'stacked-centered':
         return (
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center py-6">
-              {renderLogo()}
+            <div className="flex items-center justify-between md:justify-center py-6">
+              <div className="flex-1 md:flex-none">
+                {renderLogo()}
+              </div>
+              <div className="md:hidden">
+                {renderMobileMenuButton()}
+              </div>
             </div>
-            <div className="border-t border-b" style={{ borderColor: `${menuSettings.textColor}20` }}>
+            <div className="hidden md:block border-t border-b" style={{ borderColor: `${menuSettings.textColor}20` }}>
               <nav
                 className={`flex items-center justify-center space-x-8 py-3 overflow-x-auto ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
                 style={{ fontFamily: getTemplateFontFamily() }}
@@ -436,7 +528,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                 ))}
               </nav>
             </div>
-            <div className="flex items-center justify-center py-2 space-x-6">
+            <div className="hidden md:flex items-center justify-center py-2 space-x-6">
               {renderIcons()}
             </div>
           </div>
@@ -450,21 +542,24 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
               <div className="flex items-center space-x-6">
                 <a
                   href="#"
-                  className="text-sm uppercase tracking-wider hover:opacity-75 transition-opacity"
+                  className="hidden md:block text-sm uppercase tracking-wider hover:opacity-75 transition-opacity"
                   style={{ color: menuSettings.textColor, fontFamily: getTemplateFontFamily() }}
                 >
                   Menu
                 </a>
                 <a
                   href="#"
-                  className="text-sm uppercase tracking-wider hover:opacity-75 transition-opacity"
+                  className="hidden md:block text-sm uppercase tracking-wider hover:opacity-75 transition-opacity"
                   style={{ color: menuSettings.textColor, fontFamily: getTemplateFontFamily() }}
                 >
                   Account
                 </a>
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
               </div>
             </div>
-            <div className="border-t" style={{ borderColor: `${menuSettings.textColor}15` }}>
+            <div className="hidden md:block border-t" style={{ borderColor: `${menuSettings.textColor}15` }}>
               <nav
                 className={`flex items-center space-x-8 py-4 overflow-x-auto ${getTemplateFontSize()} ${getTemplateFontWeight()}`}
                 style={{ fontFamily: getTemplateFontFamily() }}
@@ -500,12 +595,17 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                   {renderLogo()}
                 </div>
               )}
-              <div className={`${menuSettings.logoPosition === 'center' ? 'flex-1 flex justify-center' : ''}`}>
+              <div className={`hidden md:block ${menuSettings.logoPosition === 'center' ? 'flex-1 flex justify-center' : ''}`}>
                 {renderNavigation()}
               </div>
               <div className={`flex items-center space-x-4 ${menuSettings.logoPosition === 'center' ? 'flex-1 justify-end' : ''}`}>
                 {menuSettings.logoPosition === 'right' && renderLogo()}
-                {renderIcons()}
+                <div className="md:hidden">
+                  {renderMobileMenuButton()}
+                </div>
+                <div className="hidden md:flex">
+                  {renderIcons()}
+                </div>
               </div>
             </div>
           </div>
@@ -514,28 +614,31 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
   };
 
   return (
-    <header className="w-full relative">
-      {banner && (
-        <div 
-          className="w-full h-36 md:h-48 lg:h-64 bg-cover bg-center relative"
-          style={{ backgroundImage: `url(${banner})` }}
-        >
-          <div className="w-full h-full bg-black bg-opacity-30">
-            {(menuSettings.template === 'overlay' || menuSettings.template === 'transparent') && (
-              <div className={getMenuClasses()} style={getMenuStyle()}>
-                {renderMenuContent()}
-              </div>
-            )}
+    <>
+      <header className="w-full md:relative" style={mobileMenuOpen ? { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50 } : {}}>
+        {banner && (
+          <div
+            className="w-full h-36 md:h-48 lg:h-64 bg-cover bg-center relative"
+            style={{ backgroundImage: `url(${banner})` }}
+          >
+            <div className="w-full h-full bg-black bg-opacity-30">
+              {(menuSettings.template === 'overlay' || menuSettings.template === 'transparent') && (
+                <div className={getMenuClasses()} style={getMenuStyle()}>
+                  {renderMenuContent()}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-      
-      {!(banner && (menuSettings.template === 'overlay' || menuSettings.template === 'transparent')) && (
-        <div className={getMenuClasses()} style={{...getMenuStyle(), boxShadow: menuSettings.template === 'standard' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'}}>
-          {renderMenuContent()}
-        </div>
-      )}
-    </header>
+        )}
+
+        {!(banner && (menuSettings.template === 'overlay' || menuSettings.template === 'transparent')) && (
+          <div className={getMenuClasses()} style={{...getMenuStyle(), boxShadow: menuSettings.template === 'standard' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'}}>
+            {renderMenuContent()}
+          </div>
+        )}
+      </header>
+      {renderMobileMenu()}
+    </>
   );
 };
 
