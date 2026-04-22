@@ -162,11 +162,12 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
     return (
       <div
-        className="fixed inset-0 md:hidden z-40 top-16"
+        className="fixed inset-0 md:hidden z-40"
         onClick={() => setMobileMenuOpen(false)}
+        style={{ marginTop: '64px' }}
       >
         <div
-          className="absolute inset-0"
+          className="w-full"
           style={{
             backgroundColor: menuSettings.backgroundColor,
             opacity: menuSettings.opacity / 100,
@@ -183,7 +184,10 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
                   color: menuSettings.textColor,
                   fontFamily: getTemplateFontFamily(),
                 }}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                }}
               >
                 {item}
               </a>
@@ -615,7 +619,7 @@ const StorefrontHeader: React.FC<StorefrontHeaderProps> = ({ logo, banner, prima
 
   return (
     <>
-      <header className="w-full md:relative" style={mobileMenuOpen ? { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50 } : {}}>
+      <header className="w-full relative z-50">
         {banner && (
           <div
             className="w-full h-36 md:h-48 lg:h-64 bg-cover bg-center relative"
