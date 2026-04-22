@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { ElementInstance, ElementType, StoreCustomization, CustomizationMode, ProductCardSettings, ProductModalSettings, MenuSettings, SectionStyle, SetupStep, SavedStore, ViewMode } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -88,8 +88,16 @@ const initialCustomization: StoreCustomization = {
 const createDefaultSectionStyle = (): SectionStyle => ({
   backgroundColor: 'transparent',
   backgroundOpacity: 100,
-  padding: { top: 48, bottom: 48, left: 16, right: 16 },
-  margin: { top: 0, bottom: 0 },
+  padding: {
+    top: 48,
+    bottom: 48,
+    left: 16,
+    right: 16,
+  },
+  margin: {
+    top: 0,
+    bottom: 0,
+  },
   borderRadius: 0,
   boxShadow: 'none',
   textAlign: 'left',
@@ -108,56 +116,6 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
   const [savedStores, setSavedStores] = useState<SavedStore[]>([]);
   const [viewMode, setViewMode] = useState<ViewMode>('editor');
   const [selectedStoreId, setSelectedStoreId] = useState<string | null>(null);
-
-  // LOAD STATE
-  useEffect(() => {
-    const saved = localStorage.getItem('customization_app_state');
-    if (!saved) return;
-
-    try {
-      const parsed = JSON.parse(saved);
-
-      if (parsed.customization) setCustomization(parsed.customization);
-      if (parsed.selectedElementId !== undefined) setSelectedElementId(parsed.selectedElementId);
-      if (parsed.customizationMode) setCustomizationMode(parsed.customizationMode);
-      if (parsed.sidebarView) setSidebarView(parsed.sidebarView);
-      if (parsed.isMobileView !== undefined) setIsMobileView(parsed.isMobileView);
-      if (parsed.currentSetupStep) setCurrentSetupStep(parsed.currentSetupStep);
-      if (parsed.savedStores) setSavedStores(parsed.savedStores);
-      if (parsed.viewMode) setViewMode(parsed.viewMode);
-      if (parsed.selectedStoreId !== undefined) setSelectedStoreId(parsed.selectedStoreId);
-    } catch (error) {
-      console.error('Failed to load state:', error);
-    }
-  }, []);
-
-  // SAVE STATE
-  useEffect(() => {
-    localStorage.setItem(
-      'customization_app_state',
-      JSON.stringify({
-        customization,
-        selectedElementId,
-        customizationMode,
-        sidebarView,
-        isMobileView,
-        currentSetupStep,
-        savedStores,
-        viewMode,
-        selectedStoreId,
-      })
-    );
-  }, [
-    customization,
-    selectedElementId,
-    customizationMode,
-    sidebarView,
-    isMobileView,
-    currentSetupStep,
-    savedStores,
-    viewMode,
-    selectedStoreId,
-  ]);
 
   const addElement = (templateId: string, type: ElementType) => {
     if (customization.elements.length >= 5) {
@@ -198,38 +156,38 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
   const updateElementSettings = (id: string, settings: Record<string, any>) => {
     setCustomization(prev => ({
       ...prev,
-      elements: prev.elements.map(el =>
-        el.id === id ? { ...el, settings: { ...el.settings, ...settings } } : el
+      elements: prev.elements.map(element => 
+        element.id === id 
+          ? { ...element, settings: { ...element.settings, ...settings } } 
+          : element
       ),
     }));
   };
 
   const reorderElements = (startIndex: number, endIndex: number) => {
-    setCustomization(prev => {
-      const result = Array.from(prev.elements);
-      const [removed] = result.splice(startIndex, 1);
-      result.splice(endIndex, 0, removed);
+    const result = Array.from(customization.elements);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
 
-      return {
-        ...prev,
-        elements: result.map((el, index) => ({ ...el, order: index })),
-      };
-    });
+    setCustomization(prev => ({
+      ...prev,
+      elements: result.map((element, index) => ({ ...element, order: index })),
+    }));
   };
 
   const updateElementSectionStyle = (id: string, sectionStyle: Partial<SectionStyle>) => {
     setCustomization(prev => ({
       ...prev,
-      elements: prev.elements.map(el =>
-        el.id === id
-          ? {
-              ...el,
-              sectionStyle: {
-                ...(el.sectionStyle || createDefaultSectionStyle()),
-                ...sectionStyle,
-              },
-            }
-          : el
+      elements: prev.elements.map(element => 
+        element.id === id 
+          ? { 
+              ...element, 
+              sectionStyle: { 
+                ...element.sectionStyle || createDefaultSectionStyle(), 
+                ...sectionStyle 
+              } 
+            } 
+          : element
       ),
     }));
   };
@@ -291,7 +249,9 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
 
   const deleteStore = (storeId: string) => {
     setSavedStores(prev => prev.filter(s => s.id !== storeId));
-    if (selectedStoreId === storeId) setSelectedStoreId(null);
+    if (selectedStoreId === storeId) {
+      setSelectedStoreId(null);
+    }
   };
 
   return (
@@ -335,7 +295,7 @@ export const CustomizationProvider: React.FC<{ children: ReactNode }> = ({ child
 
 export const useCustomization = () => {
   const context = useContext(CustomizationContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useCustomization must be used within a CustomizationProvider');
   }
   return context;
